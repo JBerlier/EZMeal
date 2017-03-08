@@ -49,7 +49,7 @@ Ce document reprend les differents choix de conception effectue lors de la conce
 
 \chapter{Conception et contenu des differents tableaux}
 
-La base de donnees et l'application sont organisees autour de cinq tableaux differents (Utilisateurs, Recette, Appreciation, Etape et Ingredients), regroupant chacun un nombre variable de champs.  La base de donnees est construite de telle sorte a ce qu'il y ait un maximum de relations binaires et le moins de relations ternaires.
+La base de donnees et l'application sont organisees autour de cinq tableaux differents (Utilisateurs, Recette, Appreciation, Etape et Ingredients), regroupant chacun un nombre variable de champs.  La base de donnees est construite de telle sorte a ce qu'il y ait un maximum de relations binaires et un minimum de relations ternaires.
 
 \section{Utilisateurs}
 
@@ -57,28 +57,31 @@ Ce tableau est un element principal de cette application car il stocke les donne
 
 Le tableau contient les champs suivants:
 \begin{itemize}
-	\item Username, ce champ est le champ principal du tableau. Nous l'avons choisi comme tel car nous trouvons que c'est la maniere la plus adequate de qualifier un utilisateur. Ce champ est unique pour un utilisateur car c'est ce qui caracterise un utilisateur.
-	\item Password, ce champ est obligatoire et unique pour un utilisateur donne. pour des raisons de securite.
+	\item Username, ce champ est le champ principal du tableau. Nous l'avons choisi comme tel car nous trouvons que c'est la maniere la plus adequate de qualifier un utilisateur. Chaque Username est unique car c'est ce qui caracterise l'utilisateur.
+	\item Password, ce champ est obligatoire et unique pour un utilisateur donne pour des raisons de sécurité.
 	\item Age, ce champ est obligatoire et unique pour un utilisateur. Ces deux conditions sur la relation sont specifiees dans le canevas de l'application.
 	\item Residence, ce champ est obligatoire et unique pour un utilisateur. Ces deux conditions sur la relation sont specifiees dans le canevas de l'application.
 	\item Sexe, ce champ est obligatoire et unique pour un utilisateur. Ces deux conditions sur la relation sont specifiees dans le canevas de l'application.
 	\item Appreciation, ce champ n'est pas unique et obligatoire pour un utilisateur car nous pensons que, meme si il est utile pour les autres utilisateur d'avoir un avis sur une recette, tous les utilisateurs ne sont pas obliges de donner une appreciation.
-	\item Recette, ce champ n'est pas unique et obligatoire car nous pensons que c'est a chacun de decider s'il veut creer une recette ou non.
+	\item Recette, ce champ n'est pas unique et obligatoire car nous pensons que c'est a chacun de decider s'il veut creer une recette ou non.%si on regarde les tableaus excels de Laurent il n'y a pas les 2 derniers ce qui est compréhenssible car le lien avec l'appréciation est mis dans le tableau appréciation et l'auteur de la recette est mis dans le tableau recette
 \end{itemize}
 
 \section{Appreciation}
 
-Ce tableau n'est pas l'extension qui nous devons implementer. C'est un choix purement subjectif d'extension supplementaire a faire car nous nous sommes dits que ce serait mieux pour l'experience utilisateur de pouvoir communiquer sur les recettes, emettre son avis et des conseils/ajustements sur la recette. Le principal desinconvenient de ce tableau est le fait qu'il y ait une relation ternaire entre ce tableau et les tableaux recette et utilisateur.
+Ce tableau n'est pas l'extension qui nous devons implementer. C'est un choix purement subjectif d'extension supplementaire a faire car nous nous sommes dits que ce serait mieux pour l'experience utilisateur de pouvoir communiquer sur les recettes, émettre son avis et des conseils/ajustements sur la recette. Le principal inconvénient de ce tableau est le fait qu'il y ait une relation ternaire entre ce tableau et les tableaux recette et utilisateur.
 
 Le tableau contient les champs suivants:
 \begin{itemize}
 	\item Username, ce champ n'est pas obligatoire et pas unique car les utilisateurs ne sont pas obliges de donner une appreciation
+	%dans ce tableau ci il est obligatoire non? comment on pourrait avoir une appréciation sans auteur?
 	\item Note, ce champ n'est pas obligatoire mais est unique pour une appreciation car nous pensons que, pour une appreciation, il n'est pas obligatoire de donner une note mais chaque appreciation ne peut contenir qu'une seule note.
+	%idem comment on pourrait avoir une appréciation si on ne sait sur quelle recette elle porte
 	\item Commentaires, ce champ n'est pas obligatoire et n'est pas unique car une appreciation peut contenir plusieurs commentaires mais n'est pas obligatoirement rempli.
+	%il manque la colonne note
 \end{itemize}
 
 \section{Recette}
 
-Ce tableau est l'element principal de l'application. En effet, ce tableau est connecte a tous les autres tableaux et l'application est principalement base sur cette base de donnees. Cependant, ce tableau a une relation ternaire avec les tableaux utilisateur et appreciation.
+Ce tableau est l'élément principal de l'application. En effet,il est connecté a tous les autres tableaux et l'application est principalement basé sur cette base de donnée. Cependant, ce tableau a une relation ternaire avec les tableaux utilisateur et appreciation.
 
 \end{document}
