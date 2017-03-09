@@ -1,0 +1,49 @@
+
+
+\documentclass[a4paper,10pt]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[frenchb]{babel}
+\usepackage{titlesec} % http://ctan.org/pkg/titlesec
+\usepackage{calc}
+\usepackage{pgf}% 
+
+\title{Shéma relationnel de la banque de donnée\\ EZMeal}
+\author{Groupe R\\ \\Jean-Benoît Berlier\\Laurent Desausoi \\ Martin Fockedey \\Maxime Mawait \\Van Stratum Arthur
+}
+\date{\today}
+\makeindex
+
+\titlespacing*{\section}
+{0pt}{5.5ex plus 1ex minus .2ex}{9.3ex plus .2ex}
+
+\begin{document}
+\begin{titlepage}
+\begin{figure}[t]
+\end{figure}
+
+\maketitle 
+\end{titlepage}
+\section*{Shéma relationel}
+
+
+
+
+User (\underline{username}, age, location, sex)\par
+			 
+         \noindent\hspace{1.9in} \{M, F\} \\\\
+
+Recipe (\underline{r\_name}, picture, description, date, author, step, number\_of\_guest, difficulty, type, [subtypes], [g\_rating])\\\\
+
+Step (\underline{s\_name}, instructions, time, type , step\_number , [picture], [video])\\\\
+
+Ingredient (\underline{i\_name}, price)\\\\
+
+Includes (\underline{r\_name}, i\_name, quantity, unit) \par
+\noindent\hspace{2.1in} \{g, units, liter\} \\\\ 
+								
+Appreciation (\underline{id}, [rating], [comment])\\\\
+
+User\_appreciation (\underline{r\_name, username}, id)
+
+\end{document}
