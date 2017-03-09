@@ -1,5 +1,4 @@
 
-
 \documentclass[a4paper,10pt]{article}
 \usepackage[latin1]{inputenc}
 \usepackage[T1]{fontenc}
@@ -42,23 +41,23 @@
 
 User (\underline{username}, age, location, sex)\par
 			 
-         \noindent\hspace{1.75in} \{M, F\} \\\\
+         \noindent\hspace{1.73in} \{M, F\} \\\\
 
-Recipe (\underline{r\_name}, picture, description, date, author, step, number\_of\_guest, difficulty, type, [subtypes], [g\_rating]) \noindent\hspace{0.6in} \{‘YYYY-MM-DD’\}\noindent\hspace{1.7in} \{1-5\} \\\\
+Recipe (\underline{r\_name}, picture, description, date, author, number\_of\_guest, difficulty, type, [subtypes], [g\_rating]) \noindent\hspace{0.8in} \{‘YYYY-MM-DD’\}\noindent\hspace{1.4in} \{1-5\} \\\\
 
-Step (\underline{s\_name}, instructions, time, type , step\_number , [picture], [video])\par
-\noindent\hspace{1.6in} \{baking, preparation\} \\\\
+Step (\underline{r\_name, s\_name}, instructions, time, type, step\_number, [picture], [video])\par
+\noindent\hspace{2.0in} \{baking, preparation\} \\\\
 
 Ingredient (\underline{i\_name}, unit) \par
 \noindent\hspace{-0.18in} \{g, units, liter, pinches, spoons, coffee spoons, packet\} \\\\
 
-Includes (\underline{r\_name, i\_name}, quantity)\\\\ 
-								
-Appreciation (\underline{id}, [rating], [comment]) \par
- \noindent\hspace{1.07in} \{1-5\} \\\\
+Includes (\underline{r\_name, i\_name}, quantity)\\\\
 
-User\_appreciation (\underline{r\_name, username, id})
+
+Review (\underline{id}, [rating], [comment]) \par
+ \noindent\hspace{0.74in} \{1-5\} \\\\
+
+Review\_From\_About (\underline{r\_name, username, id})
 \end{changemargin}
 
 \end{document}
-
