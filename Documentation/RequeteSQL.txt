@@ -2,7 +2,7 @@ Groupe R : Requete SQL
 	Desausoi Laurent
 	Mawait Maxime
 	Dujardin Haves
-	fijzaiaz
+	Jean-Benoît Berlier
 	Fockedey Martin
 
 
