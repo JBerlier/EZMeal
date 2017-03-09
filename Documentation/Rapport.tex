@@ -73,7 +73,7 @@ Le tableau contient les champs suivants:
 	\item Username, ce champ est obligatoire et unique car chaque avis doit avoir un auteur.
 	\item Note, ce champ n'est pas obligatoire mais est unique pour un avis car nous pensons que, pour un avis, il n'est pas obligatoire de donner une note mais chaque avis ne peut contenir qu'une seule note.
 	\item Commentaires, ce champ n'est pas obligatoire et n'est pas unique car un avis peut contenir plusieurs commentaires mais n'est pas obligatoirement rempli.
-	\item Recette, ce champ est unique et obligatoire car chaque avis doit porter sur une recette
+	\item Recette, ce champ est unique et obligatoire car chaque avis doit porter sur une recette.
 \end{itemize}
 
 \section{Recette}
@@ -81,42 +81,48 @@ Le tableau contient les champs suivants:
 Ce tableau est l'element principal de l'application. En effet, ce tableau est connecte a tous les autres tableaux et l'application est principalement base sur cette base de donnees. Cependant, ce tableau a une relation ternaire avec les tableaux utilisateur et avis et une avec quantite et ingredients.
 
 \begin{itemize}
-	\item Nom,
-	\item Description
-	\item Photo,
-	\item Date d'ajout,
-	\item Auteur,
-	\item Nombre personnes,
-	\item Difficulte,
-	\item Types,
-	\item Sous-types,
+	\item Nom de la recette, ce champ est obligatoire et est la cle primaire de ce tableau car c'est la maniere la plus conventionnelle de caracteriser une recette. 
+	\item Description, ce champ est obligatoire car c'est extremement utile d'avoir une petite description pour la recette pour choisir la recette a cuisiner.
+	\item Photo, ce champ est obligatoire car les images de recettes sont un facteur tres important pour se faire une idee de la recette et dans la majorite des cas, une photo appetissante  va encourager l'utilisateur a choisir cette recette.
+	\item Date d'ajout, ce champ est obligatoire car chaque recette a une date d'ajout.
+	\item Auteur, ce champ est obligatoire car chaque recette a un auteur.
+	\item Nombre personnes, ce champ est obligatoire car il est important dans son choix de recettes de savoir pour combien de personnes cette recette est destinee.
+	\item Difficulte, ce champ est obligatoire car, pour un novice, il est extremement important de ne pas prendre une recette difficile a cuisiner.
+	\item Types, ce champ est obligatoire car c'est toujours de cuisiner un plat et non un dessert pour le plat de resistance.
+	\item Sous-types, ce champ n'est pas obligatoire car ce champ est purement instructif et utile pour les recherches car c'est utile si on veut chercher un plat italien par exemple.
 \end{itemize}
 
 \section{Etape}
 
+Ce tableau est un element determinant de notre application car il s'agit de notre extension imposee. De plus, ce tableau est tres important pour l'experience utilisateur car il apporte plus d'explications a une recette, ce qui peut moins decourager les utilisateurs a cuisiner.
+
 \begin{itemize}
-	\item Nom de la recette,
-	\item Nom de l'etape,
-	\item Explication,
-	\item Image,
-	\item Video,
-	\item Temps,
-	\item Cuisson,
+	\item Nom de la recette,  ce champ est obligatoire et est la cle primaire de ce tableau car ce tableau se rapporte a des recettes qui sont caracterisees par leur nom.
+	\item Nom de l'etape,  ce champ est obligatoire car c'est ce qui caracterise l'etape.
+	\item Explication, ce champ n'est pas obligatoire car toutes les etapes n'ont pas besoin d'explication. (cfr: couper des patates)
+	\item Image, ce champ n'est pas obligatoire car toutes les etapes n'ont pas besoin d'images d'explication. (cfr: couper des patates)
+	\item Video, ce champ n'est pas obligatoire car toutes les etapes n'ont pas besoin de videos d'explication. (cfr: couper des patates)
+	\item Temps, ce champ est obligatoire car chaque a un temps de preparation.
+	\item Type d'etapes, ce champ est obligatoire car chaque etape a un type qu'il est interressant de connaitre. (cfr: cuisson) 
 \end{itemize}
 
 \section{Ingredients}
 
+Ce tableau est important car, sans ingredients et sans une quantite precise de ces ingredients, une recette est impossible a executer. Ce tableau est specifique a une recette car il reprend la quantite necessaire de cet ingredient dans la recette.
+
 \begin{itemize}
-	\item Nom de la recette,
-	\item Nom de l'ingredient,
-	\item Quantite,
+	\item Nom de la recette, ce champ est obligatoire car chaque ingredient convient a une recette.
+	\item Nom de l'ingredient, ce champ est obligatoire car chaque ingredient a un nom.
+	\item Quantite, ce champ est obligatoire car c'est le champ qui determine l'utilite de ce tableau.
 \end{itemize}
 
 \section{Unites des ingredients}
 
+Ce tableau est important car c'est un tableau generique reprend la facon dont mesure chaque ingredient.
+
 \begin{itemize}
-	\item Nom de l'ingredient,
-	\item Unite,
+	\item Nom de l'ingredient, ce champ est obligatoire et est la cle primaire de ce tableau car c'est ce qui caracterise le mieux ce tableau.
+	\item Unite, ce champ est obligatoire car chaque ingredient a une methode de mesure differente.
 \end{itemize}
 
 \end{document}
