@@ -1,9 +1,9 @@
 ce dossier contient:
-	-les différents captures d'écran du prototype/mockup/wireframe de l'application à réaliser;
-	-un lexique (une dictionnaire spécialisé et succinct) des entités les plus importants du domaine de discours de l'application à réaliser; 
-	-un ensemble représentatif (max. une page A4) de faits élémentaires qui correspondent aux relations les plus importantes du schéma conceptuel ORM;
-	-une version électronique de leur schéma conceptuel ORM complet (avec les contraintes d’unicité et rôles obligatoires, et avec une population représentative pour les relations les plus importantes);
-le schéma relationnel de la base de données qui correspond au schéma ORM;
-	-un fichier SQLite de la base de données, rempli avec au moins quelques données représentatives (dont les données décrites par vos faits élémentaires);
-les requêtes SQL que vous avez réalisées pour tester votre BDD (dont les requêtes demandées dans l'énoncé du TP4).
-	-un petit rapport décrivant vos choix de conception.
+	-les diffÃ©rents captures d'Ã©cran du prototype/mockup/wireframe de l'application Ã  rÃ©aliser;
+	-un lexique (une dictionnaire spÃ©cialisÃ© et succinct) des entitÃ©s les plus importants du domaine de discours de l'application Ã  rÃ©aliser; 
+	-un ensemble reprÃ©sentatif (max. une page A4) de faits Ã©lÃ©mentaires qui correspondent aux relations les plus importantes du schÃ©ma conceptuel ORM;
+	-une version Ã©lectronique du schÃ©ma conceptuel ORM complet (avec les contraintes dâ€™unicitÃ© et rÃ´les obligatoires, et avec une population reprÃ©sentative pour les relations les plus importantes);
+le schÃ©ma relationnel de la base de donnÃ©es qui correspond au schÃ©ma ORM;
+	-un fichier SQLite de la base de donnÃ©es, rempli avec au moins quelques donnÃ©es reprÃ©sentatives (dont les donnÃ©es dÃ©crites par vos faits Ã©lÃ©mentaires);
+les requÃªtes SQL que nous avons rÃ©alisÃ©es pour tester notre BDD (dont les requÃªtes demandÃ©es dans l'Ã©noncÃ© du TP4).
+	-un petit rapport dÃ©crivant nos choix de conception.
