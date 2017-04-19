@@ -1,13 +1,13 @@
-Ce dossier ZIP contient 5 fichiers dont les caractéristiques sont présentées ci-dessous :
+Ce dossier ZIP contient 5 fichiers dont les caractÃ©ristiques sont prÃ©sentÃ©es ci-dessous :
 
-	Cartes_CRC.pdf : Fichier PDF contenant les différentes cartes CRC conçues par le groupe.
-	DiagrammeUML.pdf : Fichier PDF contenant le diagramme de classe(diagramme UML) de notre application.
-	Recits_Utilisateur.pdf : Fichier PDF contenant les différents récits d'utilisateur imaginé
-		pour notre application. L'estimation de la difficultée est également notée. Les récits sont de plus
-		triés par catégories.
+	Cartes_CRC.pdf : Fichier PDF contenant les diffÃ©rentes cartes CRC conÃ§ues par le groupe.
+	DiagrammeUML.png : Fichier PNG contenant le diagramme de classe(diagramme UML) de notre application.
+	Recits_Utilisateur.pdf : Fichier PDF contenant les diffÃ©rents rÃ©cits d'utilisateur imaginÃ©
+		pour notre application. L'estimation de la difficultÃ©e est Ã©galement notÃ©e. Les rÃ©cits sont de plus
+		triÃ©s par catÃ©gories.
 	Rapport.pdf : Fichier PDF contenant un rapport afin d'expliquer ce que nous avons fait un peu plus en details.
-	DiagrammeSequence.pdf : Fichier PDF contenant quelques diagrammes de séquence représentant les récits d'
+	DiagrammeSequence.pdf : Fichier PDF contenant quelques diagrammes de sÃ©quence reprÃ©sentant les rÃ©cits d'
 		utilisateur les plus importants.
 	lisez-moi.txt : Ce fichier.
 
-Tous ces fichiers et leur contenu ont été entièrement fait par le groupe R.
+Tous ces fichiers et leur contenu ont Ã©tÃ© entiÃ¨rement fait par le groupe R.
