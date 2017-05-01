@@ -80,6 +80,21 @@ public class MyDatabase extends SQLiteOpenHelper {
                 "('Sophie', '1234', 20, 'Rue des champs 1, 7500 Tournai', 'Femme')," +
                 "('Topichef', 'toptop', 53, 'Avenue des plats 10', 'Homme');"
         );
+        db.execSQL("DROP TABLE IF EXISTS '"+STEP_TABLE+"';");
+        db.execSQL("CREATE TABLE '"+STEP_TABLE+"' ('"+
+                RECETTE_NAME_COLUMN+"' TEXT NOT NULL PRIMARY KEY, '"+
+                STEP_NAME_COLUMN+"' TEXT NOT NULL, '"+
+                STEP_NUMBER_COLUMN+"' INTEGER NOT NULL, '"+
+                STEP_EXPLANATION_COLUMN+"' TEXT NOT NULL, '"+
+                STEP_PICTURE_COLUMN+"' BLOB, '"+
+                STEP_VIDEO_COLUMN+"' BLOB, '"+
+                STEP_TIME_COLUMN+"' INTEGER NOT NULL, '"+
+                STEP_TYPE_COLUMN+"' TEXT NOT NULL)");
+        db.execSQL("INSERT INTO "+STEP_TABLE+"("+RECETTE_NAME_COLUMN+","+STEP_NAME_COLUMN+", "+STEP_NUMBER_COLUMN+", "+STEP_EXPLANATION_COLUMN+", "+STEP_PICTURE_COLUMN+", "+STEP_VIDEO_COLUMN+", "+STEP_TIME_COLUMN+", "+STEP_TYPE_COLUMN+")"+
+                "VALUES ('Lasagne','Couper des oignons', 1, 'Coupez tout d'abord les oignons en petits cubes de 1cm de côté', oignon1.jpg,, 10, 'preparation')," +
+                "('Lasagne','Rajout de la sauce tomate', 2, 'Mettez maintenant la sauce tomate avec la viande entre chaque pâte',,,5,'preparation')" +
+                "('Lasagne','Cuisson de lasagne', 3, 'Mettez maintenant cuire la lasagne durant 30 minutes',,,30,''cuisson)"
+        );
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -162,5 +177,25 @@ public class MyDatabase extends SQLiteOpenHelper {
                 return i;
         }
         return -1;
+    }
+
+    public String getStepNameColumn(String recette_name, int step_number){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(STEP_TABLE,
+                new String[]{STEP_NAME_COLUMN},
+                RECETTE_NAME_COLUMN + "='"+recette_name+"'" + STEP_NUMBER_COLUMN + "='"+step_number+"'",
+                null, null, null,null);
+
+        return cursor.getString(0);
+    }
+
+    public String getStepExplanationColumn(String recette_name, int step_number){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(STEP_TABLE,
+                new String[]{STEP_EXPLANATION_COLUMN},
+                RECETTE_NAME_COLUMN + "='"+recette_name+"'" + STEP_NUMBER_COLUMN + "='"+step_number+"'",
+                null, null, null,null);
+
+        return cursor.getString(0);
     }
 }

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/etape_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="54dp"
+            android:layout_marginBottom="20dp">
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/etape_image"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="42dp"
+            android:layout_marginRight="42dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center_vertical">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/etape_vid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="42dp"
+            android:layout_marginRight="42dp"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center_vertical">
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/etape_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="42dp"
+            android:layout_marginRight="42dp"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center_vertical">
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="0.95"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            >
+
+            <Button
+                android:id="@+id/etap_prec"
+                android:layout_width="120dip"
+                android:layout_height="wrap_content"
+                android:text="@string/etap_prec"
+                android:backgroundTint="@color/gray"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                />
+
+            <Button
+                android:id="@+id/etap_suiv"
+                android:layout_width="120dip"
+                android:layout_height="wrap_content"
+                android:text="@string/etape_suiv"
+                android:backgroundTint="@color/gray"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</ScrollView>
