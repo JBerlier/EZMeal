@@ -25,8 +25,14 @@ public class Etape_middle extends Activity {
 
     private Button etap_prev, etap_suiv;
 
+    //Intent prev_intent = getIntent();
+
+    //private String rec_name = prev_intent.getStringExtra("firstKeyName");
+    //private int step_nb = prev_intent.getIntExtra("secondKeyName",0); //Si pas de valeur, c'est la premiere etape
+
     private String recette_name = "Lasagne";
     private int step_number = 2;
+    private int max_nb_step;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -37,6 +43,7 @@ public class Etape_middle extends Activity {
 
         String step_name = db.getStepNameColumn(recette_name,step_number);
         String step_explanation = db.getStepExplanationColumn(recette_name,step_number);
+        max_nb_step = db.getNbStep(recette_name);
 
         LinearLayout l_title =  (LinearLayout) findViewById(R.id.etape_title);
         LinearLayout l_explain = (LinearLayout) findViewById(R.id.etape_text);
@@ -54,6 +61,42 @@ public class Etape_middle extends Activity {
         this.etap_prev = (Button) findViewById(R.id.etap_prec);
         this.etap_suiv = (Button) findViewById(R.id.etap_suiv);
 
+        this.etap_prev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setEtap_prev();
+            }
+        });
 
+        this.etap_suiv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setEtap_suiv();
+            }
+        });
+    }
+
+    public void setEtap_prev(){
+        if (step_number > 0){
+            Intent intent = new Intent(this, Etape_middle.class);
+            intent.putExtra("firstKeyName",recette_name);
+            intent.putExtra("secondKeyName",step_number-1);
+            startActivityForResult(intent,REQUEST_CODE);
+        }
+        else {
+            this.finish();
+        }
+    }
+
+    public void setEtap_suiv(){
+        if (step_number < max_nb_step){
+            Intent intent = new Intent(this, Etape_middle.class);
+            intent.putExtra("firstKeyName",recette_name);
+            intent.putExtra("secondKeyName",step_number+1);
+            startActivityForResult(intent,REQUEST_CODE);
+        }
+        else {
+            this.finish();
+        }
     }
 }

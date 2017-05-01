@@ -185,8 +185,10 @@ public class MyDatabase extends SQLiteOpenHelper {
                 new String[]{STEP_NAME_COLUMN},
                 RECETTE_NAME_COLUMN + "='"+recette_name+"'" + STEP_NUMBER_COLUMN + "='"+step_number+"'",
                 null, null, null,null);
+        String res = cursor.getString(0);
+        cursor.close();
 
-        return cursor.getString(0);
+        return res;
     }
 
     public String getStepExplanationColumn(String recette_name, int step_number){
@@ -195,7 +197,20 @@ public class MyDatabase extends SQLiteOpenHelper {
                 new String[]{STEP_EXPLANATION_COLUMN},
                 RECETTE_NAME_COLUMN + "='"+recette_name+"'" + STEP_NUMBER_COLUMN + "='"+step_number+"'",
                 null, null, null,null);
+        String res = cursor.getString(0);
+        cursor.close();
 
-        return cursor.getString(0);
+        return res;
+    }
+
+    public int getNbStep(String recette_name){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(STEP_TABLE,
+                new String[]{STEP_EXPLANATION_COLUMN},
+                RECETTE_NAME_COLUMN + "='"+recette_name+"'",
+                null, null, null,null);
+        int count = cursor.getCount();
+
+        return count-1;
     }
 }
