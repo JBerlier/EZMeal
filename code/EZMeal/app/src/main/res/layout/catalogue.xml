@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="be.lsinf1225.ezmeal.MainActivity">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Catalogue"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="30sp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="124dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <ListView
+        android:layout_width="375dp"
+        android:layout_height="471dp"
+        tools:layout_editor_absoluteX="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="70dp" />
+
+    <Button
+        android:id="@+id/button_retour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="retour"
+        android:textColor="@color/colorPrimaryDark"
+        tools:layout_editor_absoluteX="-9dp"
+        tools:layout_editor_absoluteY="-5dp" />
+
+</android.support.constraint.ConstraintLayout>

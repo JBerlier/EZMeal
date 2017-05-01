@@ -17,6 +17,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity android:name=".menu"></activity>
+        
+        <activity android:name=".search"></activity>
+
+        <activity android:name=".catalogue"></activity>
+
+        <activity android:name=".suggest"></activity>
+
     </application>
 
 </manifest>

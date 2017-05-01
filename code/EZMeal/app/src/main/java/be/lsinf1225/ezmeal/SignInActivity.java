@@ -116,8 +116,8 @@ public class SignInActivity extends Activity {
         Log.d(this.TAG,"Successfull login");
 
         this.signin_button.setEnabled(true);
-        //Intent intent=new Intent(SignInActivity.this,SignUpActivity.class);
-        //this.startActivityForResult(intent,REQUEST_CODE);
+        Intent intent=new Intent(SignInActivity.this,menu.class);
+        this.startActivityForResult(intent,REQUEST_CODE);
     }
     public void signinFailed() {
         Log.d(this.TAG,"Unsuccessfull login");
