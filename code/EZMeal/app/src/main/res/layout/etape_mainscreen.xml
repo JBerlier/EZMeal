@@ -21,7 +21,7 @@
             <Button
                 android:layout_width="120dip"
                 android:layout_height="wrap_content"
-                android:text="Etape precedente"
+                android:text="@string/etap_prec"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentBottom="true"
                 />
@@ -29,7 +29,7 @@
             <Button
                 android:layout_width="120dip"
                 android:layout_height="wrap_content"
-                android:text="Etape suivante"
+                android:text="@string/etape_suiv"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"/>
         </RelativeLayout>
