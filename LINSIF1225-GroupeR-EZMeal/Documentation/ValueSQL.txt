@@ -1,0 +1,91 @@
+﻿INSERT INTO recette(recette_name, photo, description, date, auteur_name, nbre_pers, difficulte, type, sous_type)
+VALUES ('Poulet aux champignons', '', 'Très bon poulet', '2012-01-08', 'Laurent', 2, 2, 'Principal', 'Chaud'),
+	('Cake aux chocolats', '', 'Bonne fin de repas', '2004-04-04', 'Morgane', 4, 3, 'Dessert', 'Froid'),
+	('Spaghetti bolognaise', '', 'Vive les pates', '2000-07-01', 'Laurent', 6, 2, 'Principal', 'Chaud'),
+	('Kefta', '', 'Comment bien commencer la soirée', '2003-05-11', 'Hadrien', 3, 4, 'Principal', 'Chaud'),
+	('Tarte tatin', '', 'Un bon dessert pour finir', '2010-12-02', 'Morgane', 1, 3, 'Dessert', 'Froid'),
+	('Muffins aux chocolats', 'muffin.png', 'Cette recette de muffins aux chocolats contient très peu de sucre et de beurre. Elle est donc super  pour un dessert ou gouter léger.', '2017-01-10', 'Topichef', 5, 1, 'Dessert', 'de saison');
+	
+	
+	
+INSERT INTO user(username, password, age, residence, sexe)
+VALUES ('Laurent', 'lauavaitfroid', 19, 'Rue antoine 10', 'Homme'),
+	('Morgane', 'momo4ever', 38, 'Rue du gateau 19a', 'Femme'),
+	('Hadrien', 'hadoufume', 29, 'Rue nationale 1', 'Homme'),
+	('Sophie', '1234', 20, 'Rue des champs 1, 7500 Tournai', 'Femme'),
+	('Topichef', 'toptop', 53, 'Avenue des plats 10', 'Homme');
+	
+	
+	
+INSERT INTO avis(username, recette_name, note, commentaire)
+VALUES ('Laurent', 'Houmous', 3, 'Trop de gout pour un apéritif'),
+	('Morgane', 'Houmous', 5, 'Essayer de mettre moins de poivre'),
+	('Hadrien', 'Tarte tatin', 4, 'Excellente recette'),
+	('Sophie', 'Muffins aux chocolats', 4, 'trop bon :) à refaire');
+
+
+
+INSERT INTO etape(recette_name, etape_name, numero, explication, temps, type)
+VALUES ('Muffins aux chocolats', 'Faites fondre le chocolat', 1, 'Faites fondre tout le chocolat', 10, 'cuisson'),
+	('Muffins aux chocolats', 'Disposition', 2, 'Mettez votre chocolat dans des moules', 15, 'preparation'),
+	('Muffins aux chocolats', 'Cuisson', 3, 'Mettre les muffins au four à 220°C, pendant 10 min', 30, 'cuisson'),
+	('Poulet aux champignons', 'Coupez poulet', 1, 'Coupez vos poulets en de petit morceaux', 15, 'preparation'),
+	('Poulet aux champignons', 'Lavez les champignons', 2, 'Lavez vos champignons', 5, 'preparation'),
+	('Poulet aux champignons', 'Melangez tout et le cuir', 3, 'Melangez le poulet, la sauce et la crème et faites le tout cuir', 20, 'cuisson'),
+	('Poulet aux champignons', 'Assaisonnement', 4, 'Assaisonnement le tout à votre guise', 5, 'preparation'),
+	('Cake aux chocolats', 'Préparatif', 1, 'Préparer tous les ingrédients', 15, 'preparation'),
+	('Cake aux chocolats', 'Fondre le chocolat', 2, 'Faites fondre le chocolat dans une casserole', 10, 'cuisson'),
+	('Cake aux chocolats', 'Melanger', 3, 'Melangez le chocolat fondu avec les autres ingrédients', 10, 'preparation'),
+	('Cake aux chocolats', 'Cuir', 4, 'Mettez le tout au four et attendez', 40, 'cuisson'),
+	('Spaghetti bolognaise', 'Préparer le haché', 1, 'Melangez cuisez le haché à petit feu', 15, 'cuisson'),
+	('Spaghetti bolognaise', 'Ajouter la sauce', 2, 'Ajoutez la sauce tomate et mélangez', 5, 'preparation'),
+	('Spaghetti bolognaise', 'Mijoter', 3, 'Laissez le tout mijoter', 10, 'cuisson'),
+	('Spaghetti bolognaise', 'Cuir les pates', 4, 'Cuir vos pates et degustez le tout', 15, 'cuisson'),
+	('Kefta', 'Préliminaire', 1, 'Mettre du haché dans un plat et ajouter oignons et les épices', 30, 'preparation'),
+	('Kefta', 'Melangez', 2, 'Melangez bien le tout', 10, 'preparation'),
+	('Kefta', 'Cuisson', 3, 'Faites cuir le tout sur un grill ou un barbecue', 30, 'cuisson'),
+	('Tarte tatin', 'Epeluchez les pommes', 1, 'Epeluchez toutes vos pommes et coupez-les', 15, 'preparation'),
+	('Tarte tatin', 'Fondre le beurre', 2, 'Faites fondre le beurre dans un mule directement sur le feu', 10, 'cuisson'),
+	('Tarte tatin', 'Melangez', 3, 'Melangez le tout', 5, 'preparation'),
+	('Tarte tatin', 'Cuisson', 4, 'Mettez le moule au four pendant 35 minutes', 35, 'cuisson');
+	
+	
+
+
+INSERT INTO ingredient(recette_name, ingr_name, quantite)
+VALUES ('Muffins aux chocolats', 'chocolat', 200),
+	('Muffins aux chocolats', 'sucre', 100),
+	('Muffins aux chocolats', 'vanille', 1),
+	('Muffins aux chocolats', 'beurre', 300),
+	('Poulet aux champignons', 'poulet', 200),
+	('Poulet aux champignons', 'champignons', 100),
+	('Cake aux chocolats', 'chocolat', 500),
+	('Cake aux chocolats', 'callet', 50),
+	('Cake aux chocolats', 'sucre', 24),
+	('Spaghetti bolognaise', 'tomate', 220),
+	('Spaghetti bolognaise', 'pates', 500),
+	('Spaghetti bolognaise', 'haché', 1000),
+	('Kefta', 'haché', 500),
+	('Kefta', 'oignons', 1),
+	('Kefta', 'sel', 1),
+	('Tarte tatin', 'pomme', 8),
+	('Tarte tatin', 'sucre vanillé', 2),
+	('Tarte tatin', 'beurre', 100),
+	('Tarte tatin', 'sucre en poudre', 100);
+
+INSERT INTO ingr_unite(ingr_name, unite)
+VALUES ('chocolat', 'grammes'),
+	('sucre', 'grammes'),
+	('vanille', 'pincées'),
+	('beurre', 'grammes'),
+	('poulet', 'grammes'),
+	('champignons', 'grammes'),
+	('callet', 'grammes'),
+	('tomate', 'grammes'),
+	('pates', 'grammes'),
+	('haché', 'grammes'),
+	('oignons', 'entité'),
+	('sel', 'pincées'),
+	('pomme', 'entité'),
+	('sucre vanillé', 'sachet'),
+	('sucre en poudre', 'grammes');
