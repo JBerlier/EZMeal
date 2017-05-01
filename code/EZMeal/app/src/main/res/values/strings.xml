@@ -16,5 +16,4 @@
             <item name="gender_female_label">Female</item>
             <item name="gender_other_label">Other</item>
     </string-array>
-
 </resources>
