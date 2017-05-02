@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="be.lsinf1225.ezmeal.MainActivity">
+    tools:context="be.lsinf1225.ezmeal.menu">
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/button_signout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Déconnexion"

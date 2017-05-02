@@ -65,6 +65,8 @@ public class MyDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        
+        //creation table user
         db.execSQL("DROP TABLE IF EXISTS '"+USER_TABLE+"';");
         db.execSQL("CREATE TABLE '"+USER_TABLE+"' ('"+
                 USER_USERNAME_COLUMN+"' TEXT NOT NULL PRIMARY KEY, '"+
@@ -80,6 +82,8 @@ public class MyDatabase extends SQLiteOpenHelper {
                 "('Sophie', '1234', 20, 'Rue des champs 1, 7500 Tournai', 'Femme')," +
                 "('Topichef', 'toptop', 53, 'Avenue des plats 10', 'Homme');"
         );
+        
+        //creation table step
         db.execSQL("DROP TABLE IF EXISTS '"+STEP_TABLE+"';");
         db.execSQL("CREATE TABLE '"+STEP_TABLE+"' ('"+
                 RECETTE_NAME_COLUMN+"' TEXT NOT NULL PRIMARY KEY, '"+
@@ -95,6 +99,25 @@ public class MyDatabase extends SQLiteOpenHelper {
                 "('Lasagne','Rajout de la sauce tomate', 2, 'Mettez maintenant la sauce tomate avec la viande entre chaque pâte',,,5,'preparation')" +
                 "('Lasagne','Cuisson de lasagne', 3, 'Mettez maintenant cuire la lasagne durant 30 minutes',,,30,''cuisson)"
         );
+        
+        //creation table recette
+        db.execSQL("DROP TABLE IF EXISTS '"+RECETTE_TABLE+"';");
+        db.execSQL("CREATE TABLE '"+RECETTE_TABLE+"' ('"+
+                RECETTE_NAME_COLUMN+"' TEXT NOT NULL PRIMARY KEY, '"+
+                RECETTE_PICTURE_COLUMN+"' BLOB NOT NULL, '"+
+                RECETTE_DESCRIPTION_COLUMN+"' TEXT NOT NULL, '"+
+                RECETTE_DATE_COLUMN+"' DATETIME NOT NULL, '"+
+                RECETTE_AUTHOR_COLUMN+"' TEXT NOT NULL, '"+
+                RECETTE_NBRE_PERS_COLUMN+"' INTEGER NOT NULL, '"+
+                RECETTE_DIFFICULTY_COLUMN+"' INTEGER NOT NULL, '"+
+                RECETTE_TYPE_COLUMN+"' TEXT NOT NULL, '"+
+                RECETTE_SOUS_TYPE_COLUMN+"' TEXT NOT NULL);"
+        );
+        db.execSQL("INSERT INTO "+RECETTE_TABLE+"("+RECETTE_NAME_COLUMN+","+RECETTE_PICTURE_COLUMN+","+RECETTE_DESCRIPTION_COLUMN+","+RECETTE_DATE_COLUMN+","+RECETTE_AUTHOR_COLUMN+","+RECETTE_NBRE_PERS_COLUMN+","+RECETTE_DIFFICULTY_COLUMN+","+RECETTE_TYPE_COLUMN+","+RECETTE_SOUS_TYPE_COLUMN+")"+
+                "VALUES ('Lasagne', !!image en binair?!!,'Cette recette traditionelle de lasagnes vous donnera un goût d'Italie.', '2017-05-01', 'MamaItalia',6,3,'plat','italien'), "+
+                "('Muffins au chocolat', !!image en binair?!!,'Ces délicieux muffins au chocolats vous ferons retrouver les saveurs de votre enfance.', '2017-04-04', 'DeliDessert',8,2,'dessert','chocolaté'), "+
+                "('Toats aux champignons', !!image en binair?!!,'Cette entrée de fête est parfaite pour commencer un repas royal !', '2016-09-21', 'PapyCuistot',5,4,'entrée','forestier'),"
+        );
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -103,6 +126,8 @@ public class MyDatabase extends SQLiteOpenHelper {
     }
     private void deleteDatabase(SQLiteDatabase db) {
         db.execSQL("DROP TABLE IF EXISTS '"+USER_TABLE+"';");
+        db.execSQL("DROP TABLE IF EXISTS '"+RECETTE_TABLE+"';");
+        db.execSQL("DROP TABLE IF EXISTS '"+STEP_TABLE+"';");
     }
 
     public boolean open() {
@@ -113,6 +138,7 @@ public class MyDatabase extends SQLiteOpenHelper {
             return false;
         }
     }
+    //verification de sign in username+password
     public boolean checkDataLogin(String username, String password) {
         SQLiteDatabase db=getReadableDatabase();
         Cursor cursor=db.query(USER_TABLE,

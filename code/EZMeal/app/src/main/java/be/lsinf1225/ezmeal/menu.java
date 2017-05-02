@@ -11,12 +11,21 @@ public class menu extends AppCompatActivity {
     private Button ButtonSearch ;
     private Button ButtonCatalogue ;
     private Button ButtonSuggest ;
+    private Button ButtonSignOut ;
     //private Button ButtonUser ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
+        ButtonSignOut = (Button) findViewById(R.id.button_signout);
+        ButtonSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(menu.this, SignInActivity.class);
+                startActivityForResult(i, REQUEST_CODE);
+            }
+        });
         ButtonSearch = (Button) findViewById(R.id.button_search);
         ButtonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
