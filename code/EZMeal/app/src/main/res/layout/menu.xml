@@ -7,7 +7,7 @@
     tools:context="be.lsinf1225.ezmeal.menu">
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/button_signout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Déconnexion"
