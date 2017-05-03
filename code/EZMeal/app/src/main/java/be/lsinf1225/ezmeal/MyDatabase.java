@@ -14,6 +14,7 @@ import java.util.List;
  */
 
 public class MyDatabase extends SQLiteOpenHelper {
+
     private static final String TAG="MyDatabase";
     private static final String DATABASE_NAME="database.sqlite";
     private static final int DATABASE_VERSION=2;
@@ -65,11 +66,10 @@ public class MyDatabase extends SQLiteOpenHelper {
         super(context,DATABASE_NAME, null,DATABASE_VERSION);
         this.context=context;
     }
-
     @Override
     public void onCreate(SQLiteDatabase db) {
-        
-        //creation table user
+        db= SQLiteDatabase.openDatabase("EZMeal/app/src/main/assets/EZmealDatabase.sqlite",null,SQLiteDatabase.OPEN_READWRITE);
+        /*//creation table user
         db.execSQL("DROP TABLE IF EXISTS '"+USER_TABLE+"';");
         db.execSQL("CREATE TABLE '"+USER_TABLE+"' ('"+
                 USER_USERNAME_COLUMN+"' TEXT NOT NULL PRIMARY KEY, '"+
@@ -121,6 +121,7 @@ public class MyDatabase extends SQLiteOpenHelper {
                 "('Muffins au chocolat',,'Ces délicieux muffins au chocolats vous ferons retrouver les saveurs de votre enfance.', '2017-04-04', 'DeliDessert',8,2,'dessert','chocolaté'), "+
                 "('Toats aux champignons',,'Cette entrée de fête est parfaite pour commencer un repas royal !', '2016-09-21', 'PapyCuistot',5,4,'entrée','forestier'),"
         );
+        */
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
