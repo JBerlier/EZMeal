@@ -6,6 +6,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Laurent on 25/04/2017.
  */
@@ -99,12 +102,12 @@ public class MyDatabase extends SQLiteOpenHelper {
                 "('Lasagne','Rajout de la sauce tomate', 2, 'Mettez maintenant la sauce tomate avec la viande entre chaque pâte',,,5,'preparation')" +
                 "('Lasagne','Cuisson de lasagne', 3, 'Mettez maintenant cuire la lasagne durant 30 minutes',,,30,''cuisson)"
         );
-        
+
         //creation table recette
         db.execSQL("DROP TABLE IF EXISTS '"+RECETTE_TABLE+"';");
         db.execSQL("CREATE TABLE '"+RECETTE_TABLE+"' ('"+
                 RECETTE_NAME_COLUMN+"' TEXT NOT NULL PRIMARY KEY, '"+
-                RECETTE_PICTURE_COLUMN+"' BLOB NOT NULL, '"+
+                RECETTE_PICTURE_COLUMN+"' BLOB, '"+
                 RECETTE_DESCRIPTION_COLUMN+"' TEXT NOT NULL, '"+
                 RECETTE_DATE_COLUMN+"' DATETIME NOT NULL, '"+
                 RECETTE_AUTHOR_COLUMN+"' TEXT NOT NULL, '"+
@@ -114,9 +117,8 @@ public class MyDatabase extends SQLiteOpenHelper {
                 RECETTE_SOUS_TYPE_COLUMN+"' TEXT NOT NULL);"
         );
         db.execSQL("INSERT INTO "+RECETTE_TABLE+"("+RECETTE_NAME_COLUMN+","+RECETTE_PICTURE_COLUMN+","+RECETTE_DESCRIPTION_COLUMN+","+RECETTE_DATE_COLUMN+","+RECETTE_AUTHOR_COLUMN+","+RECETTE_NBRE_PERS_COLUMN+","+RECETTE_DIFFICULTY_COLUMN+","+RECETTE_TYPE_COLUMN+","+RECETTE_SOUS_TYPE_COLUMN+")"+
-                "VALUES ('Lasagne', !!image en binair?!!,'Cette recette traditionelle de lasagnes vous donnera un goût d'Italie.', '2017-05-01', 'MamaItalia',6,3,'plat','italien'), "+
-                "('Muffins au chocolat', !!image en binair?!!,'Ces délicieux muffins au chocolats vous ferons retrouver les saveurs de votre enfance.', '2017-04-04', 'DeliDessert',8,2,'dessert','chocolaté'), "+
-                "('Toats aux champignons', !!image en binair?!!,'Cette entrée de fête est parfaite pour commencer un repas royal !', '2016-09-21', 'PapyCuistot',5,4,'entrée','forestier'),"
+                "('Muffins au chocolat',,'Ces délicieux muffins au chocolats vous ferons retrouver les saveurs de votre enfance.', '2017-04-04', 'DeliDessert',8,2,'dessert','chocolaté'), "+
+                "('Toats aux champignons',,'Cette entrée de fête est parfaite pour commencer un repas royal !', '2016-09-21', 'PapyCuistot',5,4,'entrée','forestier'),"
         );
     }
     @Override
@@ -196,6 +198,8 @@ public class MyDatabase extends SQLiteOpenHelper {
                 "VALUES ('"+username+"','"+password+"','"+age+"','"+address+"','"+gender+"');");
         return true;
     }
+
+
     public int getIndex(String[] array, String elem) {
         int size=array.length;
         for(int i=0; i<size; i++) {
@@ -238,5 +242,51 @@ public class MyDatabase extends SQLiteOpenHelper {
         int count = cursor.getCount();
 
         return count-1;
+    }
+    public List<String> getTypes(){
+        List<String> types = new ArrayList<String>();
+
+        // Select All Query
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                types.add(cursor.getString(1));
+            } while (cursor.moveToNext());
+        }
+
+        // closing connection
+        cursor.close();
+        db.close();
+
+        // returning types
+        return types;
+    }
+
+    public List<String> getSubTypes(){
+        List<String> sub_types = new ArrayList<String>();
+
+        // Select All Query
+        String selectQuery = "SELECT  DISTINCT "+RECETTE_SOUS_TYPE_COLUMN+" FROM " +RECETTE_TABLE;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        //Cursor cursor = db.query(RECETTE_TABLE,new String[]{RECETTE_SOUS_TYPE_COLUMN},null,null,null,null,null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                sub_types.add(cursor.getString(1));
+            } while (cursor.moveToNext());
+        }
+
+        // closing connection
+        cursor.close();
+        db.close();
+
+        // returning types
+        return sub_types;
     }
 }
