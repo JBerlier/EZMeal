@@ -117,6 +117,7 @@ public class MyDatabase extends SQLiteOpenHelper {
                 RECETTE_SOUS_TYPE_COLUMN+"' TEXT NOT NULL);"
         );
         db.execSQL("INSERT INTO "+RECETTE_TABLE+"("+RECETTE_NAME_COLUMN+","+RECETTE_PICTURE_COLUMN+","+RECETTE_DESCRIPTION_COLUMN+","+RECETTE_DATE_COLUMN+","+RECETTE_AUTHOR_COLUMN+","+RECETTE_NBRE_PERS_COLUMN+","+RECETTE_DIFFICULTY_COLUMN+","+RECETTE_TYPE_COLUMN+","+RECETTE_SOUS_TYPE_COLUMN+")"+
+                "VALUES ('Lasagne',,'Cette recette traditionelle de lasagnes vous donnera le vrai goût Italien.', '2017-05-01', 'MamaItalia',6,3,'plat','italien'), "+
                 "('Muffins au chocolat',,'Ces délicieux muffins au chocolats vous ferons retrouver les saveurs de votre enfance.', '2017-04-04', 'DeliDessert',8,2,'dessert','chocolaté'), "+
                 "('Toats aux champignons',,'Cette entrée de fête est parfaite pour commencer un repas royal !', '2016-09-21', 'PapyCuistot',5,4,'entrée','forestier'),"
         );
@@ -243,12 +244,16 @@ public class MyDatabase extends SQLiteOpenHelper {
 
         return count-1;
     }
+
     public List<String> getTypes(){
         List<String> types = new ArrayList<String>();
 
         // Select All Query
+        String selectQuery = "SELECT  DISTINCT "+RECETTE_TYPE_COLUMN+" FROM " +RECETTE_TABLE+";";
 
         SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        //Cursor cursor = db.query(RECETTE_TABLE,new String[]{RECETTE_TYPE_COLUMN},null,null,null,null,null);
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
