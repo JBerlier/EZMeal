@@ -12,11 +12,15 @@
     <string name="authenticate_label">Authentication...</string>
 
     <string-array name="gender">
-            <item name="gender_male_label">Male</item>
-            <item name="gender_female_label">Female</item>
-            <item name="gender_other_label">Other</item>
+        <item name="gender_male_label">Male</item>
+        <item name="gender_female_label">Female</item>
+        <item name="gender_other_label">Other</item>
     </string-array>
 
     <string name="etap_prec">Etape precedente</string>
     <string name="etape_suiv">Etape suivante</string>
+    <string name="add_comment">Comment</string>
+    <string name="set_comment">Send comment</string>
+    <string name="set_grade">Send grade</string>
+    <string name="avis">Give your recommendation</string>
 </resources>

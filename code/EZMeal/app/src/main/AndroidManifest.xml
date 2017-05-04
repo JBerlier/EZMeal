@@ -10,20 +10,22 @@
         android:theme="@style/AppTheme">
         <activity android:name=".SignUpActivity"></activity>
         <activity android:name=".SignInActivity">
-            <intent-filter>
+           <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-        <activity android:name=".menu"></activity>
-        
-        <activity android:name=".search"></activity>
+        <activity android:name=".Etape_middle">
 
-        <activity android:name=".catalogue"></activity>
 
-        <activity android:name=".suggest"></activity>
-
+        </activity>
+        <activity android:name=".menu" />
+        <activity android:name=".search" />
+        <activity android:name=".catalogue" />
+        <activity android:name=".suggest" />
+        <activity android:name=".AvisActivity">
+        </activity>
     </application>
 
 </manifest>

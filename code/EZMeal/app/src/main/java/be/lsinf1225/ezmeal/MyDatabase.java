@@ -61,6 +61,7 @@ public class MyDatabase extends SQLiteOpenHelper {
     private static final String USER_ADDRESS_COLUMN="residence";
     private static final String USER_GENDER_COLUMN="sexe";
 
+
     public MyDatabase(Context context) {
         super(context,DATABASE_NAME, null,DATABASE_VERSION);
         this.context=context;
@@ -120,6 +121,11 @@ public class MyDatabase extends SQLiteOpenHelper {
                 "('Muffins au chocolat',,'Ces délicieux muffins au chocolats vous ferons retrouver les saveurs de votre enfance.', '2017-04-04', 'DeliDessert',8,2,'dessert','chocolaté'), "+
                 "('Toats aux champignons',,'Cette entrée de fête est parfaite pour commencer un repas royal !', '2016-09-21', 'PapyCuistot',5,4,'entrée','forestier'),"
         );
+
+        //creation table avis
+        db.execSQL("DROP TABLE IF EXISTS '"+AVIS_TABLE+"';");
+        db.execSQL(String.format("CREATE TABLE %1$s(%2$s TEXT PRIMARY KEY REFERENCES %6$s,%3$s TEXT PRIMARY KEY REFERENCES %7$s,%4$s TEXT,%5$s INTEGER);",
+                AVIS_TABLE,AVIS_AUTHOR_COLUMN,AVIS_RECETTE_COLUMN,AVIS_COMMENTAIRE_COLUMN,AVIS_NOTE_COLUMN,USER_TABLE,RECETTE_TABLE));
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -200,6 +206,60 @@ public class MyDatabase extends SQLiteOpenHelper {
     }
 
 
+    /**
+     * Ajoute ou écrase une commentaire d'un utilsateur sur un recette
+     * @param comment texte du commentaire
+     * @param username nom de l'utilisateur postant le commentaire
+     * @param recipe nom de la recette commentée
+     */
+    public void addComment(String comment, String username, String recipe){
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.query(AVIS_TABLE,
+                new String[]{AVIS_AUTHOR_COLUMN}, //on prend une seule colonne car on n'est interessé que par le nombre de lignes
+                AVIS_AUTHOR_COLUMN+" ='"+username+"'AND"+AVIS_RECETTE_COLUMN+" ='"+recipe+"'",
+                null,
+                null,
+                null,
+                null);
+
+        if(cursor.getCount()==0) {//si il n'y as pas d'avis de l'utilsateur
+            db.execSQL(String.format("INSERT INTO %1$s(%2$s,%3$s,%4$s,%5$s) VALUES ('%6$s','%7$s',NULL,'%8$s');",
+                    AVIS_TABLE,AVIS_AUTHOR_COLUMN,AVIS_RECETTE_COLUMN,AVIS_NOTE_COLUMN,AVIS_COMMENTAIRE_COLUMN,username,recipe,comment));
+        }
+        else{//si il ya déja un avis créé
+            db.execSQL(String.format("UPDATE %1$s SET %2$s = '%3$s' WHERE %4$s = '%5$s' AND %6$s = '%7$s'"
+                    ,AVIS_TABLE,AVIS_COMMENTAIRE_COLUMN,comment,AVIS_AUTHOR_COLUMN,username,AVIS_RECETTE_COLUMN,recipe));
+        }
+    }
+
+    /**
+     * Ajoute ou écrase une note d'un utilsateur sur un recette
+     * @param grade note, inclus dans [0 , 5]
+     * @param username nom de l'utilisateur postant le commentaire
+     * @param recipe nom de la recette commentée
+     * @throws Exception si grade n'est pas inclus dans [0 , 5]
+     */
+    public void addGrade(int grade, String username, String recipe) throws Exception {
+        if(grade>5||grade<0)
+            throw new Exception("grade hors des limites");
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.query(AVIS_TABLE,
+                new String[]{AVIS_AUTHOR_COLUMN}, //on prend une seule colonne car on n'est interessé que par le nombre de lignes
+                AVIS_AUTHOR_COLUMN+" ='"+username+"'AND"+AVIS_RECETTE_COLUMN+" ='"+recipe+"'",
+                null,
+                null,
+                null,
+                null);
+
+        if(cursor.getCount()==0) {//si il n'y as pas d'avis de l'utilsateur
+            db.execSQL(String.format("INSERT INTO %1$s(%2$s,%3$s,%4$s,%5$s) VALUES ('%6$s','%7$s','%8$s',NULL);",
+                    AVIS_TABLE,AVIS_AUTHOR_COLUMN,AVIS_RECETTE_COLUMN,AVIS_NOTE_COLUMN,AVIS_COMMENTAIRE_COLUMN,username,recipe,grade));
+        }
+        else{//si il ya déja un avis créé
+            db.execSQL(String.format("UPDATE %1$s SET %2$s = %3$s WHERE %4$s = %5$s AND %6$s = %7$s"
+                    ,AVIS_TABLE,AVIS_NOTE_COLUMN,grade,AVIS_AUTHOR_COLUMN,username,AVIS_RECETTE_COLUMN,recipe));
+        }
+    }
     public int getIndex(String[] array, String elem) {
         int size=array.length;
         for(int i=0; i<size; i++) {
