@@ -4,7 +4,8 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
+        android:roundIcon="@drawable/logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -16,16 +17,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Etape_middle">
 
+        <activity android:name=".TimerActivity"></activity>
 
-        </activity>
-        <activity android:name=".menu" />
-        <activity android:name=".search" />
-        <activity android:name=".catalogue" />
-        <activity android:name=".suggest" />
-        <activity android:name=".AvisActivity">
-        </activity>
+        <activity android:name=".menu"></activity>
+        <activity android:name=".search"></activity>
+        <activity android:name=".catalogue"></activity>
+        <activity android:name=".suggest"></activity>
+        <activity android:name=".Etape_middle"></activity>
+        <activity android:name=".AvisActivity"></activity>
     </application>
 
 </manifest>
