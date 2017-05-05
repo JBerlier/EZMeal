@@ -110,7 +110,7 @@ public class SignInActivity extends Activity {
             return db.checkDataLogin(username,password);
         } else {
             throw new Error("Impossible d'ouvrir la base de donnees");
-        }
+       }
     }
     public void signinSuccess() {
         Log.d(this.TAG,"Successfull login");

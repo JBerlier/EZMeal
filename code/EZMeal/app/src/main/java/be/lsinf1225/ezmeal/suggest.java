@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by marti on 28-04-17.
  */
@@ -13,10 +16,13 @@ import android.widget.Button;
 public class suggest extends Activity {
     private static final int REQUEST_CODE = 1 ;
     private Button ButtonRetour ;
+    private List<String> suggestions=new ArrayList<>();
+    MyDatabase db = new MyDatabase(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.suggest);
+        suggestions =db.suggest();
 
         ButtonRetour = (Button) findViewById(R.id.button_retour);
         ButtonRetour.setOnClickListener(new View.OnClickListener() {

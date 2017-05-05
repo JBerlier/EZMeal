@@ -15,62 +15,64 @@ import java.util.List;
 
 public class MyDatabase extends SQLiteOpenHelper {
 
-    private static final String TAG="MyDatabase";
-    private static final String DATABASE_NAME="database.sqlite";
-    private static final int DATABASE_VERSION=2;
+    private static final String TAG = "MyDatabase";
+    private static final String DATABASE_NAME = "database.sqlite";
+    private static final int DATABASE_VERSION = 2;
     private static Context context;
 
-    private static final String AVIS_TABLE="avis";
-    private static final String AVIS_AUTHOR_COLUMN="username";
-    private static final String AVIS_RECETTE_COLUMN="recette_name";
-    private static final String AVIS_NOTE_COLUMN="note";
-    private static final String AVIS_COMMENTAIRE_COLUMN="commentaire";
+    private static final String AVIS_TABLE = "avis";
+    private static final String AVIS_AUTHOR_COLUMN = "username";
+    private static final String AVIS_RECETTE_COLUMN = "recette_name";
+    private static final String AVIS_NOTE_COLUMN = "note";
+    private static final String AVIS_COMMENTAIRE_COLUMN = "commentaire";
 
-    private static final String STEP_TABLE="etape";
-    private static final String STEP_NAME_COLUMN="etape_name";
-    private static final String STEP_NUMBER_COLUMN="numero";
-    private static final String STEP_EXPLANATION_COLUMN="explication";
-    private static final String STEP_PICTURE_COLUMN="image";
-    private static final String STEP_VIDEO_COLUMN="video";
-    private static final String STEP_TIME_COLUMN="temps";
-    private static final String STEP_TYPE_COLUMN="type";
+    private static final String STEP_TABLE = "etape";
+    private static final String STEP_NAME_COLUMN = "etape_name";
+    private static final String STEP_NUMBER_COLUMN = "numero";
+    private static final String STEP_EXPLANATION_COLUMN = "explication";
+    private static final String STEP_PICTURE_COLUMN = "image";
+    private static final String STEP_VIDEO_COLUMN = "video";
+    private static final String STEP_TIME_COLUMN = "temps";
+    private static final String STEP_TYPE_COLUMN = "type";
 
-    private static final String INGREDIENT_UNITE_TABLE="ingr_unite";
-    private static final String INGREDIENT_UNITE_NAME_COLUMN="ingr_name";
-    private static final String INGREDIENT_UNITE_COLUMN="unite";
+    private static final String INGREDIENT_UNITE_TABLE = "ingr_unite";
+    private static final String INGREDIENT_UNITE_NAME_COLUMN = "ingr_name";
+    private static final String INGREDIENT_UNITE_COLUMN = "unite";
 
-    private static final String INGREDIENT_TABLE="ingredient";
-    private static final String INGREDIENT_RECETTE_COLUMN="recette_name";
-    private static final String INGREDIENT_NAME_COLUMN="ingr_name";
-    private static final String INGREDIENT_QUANTITY_COLUMN="quantite";
+    private static final String INGREDIENT_TABLE = "ingredient";
+    private static final String INGREDIENT_RECETTE_COLUMN = "recette_name";
+    private static final String INGREDIENT_NAME_COLUMN = "ingr_name";
+    private static final String INGREDIENT_QUANTITY_COLUMN = "quantite";
 
-    private static final String RECETTE_TABLE="recette";
-    private static final String RECETTE_NAME_COLUMN="recette_name";
-    private static final String RECETTE_PICTURE_COLUMN="photo";
-    private static final String RECETTE_DESCRIPTION_COLUMN="description";
-    private static final String RECETTE_DATE_COLUMN="date";
-    private static final String RECETTE_AUTHOR_COLUMN="auteur_name";
-    private static final String RECETTE_NBRE_PERS_COLUMN="nbre_pers";
-    private static final String RECETTE_DIFFICULTY_COLUMN="difficulte";
-    private static final String RECETTE_TYPE_COLUMN="type";
-    private static final String RECETTE_SOUS_TYPE_COLUMN="sous_type";
+    private static final String RECETTE_TABLE = "recette";
+    private static final String RECETTE_NAME_COLUMN = "recette_name";
+    private static final String RECETTE_PICTURE_COLUMN = "photo";
+    private static final String RECETTE_DESCRIPTION_COLUMN = "description";
+    private static final String RECETTE_DATE_COLUMN = "date";
+    private static final String RECETTE_AUTHOR_COLUMN = "auteur_name";
+    private static final String RECETTE_NBRE_PERS_COLUMN = "nbre_pers";
+    private static final String RECETTE_DIFFICULTY_COLUMN = "difficulte";
+    private static final String RECETTE_TYPE_COLUMN = "type";
+    private static final String RECETTE_SOUS_TYPE_COLUMN = "sous_type";
 
-    private static final String USER_TABLE="user";
-    private static final String USER_USERNAME_COLUMN="username";
-    private static final String USER_PASWD_COLUMN="password";
-    private static final String USER_AGE_COLUMN="age";
-    private static final String USER_ADDRESS_COLUMN="residence";
-    private static final String USER_GENDER_COLUMN="sexe";
+    private static final String USER_TABLE = "user";
+    private static final String USER_USERNAME_COLUMN = "username";
+    private static final String USER_PASWD_COLUMN = "password";
+    private static final String USER_AGE_COLUMN = "age";
+    private static final String USER_ADDRESS_COLUMN = "residence";
+    private static final String USER_GENDER_COLUMN = "sexe";
 
     public MyDatabase(Context context) {
-        super(context,DATABASE_NAME, null,DATABASE_VERSION);
-        this.context=context;
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
     }
+
+
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db= SQLiteDatabase.openDatabase("EZMeal/app/src/main/assets/EZmealDatabase.sqlite",null,SQLiteDatabase.OPEN_READWRITE);
-        /*//creation table user
-        db.execSQL("DROP TABLE IF EXISTS '"+USER_TABLE+"';");
+        db = SQLiteDatabase.openDatabase("EZMeal/app/src/main/assets/EZmealDatabase.sqlite", null, SQLiteDatabase.OPEN_READWRITE);
+        //creation table user
+        /*db.execSQL("DROP TABLE IF EXISTS '"+USER_TABLE+"';");
         db.execSQL("CREATE TABLE '"+USER_TABLE+"' ('"+
                 USER_USERNAME_COLUMN+"' TEXT NOT NULL PRIMARY KEY, '"+
                 USER_PASWD_COLUMN+"' TEXT NOT NULL, '"+
@@ -120,18 +122,20 @@ public class MyDatabase extends SQLiteOpenHelper {
                 "VALUES ('Lasagne',,'Cette recette traditionelle de lasagnes vous donnera le vrai goût Italien.', '2017-05-01', 'MamaItalia',6,3,'plat','italien'), "+
                 "('Muffins au chocolat',,'Ces délicieux muffins au chocolats vous ferons retrouver les saveurs de votre enfance.', '2017-04-04', 'DeliDessert',8,2,'dessert','chocolaté'), "+
                 "('Toats aux champignons',,'Cette entrée de fête est parfaite pour commencer un repas royal !', '2016-09-21', 'PapyCuistot',5,4,'entrée','forestier'),"
-        );
-        */
+        );*/
     }
+
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         this.deleteDatabase(db);
         this.onCreate(db);
     }
+
     private void deleteDatabase(SQLiteDatabase db) {
-        db.execSQL("DROP TABLE IF EXISTS '"+USER_TABLE+"';");
-        db.execSQL("DROP TABLE IF EXISTS '"+RECETTE_TABLE+"';");
-        db.execSQL("DROP TABLE IF EXISTS '"+STEP_TABLE+"';");
+        db.execSQL("DROP TABLE IF EXISTS '" + USER_TABLE + "';");
+        db.execSQL("DROP TABLE IF EXISTS '" + RECETTE_TABLE + "';");
+        db.execSQL("DROP TABLE IF EXISTS '" + STEP_TABLE + "';");
     }
 
     public boolean open() {
@@ -142,38 +146,65 @@ public class MyDatabase extends SQLiteOpenHelper {
             return false;
         }
     }
+
     //verification de sign in username+password
     public boolean checkDataLogin(String username, String password) {
-        SQLiteDatabase db=getReadableDatabase();
-        Cursor cursor=db.query(USER_TABLE,
+        /*SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(USER_TABLE,
                 new String[]{USER_PASWD_COLUMN},
-                USER_USERNAME_COLUMN+" ='"+username+"'",
+                USER_USERNAME_COLUMN + " ='" + username + "'",
                 null,
                 null,
                 null,
                 null);
-        if(cursor.getCount()==0) {
+        if (cursor.getCount() == 0) {
             cursor.close();
             return false;
         }
-        if(cursor.moveToFirst()) {
+        if (cursor.moveToFirst()) {
             boolean flag = cursor.getString(cursor.getColumnIndex(USER_PASWD_COLUMN)).equals(password);
             cursor.close();
             return flag;
         }
         return false;
+        */
+        List<String> sub_types = new ArrayList<String>();
+
+        // Select All Query
+        String selectQuery = "SELECT  DISTINCT " + RECETTE_SOUS_TYPE_COLUMN + " FROM " + RECETTE_TABLE;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        //Cursor cursor = db.query(RECETTE_TABLE,new String[]{RECETTE_SOUS_TYPE_COLUMN},null,null,null,null,null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                sub_types.add(cursor.getString(1));
+            } while (cursor.moveToNext());
+        }
+
+        // closing connection
+        cursor.close();
+        db.close();
+
+        // returning types
+
+        return true;
     }
+
     public boolean checkUsernameDB(String username) {
-        SQLiteDatabase db=this.getReadableDatabase();
-        Cursor cursor=db.query(USER_TABLE,
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(USER_TABLE,
                 new String[]{USER_USERNAME_COLUMN},
-                USER_USERNAME_COLUMN+" ='"+username+"'",
+                USER_USERNAME_COLUMN + " ='" + username + "'",
                 null,
                 null,
                 null,
                 null);
 
-        if(cursor.getCount()==0) {
+        if (cursor.getCount() == 0) {
             cursor.close();
             return false;
         } else {
@@ -181,76 +212,77 @@ public class MyDatabase extends SQLiteOpenHelper {
             return true;
         }
     }
+
     public boolean addDataRegister(String username, String password, String age, String address, String gender) {
-        int index=this.getIndex(this.context.getResources().getStringArray(R.array.gender),gender);
-        switch(index) {
+        int index = this.getIndex(this.context.getResources().getStringArray(R.array.gender), gender);
+        switch (index) {
             case 0:
-                gender="Homme";
+                gender = "Homme";
                 break;
             case 1:
-                gender="Femme";
+                gender = "Femme";
                 break;
             case 2:
-                gender="Autre";
+                gender = "Autre";
                 break;
         }
 
-        SQLiteDatabase db=this.getReadableDatabase();
-        db.execSQL("INSERT INTO "+USER_TABLE+"("+USER_USERNAME_COLUMN+","+USER_PASWD_COLUMN+","+USER_AGE_COLUMN+","+USER_ADDRESS_COLUMN+","+USER_GENDER_COLUMN+")"+
-                "VALUES ('"+username+"','"+password+"','"+age+"','"+address+"','"+gender+"');");
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.execSQL("INSERT INTO " + USER_TABLE + "(" + USER_USERNAME_COLUMN + "," + USER_PASWD_COLUMN + "," + USER_AGE_COLUMN + "," + USER_ADDRESS_COLUMN + "," + USER_GENDER_COLUMN + ")" +
+                "VALUES ('" + username + "','" + password + "','" + age + "','" + address + "','" + gender + "');");
         return true;
     }
 
 
     public int getIndex(String[] array, String elem) {
-        int size=array.length;
-        for(int i=0; i<size; i++) {
-            if(elem==array[i])
+        int size = array.length;
+        for (int i = 0; i < size; i++) {
+            if (elem == array[i])
                 return i;
         }
         return -1;
     }
 
-    public String getStepNameColumn(String recette_name, int step_number){
+    public String getStepNameColumn(String recette_name, int step_number) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(STEP_TABLE,
                 new String[]{STEP_NAME_COLUMN},
-                RECETTE_NAME_COLUMN + "='"+recette_name+"'" + STEP_NUMBER_COLUMN + "='"+step_number+"'",
-                null, null, null,null);
+                RECETTE_NAME_COLUMN + "='" + recette_name + "'" + STEP_NUMBER_COLUMN + "='" + step_number + "'",
+                null, null, null, null);
         String res = cursor.getString(0);
         cursor.close();
 
         return res;
     }
 
-    public String getStepExplanationColumn(String recette_name, int step_number){
+    public String getStepExplanationColumn(String recette_name, int step_number) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(STEP_TABLE,
                 new String[]{STEP_EXPLANATION_COLUMN},
-                RECETTE_NAME_COLUMN + "='"+recette_name+"'" + STEP_NUMBER_COLUMN + "='"+step_number+"'",
-                null, null, null,null);
+                RECETTE_NAME_COLUMN + "='" + recette_name + "'" + STEP_NUMBER_COLUMN + "='" + step_number + "'",
+                null, null, null, null);
         String res = cursor.getString(0);
         cursor.close();
 
         return res;
     }
 
-    public int getNbStep(String recette_name){
+    public int getNbStep(String recette_name) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(STEP_TABLE,
                 new String[]{STEP_EXPLANATION_COLUMN},
-                RECETTE_NAME_COLUMN + "='"+recette_name+"'",
-                null, null, null,null);
+                RECETTE_NAME_COLUMN + "='" + recette_name + "'",
+                null, null, null, null);
         int count = cursor.getCount();
 
-        return count-1;
+        return count - 1;
     }
 
-    public List<String> getTypes(){
+    public List<String> getTypes() {
         List<String> types = new ArrayList<String>();
 
         // Select All Query
-        String selectQuery = "SELECT  DISTINCT "+RECETTE_TYPE_COLUMN+" FROM " +RECETTE_TABLE+";";
+        String selectQuery = "SELECT  DISTINCT " + RECETTE_TYPE_COLUMN + " FROM " + RECETTE_TABLE + ";";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -271,11 +303,11 @@ public class MyDatabase extends SQLiteOpenHelper {
         return types;
     }
 
-    public List<String> getSubTypes(){
+    public List<String> getSubTypes() {
         List<String> sub_types = new ArrayList<String>();
 
         // Select All Query
-        String selectQuery = "SELECT  DISTINCT "+RECETTE_SOUS_TYPE_COLUMN+" FROM " +RECETTE_TABLE;
+        String selectQuery = "SELECT  DISTINCT " + RECETTE_SOUS_TYPE_COLUMN + " FROM " + RECETTE_TABLE;
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -288,11 +320,76 @@ public class MyDatabase extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
 
-        // closing connection
-        cursor.close();
-        db.close();
-
         // returning types
         return sub_types;
     }
+
+
+    public List<String> search(String keyword, String type, String subtype) {
+        List<String> recettes = new ArrayList<>();
+        int i = 0;
+        String selectQuery = "SELECT " + RECETTE_NAME_COLUMN + " FROM "+ RECETTE_TABLE +" WHERE ";
+        if (type!=null) ;
+        {
+            selectQuery = selectQuery + RECETTE_TYPE_COLUMN + " = '" + type + "' ";
+            i++;
+        }
+        if (subtype!= null) ;
+        {
+            if (i == 1) {
+                selectQuery = selectQuery + "OR ";
+            }
+            selectQuery = selectQuery + RECETTE_SOUS_TYPE_COLUMN + " = '" + subtype + "' ";
+            i++;
+        }
+
+        if (keyword!= null) ;
+        {
+            if (i == 1) {
+                selectQuery = selectQuery + "OR ";
+            }
+            selectQuery = selectQuery + RECETTE_NAME_COLUMN + " LIKE '%" + keyword + "%' OR " + RECETTE_DESCRIPTION_COLUMN + " LIKE '%" + keyword + "%' OR " + RECETTE_AUTHOR_COLUMN + " LIKE '%" + keyword + "%' OR " + RECETTE_TYPE_COLUMN + " LIKE '%" + keyword + "%' OR " + RECETTE_SOUS_TYPE_COLUMN + " LIKE '%" + keyword +"%'";
+        }
+        if(selectQuery.equals("SELECT " + RECETTE_NAME_COLUMN + " WHERE "))
+        {
+            return recettes;
+        }
+        else
+        {
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    recettes.add(cursor.getString(1));
+                } while (cursor.moveToNext());
+            }
+            return recettes;
+        }
+    }
+        public List<String> suggest ()
+        {
+            List<String> suggestions = new ArrayList<>();;
+            String selectQuery="SELECT "+RECETTE_NAME_COLUMN+" FROM "+AVIS_TABLE+" WHERE "+AVIS_NOTE_COLUMN+"=5";
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    suggestions.add(cursor.getString(1));
+                } while (cursor.moveToNext());
+            }
+            return suggestions;
+        }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
