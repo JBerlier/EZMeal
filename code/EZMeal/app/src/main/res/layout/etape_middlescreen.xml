@@ -8,6 +8,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
         android:weightSum="1">
 
         <LinearLayout
@@ -16,6 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_marginLeft="24dp"
             android:layout_marginTop="54dp"
             android:layout_marginBottom="20dp">
         </LinearLayout>

@@ -13,7 +13,7 @@ import android.util.Log;
 public class MyDatabase extends SQLiteOpenHelper {
     private static final String TAG="MyDatabase";
     private static final String DATABASE_NAME="database.sqlite";
-    private static final int DATABASE_VERSION=2;
+    private static final int DATABASE_VERSION=3;
     private static Context context;
 
     private static final String AVIS_TABLE="avis";
@@ -132,7 +132,7 @@ public class MyDatabase extends SQLiteOpenHelper {
 
     public boolean open() {
         try {
-            getWritableDatabase();
+            this.getWritableDatabase();
             return true;
         } catch (Throwable t) {
             return false;
@@ -208,34 +208,61 @@ public class MyDatabase extends SQLiteOpenHelper {
     public String getStepNameColumn(String recette_name, int step_number){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(STEP_TABLE,
-                new String[]{STEP_NAME_COLUMN},
-                RECETTE_NAME_COLUMN + "='"+recette_name+"'" + STEP_NUMBER_COLUMN + "='"+step_number+"'",
+                new String[]{STEP_NAME_COLUMN, STEP_NUMBER_COLUMN},
+                RECETTE_NAME_COLUMN + " ='"+recette_name+"'",
                 null, null, null,null);
-        String res = cursor.getString(0);
+        if (cursor.moveToFirst()){
+            while(!cursor.isAfterLast()){
+                if (step_number == cursor.getInt(cursor.getColumnIndex(STEP_NUMBER_COLUMN))){
+                    String res = cursor.getString(cursor.getColumnIndex(STEP_NAME_COLUMN));
+
+                    cursor.close();
+
+                    return res;
+                }
+
+                cursor.moveToNext();
+            }
+        }
         cursor.close();
 
-        return res;
+        return "Pas de nom d'étape disponible";
     }
 
     public String getStepExplanationColumn(String recette_name, int step_number){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(STEP_TABLE,
-                new String[]{STEP_EXPLANATION_COLUMN},
-                RECETTE_NAME_COLUMN + "='"+recette_name+"'" + STEP_NUMBER_COLUMN + "='"+step_number+"'",
-                null, null, null,null);
-        String res = cursor.getString(0);
+                new String[]{STEP_EXPLANATION_COLUMN,STEP_NUMBER_COLUMN},
+                RECETTE_NAME_COLUMN + " ='"+recette_name+"'",
+                null, null, null, null);
+
+        if (cursor.moveToFirst()){
+            while(!cursor.isAfterLast()){
+                if (step_number == cursor.getInt(cursor.getColumnIndex(STEP_NUMBER_COLUMN))){
+                    String res = cursor.getString(cursor.getColumnIndex(STEP_EXPLANATION_COLUMN));
+
+                    cursor.close();
+
+                    return res;
+                }
+
+                cursor.moveToNext();
+            }
+        }
         cursor.close();
 
-        return res;
+        return "Pas d'explication d'étape disponible";
     }
 
     public int getNbStep(String recette_name){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(STEP_TABLE,
                 new String[]{STEP_EXPLANATION_COLUMN},
-                RECETTE_NAME_COLUMN + "='"+recette_name+"'",
+                RECETTE_NAME_COLUMN + " ='"+recette_name+"'",
                 null, null, null,null);
         int count = cursor.getCount();
+
+        cursor.close();
 
         return count-1;
     }
