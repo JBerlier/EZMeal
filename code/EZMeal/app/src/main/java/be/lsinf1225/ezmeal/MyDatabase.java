@@ -71,9 +71,8 @@ public class MyDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db= SQLiteDatabase.openDatabase("EZMeal/app/src/main/assets/EZmealDatabase.sqlite",null,SQLiteDatabase.OPEN_READWRITE);
         //creation table user
-        /*db.execSQL("DROP TABLE IF EXISTS '"+USER_TABLE+"';");
+        db.execSQL("DROP TABLE IF EXISTS '"+USER_TABLE+"';");
 
         db.execSQL("CREATE TABLE '"+USER_TABLE+"' ('"+
                 USER_USERNAME_COLUMN+"' TEXT NOT NULL PRIMARY KEY, '"+
@@ -93,8 +92,8 @@ public class MyDatabase extends SQLiteOpenHelper {
         //creation table step
         db.execSQL("DROP TABLE IF EXISTS '"+STEP_TABLE+"';");
         db.execSQL("CREATE TABLE '"+STEP_TABLE+"' ('"+
-                RECETTE_NAME_COLUMN+"' TEXT NOT NULL PRIMARY KEY, '"+
-                STEP_NAME_COLUMN+"' TEXT NOT NULL, '"+
+                STEP_NAME_COLUMN+"' TEXT NOT NULL PRIMARY KEY, '"+
+                RECETTE_NAME_COLUMN+"' TEXT NOT NULL, '"+
                 STEP_NUMBER_COLUMN+"' INTEGER NOT NULL, '"+
                 STEP_EXPLANATION_COLUMN+"' TEXT NOT NULL, '"+
                 STEP_PICTURE_COLUMN+"' TEXT, '"+
@@ -102,13 +101,17 @@ public class MyDatabase extends SQLiteOpenHelper {
                 STEP_TIME_COLUMN+"' INTEGER NOT NULL, '"+
                 STEP_TYPE_COLUMN+"' TEXT NOT NULL)");
 
+        db.execSQL("INSERT INTO "+STEP_TABLE+"( "+STEP_NAME_COLUMN+", "+RECETTE_NAME_COLUMN+", "+STEP_NUMBER_COLUMN+", "+STEP_EXPLANATION_COLUMN+", "+STEP_TIME_COLUMN+", "+STEP_TYPE_COLUMN+")"+
+                "VALUES ('Cuire la lasagne', 'Lasagne', 2, 'Mettre la lasagne au four à 200', 30, 'cuisson')," +
+                "('Couper les oignons', 'Lasagne', 1, 'Couper les oignons en petits cubes de 1cm de côté', 10, 'preparation')"
+        );
         
 
         //creation table recette
-        db.execSQL("DROP TABLE IF EXISTS '"+RECETTE_TABLE+"';");
+        /*db.execSQL("DROP TABLE IF EXISTS '"+RECETTE_TABLE+"';");
         db.execSQL("CREATE TABLE '"+RECETTE_TABLE+"' ('"+
                 RECETTE_NAME_COLUMN+"' TEXT NOT NULL PRIMARY KEY, '"+
-                RECETTE_PICTURE_COLUMN+"' BLOB, '"+
+                RECETTE_PICTURE_COLUMN+"' TEXT" + ", '"+
                 RECETTE_DESCRIPTION_COLUMN+"' TEXT NOT NULL, '"+
                 RECETTE_DATE_COLUMN+"' DATETIME NOT NULL, '"+
                 RECETTE_AUTHOR_COLUMN+"' TEXT NOT NULL, '"+
@@ -117,10 +120,10 @@ public class MyDatabase extends SQLiteOpenHelper {
                 RECETTE_TYPE_COLUMN+"' TEXT NOT NULL, '"+
                 RECETTE_SOUS_TYPE_COLUMN+"' TEXT NOT NULL);"
         );
-        db.execSQL("INSERT INTO "+RECETTE_TABLE+"("+RECETTE_NAME_COLUMN+","+RECETTE_PICTURE_COLUMN+","+RECETTE_DESCRIPTION_COLUMN+","+RECETTE_DATE_COLUMN+","+RECETTE_AUTHOR_COLUMN+","+RECETTE_NBRE_PERS_COLUMN+","+RECETTE_DIFFICULTY_COLUMN+","+RECETTE_TYPE_COLUMN+","+RECETTE_SOUS_TYPE_COLUMN+")"+
-                "VALUES ('Lasagne',,'Cette recette traditionelle de lasagnes vous donnera le vrai goût Italien.', '2017-05-01', 'MamaItalia',6,3,'plat','italien'), "+
-                "('Muffins au chocolat',,'Ces délicieux muffins au chocolats vous ferons retrouver les saveurs de votre enfance.', '2017-04-04', 'DeliDessert',8,2,'dessert','chocolaté'), "+
-                "('Toats aux champignons',,'Cette entrée de fête est parfaite pour commencer un repas royal !', '2016-09-21', 'PapyCuistot',5,4,'entrée','forestier'),"
+        db.execSQL("INSERT INTO "+RECETTE_TABLE+"("+RECETTE_NAME_COLUMN+","+RECETTE_DESCRIPTION_COLUMN+","+RECETTE_DATE_COLUMN+","+RECETTE_AUTHOR_COLUMN+","+RECETTE_NBRE_PERS_COLUMN+","+RECETTE_DIFFICULTY_COLUMN+","+RECETTE_TYPE_COLUMN+","+RECETTE_SOUS_TYPE_COLUMN+")"+
+                "VALUES ('Lasagne','Cette recette traditionelle de lasagnes vous donnera le vrai goût Italien.', '2017-05-01', 'MamaItalia',6,3,'plat','italien'), "+
+                "('Muffins au chocolat','Ces délicieux muffins au chocolats vous ferons retrouver les saveurs de votre enfance.', '2017-04-04', 'DeliDessert',8,2,'dessert','chocolaté'), "+
+                "('Toats aux champignons','Cette entrée de fête est parfaite pour commencer un repas royal !', '2016-09-21', 'PapyCuistot',5,4,'entrée','forestier'),"
         );
 
         //creation table avis
@@ -273,11 +276,14 @@ public class MyDatabase extends SQLiteOpenHelper {
     }
 
     public String getStepNameColumn(String recette_name, int step_number){
+        Log.d(this.TAG, "Rentree dans get step_name");
         SQLiteDatabase db = this.getReadableDatabase();
+        Log.d(this.TAG, "db en lecture");
         Cursor cursor = db.query(STEP_TABLE,
                 new String[]{STEP_NAME_COLUMN, STEP_NUMBER_COLUMN},
                 RECETTE_NAME_COLUMN + " ='"+recette_name+"'",
                 null, null, null,null);
+        Log.d(this.TAG, "Cursor cree");
         if (cursor.moveToFirst()){
             while(!cursor.isAfterLast()){
                 if (step_number == cursor.getInt(cursor.getColumnIndex(STEP_NUMBER_COLUMN))){

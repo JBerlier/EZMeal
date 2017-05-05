@@ -19,7 +19,6 @@
         <activity android:name=".Etape_middle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -30,7 +29,6 @@
         <activity android:name=".search"></activity>
         <activity android:name=".catalogue"></activity>
         <activity android:name=".suggest"></activity>
-        <activity android:name=".Etape_middle"></activity>
         <activity android:name=".AvisActivity"></activity>
     </application>
 
