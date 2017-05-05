@@ -70,8 +70,8 @@ public class MyDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db= SQLiteDatabase.openDatabase("EZMeal/app/src/main/assets/EZmealDatabase.sqlite",null,SQLiteDatabase.OPEN_READWRITE);
-        /*//creation table user
-        db.execSQL("DROP TABLE IF EXISTS '"+USER_TABLE+"';");
+        //creation table user
+        /*db.execSQL("DROP TABLE IF EXISTS '"+USER_TABLE+"';");
         db.execSQL("CREATE TABLE '"+USER_TABLE+"' ('"+
                 USER_USERNAME_COLUMN+"' TEXT NOT NULL PRIMARY KEY, '"+
                 USER_PASWD_COLUMN+"' TEXT NOT NULL, '"+
@@ -248,7 +248,7 @@ public class MyDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor cursor=db.query(AVIS_TABLE,
                 new String[]{AVIS_AUTHOR_COLUMN}, //on prend une seule colonne car on n'est interessé que par le nombre de lignes
-                AVIS_AUTHOR_COLUMN+" ='"+username+"'AND"+AVIS_RECETTE_COLUMN+" ='"+recipe+"'",
+                AVIS_AUTHOR_COLUMN+" ='"+username+"'AND "+AVIS_RECETTE_COLUMN+" ='"+recipe+"'",
                 null,
                 null,
                 null,
