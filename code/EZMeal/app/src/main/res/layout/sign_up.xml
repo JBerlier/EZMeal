@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/login_background"
-    tools:context="be.lsinf1225.ezmeal.SignUpActivity">
+    tools:context="be.lsinf1225.lsinf1225_grouper.SignUpActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -17,8 +17,8 @@
         <ImageView
             android:src="@drawable/logo"
             android:layout_width="wrap_content"
-            android:layout_height="72dp"
-            android:layout_marginBottom="24dp"
+            android:layout_height="108dp"
+            android:layout_marginBottom="36dp"
             android:layout_gravity="center_horizontal" />
 
         <!-- Username Label -->

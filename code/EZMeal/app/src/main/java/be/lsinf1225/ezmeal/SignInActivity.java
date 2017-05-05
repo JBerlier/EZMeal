@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- *  TO DO : WHERE TO SEND WHEN LOG WITH WHAT INFO
+ *  TO DO : Intent with username in signinSuccess
  * Created by Laurent on 23/04/2017.
  */
 
@@ -48,12 +48,6 @@ public class SignInActivity extends Activity {
                 startActivityForResult(intent,REQUEST_CODE);
             }
         });
-    }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode==this.REQUEST_CODE && resultCode==this.RESULT_OK) {
-            Log.d(this.TAG,"Successfull intent to SignInActivity");
-        }
     }
     @Override
     public void onBackPressed() {
