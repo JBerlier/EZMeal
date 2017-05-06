@@ -107,18 +107,6 @@ public class TimerActivity extends Activity {
             }
         });
     }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        /*if(requestCode==REQUEST_CODE && resultCode==RESULT_OK) {
-            if(data.hasExtra()) {
-                time_tospend=data.getExtras().getInt();
-            }
-        }*/
-    }
-    @Override
-    public void onBackPressed() {
-        this.moveTaskToBack(false);
-    }
 
     public String getTimeString(long time) {
         long minutes=time/60;

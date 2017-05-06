@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/login_background"
-    tools:context="be.lsinf1225.lsinf1225_grouper.SignInActivity">
+    tools:context="be.lsinf1225.ezmeal.SignInActivity">
 
     <LinearLayout
         android:orientation="vertical"

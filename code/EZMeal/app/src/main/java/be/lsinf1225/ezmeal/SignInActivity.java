@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- *  TO DO : Intent with username in signinSuccess
  * Created by Laurent on 23/04/2017.
  */
 
@@ -28,6 +27,7 @@ public class SignInActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.sign_in);
+
         this.username_text=(EditText)this.findViewById(R.id.username_input);
         this.password_text=(EditText)this.findViewById(R.id.password_input);
         this.signin_button=(Button)this.findViewById(R.id.signin_button);
@@ -42,21 +42,13 @@ public class SignInActivity extends Activity {
         this.signup_link.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG,"Changing to sign up");
-
                 Intent intent=new Intent(SignInActivity.this,SignUpActivity.class);
                 startActivityForResult(intent,REQUEST_CODE);
             }
         });
     }
-    @Override
-    public void onBackPressed() {
-        this.moveTaskToBack(false);
-    }
 
     public void  signin() {
-        Log.d(this.TAG, "Login");
-
         final String username=this.username_text.getText().toString();
         final String password=this.password_text.getText().toString();
         if(!this.validateData(username,password)) {
@@ -65,6 +57,7 @@ public class SignInActivity extends Activity {
         }
 
         this.signin_button.setEnabled(false);
+        this.signup_link.setEnabled(false);
         final ProgressDialog progress=new ProgressDialog(SignInActivity.this);
         progress.setIndeterminate(true);
         progress.setMessage(this.getString(R.string.authenticate_label));
@@ -75,7 +68,7 @@ public class SignInActivity extends Activity {
                     @Override
                     public void run() {
                         if(checkDataDB(username,password)) {
-                            signinSuccess();
+                            signinSuccess(username);
                         } else {
                             signinFailed();
                         }
@@ -84,15 +77,13 @@ public class SignInActivity extends Activity {
                 },3000);
     }
     public boolean validateData(String username, String password) {
-        Log.d(this.TAG,"Validating : Username = "+username+"\tPassword = "+password);
-
         boolean flag=true;
         if(username.isEmpty()) {
-            this.username_text.setError("Enter a valid username");
+            this.username_text.setError(this.getString(R.string.invalid_username_label));
             flag=false;
         }
         if(password.isEmpty()) {
-            this.password_text.setError("Enter a valid password");
+            this.password_text.setError(this.getString(R.string.invalid_password_label));
             flag=false;
         }
 
@@ -101,22 +92,21 @@ public class SignInActivity extends Activity {
     public boolean checkDataDB(String username, String password) {
         MyDatabase db=new MyDatabase(this);
         if(db.open()) {
-            return db.checkDataLogin(username,password);
+            return db.checkPassword(username,password);
         } else {
             throw new Error("Impossible d'ouvrir la base de donnees");
-       }
+        }
     }
-    public void signinSuccess() {
-        Log.d(this.TAG,"Successfull login");
-
+    public void signinSuccess(String username) {
         this.signin_button.setEnabled(true);
+        this.signup_link.setEnabled(true);
         Intent intent=new Intent(SignInActivity.this,menu.class);
+        intent.putExtra("USERNAME_INFO",username);
         this.startActivityForResult(intent,REQUEST_CODE);
     }
     public void signinFailed() {
-        Log.d(this.TAG,"Unsuccessfull login");
-
-        Toast.makeText(this.getBaseContext(), "Unsuccessful log in, try again", Toast.LENGTH_LONG).show();
+        Toast.makeText(this.getBaseContext(), this.getString(R.string.unsuccessfull_login_label), Toast.LENGTH_LONG).show();
         this.signin_button.setEnabled(true);
+        this.signup_link.setEnabled(true);
     }
 }

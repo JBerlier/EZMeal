@@ -3,13 +3,17 @@
 
     <string name="username_label">Username</string>
     <string name="password_label">Password</string>
+    <string name="old_password_label">Old password</string>
+    <string name="new_password_label">New password</string>
     <string name="age_label">Age</string>
     <string name="address_label">Address</string>
+    <string name="gender_label">Gender</string>
     <string name="login_label">Log in</string>
     <string name="register_label">Register</string>
     <string name="no_account_label">No account yet ? Create one</string>
     <string name="already_account_label">Already have an account ? Sign in</string>
     <string name="authenticate_label">Authentication...</string>
+    <string name="account_change_label">Save account settings</string>
     <string-array name="gender">
         <item name="gender_male_label">Male</item>
         <item name="gender_female_label">Female</item>
@@ -30,4 +34,14 @@
     <string name="set_comment">Send comment</string>
     <string name="set_grade">Send grade</string>
     <string name="avis">Give your recommendation</string>
+
+    <string name="invalid_username_label">Enter a valid username</string>
+    <string name="invalid_password_label">Enter a valid password</string>
+    <string name="invalid_age_label">Enter a valid age</string>
+    <string name="invalid_address_label">Enter a valid address</string>
+    <string name="invalid_gender_label">Enter a valid gender</string>
+
+    <string name="unsuccessfull_login_label">Unsuccessfull log in, try again</string>
+    <string name="unsuccessfull_register_label">Unsuccessfull registering, try again</string>
+    <string name="unsuccessfull_change_label">Unsuccessfull change, try again</string>
 </resources>
