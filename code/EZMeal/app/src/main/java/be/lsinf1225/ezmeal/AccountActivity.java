@@ -31,7 +31,8 @@ public class AccountActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.account_info);
-        this.username=this.getIntent().getStringExtra("USERNAME_INFO");
+        if(this.getIntent().hasExtra("USERNAME_INFO"))
+            this.username=this.getIntent().getStringExtra("USERNAME_INFO");
 
         this.username_input=(EditText)this.findViewById(R.id.username_input);
         this.old_password_input=(EditText)this.findViewById(R.id.old_password_input);
