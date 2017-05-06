@@ -107,6 +107,8 @@ public class TimerActivity extends Activity {
             }
         });
     }
+    @Override
+    public void onBackPressed() {}
 
     public String getTimeString(long time) {
         long minutes=time/60;

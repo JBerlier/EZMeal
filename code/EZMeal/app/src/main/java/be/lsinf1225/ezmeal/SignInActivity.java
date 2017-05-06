@@ -47,6 +47,8 @@ public class SignInActivity extends Activity {
             }
         });
     }
+    @Override
+    public void onBackPressed() {}
 
     public void  signin() {
         final String username=this.username_text.getText().toString();
