@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +19,21 @@ import java.util.List;
 public class suggest extends Activity {
     private static final int REQUEST_CODE = 1 ;
     private Button ButtonRetour ;
+    private Button ButtonAutre;
+    private ImageButton imageButton;
+    private TextView Recette_name;
     private List<String> suggestions=new ArrayList<>();
+    private String suggestion;
+    private int index =0 ;
     MyDatabase db = new MyDatabase(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.suggest);
-        suggestions =db.suggest();
+        suggestions = db.suggest();
+        suggestion = suggestions.get(index);
+        Recette_name =(TextView) findViewById(R.id.Recette_name);
+        Recette_name.setText(suggestion);
 
         ButtonRetour = (Button) findViewById(R.id.button_retour);
         ButtonRetour.setOnClickListener(new View.OnClickListener() {
@@ -30,6 +41,34 @@ public class suggest extends Activity {
             public void onClick(View view) {
                 Intent i = new Intent(suggest.this, menu.class);
                 startActivityForResult(i, REQUEST_CODE);
+            }
+        });
+
+
+        imageButton = (ImageButton) findViewById(R.id.imageButton);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+
+                                           @Override
+                                           public void onClick(View arg0) {
+
+                                               Toast.makeText(suggest.this,
+                                                       "ImageButton is clicked!", Toast.LENGTH_SHORT).show();
+
+                                           }
+                                       });
+        ButtonAutre = (Button) findViewById(R.id.button_autre);
+        ButtonAutre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                index++;
+                if (index>=suggestions.size())
+                {
+                    Toast.makeText(suggest.this, "Plus de suggestions", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    suggestion = suggestions.get(index);
+                    Recette_name.setText(suggestion);
+                }
             }
         });
     }

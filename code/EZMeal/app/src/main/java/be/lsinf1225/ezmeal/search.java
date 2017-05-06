@@ -3,6 +3,7 @@ package be.lsinf1225.ezmeal;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -29,7 +30,7 @@ public class search extends Activity {
     private Spinner spinner_subtype;
     private String searched_type="";
     private String searched_subtype="";
-    private String searched_keyword="";
+    private String searched_keyword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +41,8 @@ public class search extends Activity {
         spinner_type = (Spinner) findViewById(R.id.spinner_type);
         spinner_subtype = (Spinner) findViewById(R.id.spinner_subtype);
 
-        //loadSpinnerData();
-
+        loadSpinnerData();
+        MyDatabase db = new MyDatabase(this);
         spinner_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -92,8 +93,10 @@ public class search extends Activity {
      * */
    private void loadSpinnerData() {
        MyDatabase db = new MyDatabase(this);
-       List<String> types = db.getTypes();
+       Log.d("Laurent","1");
+       List<String> types =db.getTypes();
        List<String> subtypes = db.getSubTypes();
+
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, types);

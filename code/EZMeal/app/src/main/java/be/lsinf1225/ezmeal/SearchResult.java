@@ -22,8 +22,6 @@ import java.util.List;
 
 public class SearchResult extends ListActivity {
 
-    // This is the Adapter being used to display the list's data
-    SimpleCursorAdapter mAdapter;
 
     private String searched_type="";
     private String searched_subtype="";
@@ -43,15 +41,14 @@ public class SearchResult extends ListActivity {
             searched_type =(String) b.get("type");
             searched_subtype =(String) b.get("subtype");
             searched_keyword =(String) b.get("keyword");
-
         }
         MyDatabase db = new MyDatabase(this);
-        //recettes=db.search(searched_keyword,searched_type,searched_subtype);
-        recettes.add("autre recherche");
+        recettes=db.search(searched_keyword,searched_type,searched_subtype);
         if (recettes.isEmpty())
         {
             Toast.makeText(SearchResult.this, "Pas de résultats", Toast.LENGTH_SHORT).show();
         }
+        recettes.add("autre recherche");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, recettes);
         setListAdapter(adapter);
         getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -63,7 +60,6 @@ public class SearchResult extends ListActivity {
                     Intent i = new Intent(SearchResult.this, search.class);
                     startActivityForResult(i, REQUEST_CODE);
                 }
-               //lancer l'activity de la recette
             }
         });
 

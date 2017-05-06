@@ -1,29 +1,44 @@
 package be.lsinf1225.ezmeal;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by marti on 28-04-17.
  */
 
-public class catalogue extends Activity{
+public class catalogue extends ListActivity {
     private static final int REQUEST_CODE = 1 ;
-    private Button ButtonRetour ;
+    private List<String> recettes =new ArrayList();
+    private String chosenrecette;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.catalogue);
-
-        ButtonRetour = (Button) findViewById(R.id.button_retour);
-        ButtonRetour.setOnClickListener(new View.OnClickListener() {
-        @Override
-            public void onClick(View view) {
-                Intent i = new Intent(catalogue.this, menu.class);
-                startActivityForResult(i, REQUEST_CODE);
+        MyDatabase db = new MyDatabase(this);
+        recettes=db.catalog();
+        recettes.add("retour au menu");
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,recettes);
+        setListAdapter(adapter);
+        getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                chosenrecette=recettes.get(position);
+                if(chosenrecette.equals("retour au menu"))
+                {
+                    Intent i = new Intent(catalogue.this, menu.class);
+                    startActivityForResult(i, REQUEST_CODE);
+                }
             }
         });
     }
