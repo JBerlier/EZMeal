@@ -71,11 +71,9 @@ public class MyDatabase extends SQLiteOpenHelper {
         this.context = context;
     }
 
-
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        //db= SQLiteDatabase.openDatabase("EZMeal/app/src/main/assets/EZmealDatabase.sqlite",null,SQLiteDatabase.OPEN_READWRITE);
         //creation table user
         db.execSQL("DROP TABLE IF EXISTS '"+USER_TABLE+"';");
         db.execSQL("CREATE TABLE '"+USER_TABLE+"' ('"+
@@ -86,15 +84,17 @@ public class MyDatabase extends SQLiteOpenHelper {
                 USER_GENDER_COLUMN+"' TEXT NOT NULL);"
         );
         db.execSQL("INSERT INTO "+USER_TABLE+"("+USER_USERNAME_COLUMN+","+USER_PASWD_COLUMN+","+USER_AGE_COLUMN+","+USER_ADDRESS_COLUMN+","+USER_GENDER_COLUMN+")"+
-                "VALUES ('Laurent', 'laurent', 19, 'Rue antoine 10', 'Homme')," +
-                "('Morgane', 'momo4ever', 38, 'Rue du gateau 19a', 'Femme')," +
-                "('Hadrien', 'hadoufume', 29, 'Rue nationale 1', 'Homme')," +
-                "('Sophie', '1234', 20, 'Rue des champs 1, 7500 Tournai', 'Femme')," +
-                "('Topichef', 'toptop', 53, 'Avenue des plats 10', 'Homme');"
+                "VALUES ('Laurent', 'laurent', 19, 'Rue antoine 10', 'Male')," +
+                "('Morgane', 'momo4ever', 38, 'Rue du gateau 19a', 'Female')," +
+                "('Hadrien', 'hadoufume', 29, 'Rue nationale 1', 'Male')," +
+                "('Sophie', '1234', 20, 'Rue des champs 1, 7500 Tournai', 'Female')," +
+                "('Topichef', 'toptop', 53, 'Avenue des plats 10', 'Male');"
         );
 
-        //creation table step
-        /*db.execSQL("DROP TABLE IF EXISTS '"+STEP_TABLE+"';");
+        
+        /*//creation table step
+        db.execSQL("DROP TABLE IF EXISTS '"+STEP_TABLE+"';");
+>>>>>>> dcf21769b1bf338ed7a667576f3224e4d8088275
         db.execSQL("CREATE TABLE '"+STEP_TABLE+"' ('"+
                 RECETTE_NAME_COLUMN+"' TEXT NOT NULL PRIMARY KEY, '"+
                 STEP_NAME_COLUMN+"' TEXT NOT NULL, '"+
@@ -150,20 +150,16 @@ public class MyDatabase extends SQLiteOpenHelper {
 
 
     }
-
-
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         this.deleteDatabase(db);
         this.onCreate(db);
     }
-
     private void deleteDatabase(SQLiteDatabase db) {
         db.execSQL("DROP TABLE IF EXISTS '" + USER_TABLE + "';");
         db.execSQL("DROP TABLE IF EXISTS '" + RECETTE_TABLE + "';");
         db.execSQL("DROP TABLE IF EXISTS '" + STEP_TABLE + "';");
     }
-
     public boolean open() {
         try {
             getWritableDatabase();
@@ -171,28 +167,6 @@ public class MyDatabase extends SQLiteOpenHelper {
         } catch (Throwable t) {
             return false;
         }
-    }
-
-    //verification de sign in username+password
-    public boolean checkDataLogin(String username, String password) {
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(USER_TABLE,
-                new String[]{USER_PASWD_COLUMN},
-                USER_USERNAME_COLUMN + " ='" + username + "'",
-                null,
-                null,
-                null,
-                null);
-        if (cursor.getCount() == 0) {
-            cursor.close();
-            return false;
-        }
-        if (cursor.moveToFirst()) {
-            boolean flag = cursor.getString(cursor.getColumnIndex(USER_PASWD_COLUMN)).equals(password);
-            cursor.close();
-            return flag;
-        }
-        return false;
     }
 
 
@@ -216,7 +190,7 @@ public class MyDatabase extends SQLiteOpenHelper {
         }
     }
 
-    public boolean addDataRegister(String username, String password, String age, String address, String gender) {
+    /*public boolean addDataRegister(String username, String password, String age, String address, String gender) {
         int index = this.getIndex(this.context.getResources().getStringArray(R.array.gender), gender);
         switch (index) {
             case 0:
@@ -234,7 +208,7 @@ public class MyDatabase extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO " + USER_TABLE + "(" + USER_USERNAME_COLUMN + "," + USER_PASWD_COLUMN + "," + USER_AGE_COLUMN + "," + USER_ADDRESS_COLUMN + "," + USER_GENDER_COLUMN + ")" +
                 "VALUES ('" + username + "','" + password + "','" + age + "','" + address + "','" + gender + "');");
         return true;
-    }
+    }*/
 
 
     /**
@@ -271,33 +245,24 @@ public class MyDatabase extends SQLiteOpenHelper {
      * @throws Exception si grade n'est pas inclus dans [0 , 5]
      */
     public void addGrade(int grade, String username, String recipe) throws Exception {
-        if(grade>5||grade<0)
+        if (grade > 5 || grade < 0)
             throw new Exception("grade hors des limites");
-        SQLiteDatabase db=this.getReadableDatabase();
-        Cursor cursor=db.query(AVIS_TABLE,
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(AVIS_TABLE,
                 new String[]{AVIS_AUTHOR_COLUMN}, //on prend une seule colonne car on n'est interessé que par le nombre de lignes
-                AVIS_AUTHOR_COLUMN+" ='"+username+"'AND "+AVIS_RECETTE_COLUMN+" ='"+recipe+"'",
+                AVIS_AUTHOR_COLUMN + " ='" + username + "'AND " + AVIS_RECETTE_COLUMN + " ='" + recipe + "'",
                 null,
                 null,
                 null,
                 null);
 
-        if(cursor.getCount()==0) {//si il n'y as pas d'avis de l'utilsateur
+        if (cursor.getCount() == 0) {//si il n'y as pas d'avis de l'utilsateur
             db.execSQL(String.format("INSERT INTO %1$s(%2$s,%3$s,%4$s,%5$s) VALUES ('%6$s','%7$s','%8$s',NULL);",
-                    AVIS_TABLE,AVIS_AUTHOR_COLUMN,AVIS_RECETTE_COLUMN,AVIS_NOTE_COLUMN,AVIS_COMMENTAIRE_COLUMN,username,recipe,grade));
-        }
-        else{//si il ya déja un avis créé
+                    AVIS_TABLE, AVIS_AUTHOR_COLUMN, AVIS_RECETTE_COLUMN, AVIS_NOTE_COLUMN, AVIS_COMMENTAIRE_COLUMN, username, recipe, grade));
+        } else {//si il ya déja un avis créé
             db.execSQL(String.format("UPDATE %1$s SET %2$s = %3$s WHERE %4$s = %5$s AND %6$s = %7$s"
-                    ,AVIS_TABLE,AVIS_NOTE_COLUMN,grade,AVIS_AUTHOR_COLUMN,username,AVIS_RECETTE_COLUMN,recipe));
+                    , AVIS_TABLE, AVIS_NOTE_COLUMN, grade, AVIS_AUTHOR_COLUMN, username, AVIS_RECETTE_COLUMN, recipe));
         }
-    }
-    public int getIndex(String[] array, String elem) {
-        int size = array.length;
-        for (int i = 0; i < size; i++) {
-            if (elem == array[i])
-                return i;
-        }
-        return -1;
     }
 
     public String getStepNameColumn(String recette_name, int step_number) {
@@ -323,7 +288,6 @@ public class MyDatabase extends SQLiteOpenHelper {
 
         return res;
     }
-
     public int getNbStep(String recette_name) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(STEP_TABLE,
@@ -334,7 +298,6 @@ public class MyDatabase extends SQLiteOpenHelper {
 
         return count - 1;
     }
-
     public List<String> getTypes() {
 
         List<String> types = new ArrayList<String>();
@@ -356,7 +319,6 @@ public class MyDatabase extends SQLiteOpenHelper {
 
         return types;
     }
-
     public List<String> getSubTypes() {
         List<String> sub_types = new ArrayList<String>();
         sub_types.add("-");
@@ -374,7 +336,6 @@ public class MyDatabase extends SQLiteOpenHelper {
         cursor.close();
         return sub_types;
     }
-
 
     public List<String> search(String keyword, String type, String subtype) {
         List<String> recettes = new ArrayList<>();
@@ -397,8 +358,7 @@ public class MyDatabase extends SQLiteOpenHelper {
             cursor.close();
             return recettes;
     }
-        public List<String> suggest ()
-        {
+    public List<String> suggest () {
             List<String> suggestions = new ArrayList<>();;
             String selectQuery="SELECT "+RECETTE_NAME_COLUMN+" FROM "+AVIS_TABLE+" WHERE "+AVIS_NOTE_COLUMN+"=5";
             SQLiteDatabase db = this.getReadableDatabase();
@@ -412,6 +372,7 @@ public class MyDatabase extends SQLiteOpenHelper {
             cursor.close();
             return suggestions;
         }
+
         public List<String> catalog()
     {
         List<String> catalogue = new ArrayList<>();;
@@ -427,17 +388,144 @@ public class MyDatabase extends SQLiteOpenHelper {
         cursor.close();
         return catalogue;
     }
+
+
+
+
+    public String getAge(String username) {
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.query(USER_TABLE,
+                new String[]{USER_AGE_COLUMN},
+                USER_USERNAME_COLUMN+"='"+username+"'",
+                null,
+                null,
+                null,
+                null
+        );
+        if(cursor.moveToFirst()) {
+            String age=cursor.getInt(cursor.getColumnIndexOrThrow(USER_AGE_COLUMN))+"";
+            cursor.close();
+            return age;
+        }
+        cursor.close();
+        throw new Error("User not found");
+    }
+    public String getAddress(String username) {
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.query(USER_TABLE,
+                new String[]{USER_ADDRESS_COLUMN},
+                USER_USERNAME_COLUMN+"='"+username+"'",
+                null,
+                null,
+                null,
+                null
+        );
+        if(cursor.moveToFirst()) {
+            String address=cursor.getString(cursor.getColumnIndexOrThrow(USER_ADDRESS_COLUMN))+"";
+            cursor.close();
+            return address;
+        }
+        cursor.close();
+        throw new Error("User not found");
+    }
+    public String getGender(String username) {
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.query(USER_TABLE,
+                new String[]{USER_GENDER_COLUMN},
+                USER_USERNAME_COLUMN+"='"+username+"'",
+                null,
+                null,
+                null,
+                null
+        );
+        if(cursor.moveToFirst()) {
+            String address=cursor.getString(cursor.getColumnIndexOrThrow(USER_GENDER_COLUMN))+"";
+            cursor.close();
+            return address;
+        }
+        cursor.close();
+        throw new Error("User not found");
+    }
+
+    // Retourne true si @username est dans la DB
+    public boolean checkUsername(String username) {
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.query(USER_TABLE,
+                new String[]{USER_USERNAME_COLUMN},
+                USER_USERNAME_COLUMN+"='"+username+"'",
+                null,
+                null,
+                null,
+                null);
+
+        if(cursor.getCount()==0) {
+            cursor.close();
+            return false;
+        } else {
+            cursor.close();
+            return true;
+        }
+    }
+    // Retourne true si @password est associe avec @username dans la DB
+    public boolean checkPassword(String username, String password) {
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.query(USER_TABLE,
+                new String[]{USER_PASWD_COLUMN},
+                USER_USERNAME_COLUMN+"='"+username+"'",
+                null,
+                null,
+                null,
+                null);
+
+        if(cursor.moveToFirst()) {
+            String password_db=cursor.getString(cursor.getColumnIndexOrThrow(USER_PASWD_COLUMN));
+            cursor.close();
+            return password.equals(password_db);
+        }
+        cursor.close();
+        return false;
+    }
+
+    public boolean replaceData(String old_username, String new_username, String password, String age, String address, String gender) {
+        SQLiteDatabase db=this.getReadableDatabase();
+        db.execSQL("UPDATE "+USER_TABLE
+                +" SET "+USER_USERNAME_COLUMN+"='"+new_username+"',"
+                +USER_AGE_COLUMN+"='"+age+"',"
+                +USER_ADDRESS_COLUMN+"='"+address+"',"
+                +USER_GENDER_COLUMN+"='"+gender+"'"
+                +" WHERE "+USER_USERNAME_COLUMN+"='"+old_username+"';");
+
+        if(!password.isEmpty()) {
+            db.execSQL("UPDATE " + USER_TABLE
+                    + " SET " + USER_PASWD_COLUMN + "='" + password + "'"
+                    + " WHERE " + USER_USERNAME_COLUMN + "='" + new_username + "';");
+        }
+
+        return true;
+    }
+
+    public boolean addData(String username, String password, String age, String address, String gender) {
+        String[] listGender=this.context.getResources().getStringArray(R.array.gender);
+        int index=0;
+        for(int i=0; i<listGender.length; i++) {
+            if(listGender[i].equals(gender))
+                index=i;
+        }
+        switch(index) {
+            case 0:
+                gender="Male";
+                break;
+            case 1:
+                gender="Female";
+                break;
+            case 2:
+                gender="Other";
+                break;
+        }
+
+        SQLiteDatabase db=this.getReadableDatabase();
+        db.execSQL("INSERT INTO "+USER_TABLE+"("+USER_USERNAME_COLUMN+","+USER_PASWD_COLUMN+","+USER_AGE_COLUMN+","+USER_ADDRESS_COLUMN+","+USER_GENDER_COLUMN+")"+
+                "VALUES ('"+username+"','"+password+"','"+age+"','"+address+"','"+gender+"');");
+        return true;
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/login_background"
-    tools:context="be.lsinf1225.lsinf1225_grouper.SignUpActivity">
+    tools:context="be.lsinf1225.ezmeal.SignUpActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -110,7 +110,7 @@
             android:alpha="0.75">
             <Spinner
                 android:id="@+id/gender_spinner"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
                 android:layout_gravity="center_vertical"/>
