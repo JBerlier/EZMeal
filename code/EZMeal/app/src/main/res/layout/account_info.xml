@@ -208,9 +208,10 @@
                 android:layout_marginLeft="15dp"
                 android:padding="12dp"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/rounded"
-                android:backgroundTint="@color/gray"
                 android:alpha="0.9"
+                android:background="@drawable/rounded"
+                android:backgroundTint="@color/orange"
+                android:textColor="@color/white"
                 android:text="@string/cancel_label"/>
             <Button
                 android:id="@+id/account_change_button"
@@ -221,9 +222,10 @@
                 android:layout_marginLeft="15dp"
                 android:padding="12dp"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/rounded"
-                android:backgroundTint="@color/gray"
                 android:alpha="0.9"
+                android:background="@drawable/rounded"
+                android:backgroundTint="@color/orange"
+                android:textColor="@color/white"
                 android:text="@string/account_change_label"/>
         </LinearLayout>
     </LinearLayout>
