@@ -23,7 +23,8 @@ public class menu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
-        this.username=this.getIntent().getStringExtra("USERNAME_INFO");
+        if(this.getIntent().hasExtra("USERNAME_INFO"))
+            this.username=this.getIntent().getStringExtra("USERNAME_INFO");
 
         ButtonSignOut = (Button) findViewById(R.id.button_signout);
         ButtonSignOut.setOnClickListener(new View.OnClickListener() {

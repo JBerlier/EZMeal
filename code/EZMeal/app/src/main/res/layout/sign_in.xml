@@ -80,9 +80,10 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:textColor="@color/darkblue"
+            android:textColor="@color/silver"
             android:gravity="center"
             android:text="@string/no_account_label"
+            android:textStyle="bold"
             android:textSize="16dip"/>
 
     </LinearLayout>
