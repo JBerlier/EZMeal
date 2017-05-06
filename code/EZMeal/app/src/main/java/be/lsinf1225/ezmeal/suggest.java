@@ -12,7 +12,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
+/**TO DO relier le buttonImage à la recette et charger la bonne image en fonction de la recette dans le imagebutton
  * Created by marti on 28-04-17.
  */
 

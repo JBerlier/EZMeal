@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * Created by marti on 28-04-17.
+ * TO DO créer le intent vers la recette + rendre cela plus jolie
  */
 
 public class catalogue extends ListActivity {

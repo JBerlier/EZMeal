@@ -2,7 +2,6 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/retour"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="be.lsinf1225.ezmeal.search">
@@ -11,10 +10,13 @@
         android:id="@+id/button_retour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:alpha="0.9"
+
+        android:backgroundTint="@color/orange"
         android:text="retour"
-        android:textColor="@color/colorPrimaryDark"
-        tools:layout_editor_absoluteX="-7dp"
-        tools:layout_editor_absoluteY="-7dp" />
+        android:textColor="@color/white"
+        tools:layout_editor_absoluteX="-8dp"
+        tools:layout_editor_absoluteY="-8dp" />
 
     <TextView
         android:id="@+id/textView8"
@@ -23,8 +25,9 @@
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="270dp"
+        android:backgroundTint="@color/gray"
         android:text="Par sous-type :"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/orange"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,7 +40,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="92dp"
         android:text="Par mot-clés :"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/orange"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -46,11 +49,11 @@
         android:id="@+id/textView_recherche_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="121dp"
+        android:layout_marginLeft="130dp"
         android:layout_marginStart="121dp"
         android:layout_marginTop="16dp"
         android:text="Recherche"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/orange"
         android:textSize="30sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -63,7 +66,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="183dp"
         android:text="Par type :"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/orange"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -76,6 +79,7 @@
         android:layout_marginStart="140dp"
         android:layout_marginTop="85dp"
         android:ems="10"
+        android:textColor="@color/orange"
         android:inputType="textPersonName"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -105,14 +109,18 @@
 
     <Button
         android:id="@+id/button_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="113dp"
+        android:layout_width="188dp"
+        android:layout_height="57dp"
         android:layout_marginStart="113dp"
-        android:layout_marginTop="374dp"
+        android:alpha="0.9"
+        android:background="@drawable/rounded"
+        android:backgroundTint="@color/orange"
         android:text="Lancer recherche"
-        android:textColor="@color/colorPrimaryDark"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:drawableLeft="@drawable/ic_search_black_24dp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="390dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
