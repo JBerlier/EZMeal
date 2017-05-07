@@ -260,7 +260,7 @@ public class MyDatabase extends SQLiteOpenHelper {
             db.execSQL(String.format("INSERT INTO %1$s(%2$s,%3$s,%4$s,%5$s) VALUES ('%6$s','%7$s','%8$s',NULL);",
                     AVIS_TABLE, AVIS_AUTHOR_COLUMN, AVIS_RECETTE_COLUMN, AVIS_NOTE_COLUMN, AVIS_COMMENTAIRE_COLUMN, username, recipe, grade));
         } else {//si il ya déja un avis créé
-            db.execSQL(String.format("UPDATE %1$s SET %2$s = %3$s WHERE %4$s = %5$s AND %6$s = %7$s"
+            db.execSQL(String.format("UPDATE %1$s SET %2$s = '%3$s' WHERE %4$s = '%5$s' AND %6$s = '%7$s'"
                     , AVIS_TABLE, AVIS_NOTE_COLUMN, grade, AVIS_AUTHOR_COLUMN, username, AVIS_RECETTE_COLUMN, recipe));
         }
     }
@@ -389,8 +389,51 @@ public class MyDatabase extends SQLiteOpenHelper {
         return catalogue;
     }
 
+    /**
+     * Renvoye une note
+     * @param username nom de l'utilisateur dont on veux la note
+     * @param recipe nom de la recette dont on veut la note
+     * @return la note si elle existe, sinon 0
+     */
+    public int getGrade(String username,String recipe){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(AVIS_TABLE,
+                new String[]{AVIS_NOTE_COLUMN},
+                AVIS_AUTHOR_COLUMN + " ='" + username + "'AND " + AVIS_RECETTE_COLUMN + " ='" + recipe + "'",
+                null,
+                null,
+                null,
+                null);
+        if(cursor.getCount()==0){
+            return 0;
+        }
+        else {
+            return cursor.getInt(1);
+        }
+    }
 
-
+    /**
+     * Renvoye un commentaire
+     * @param username nom de l'utilisateur dont on veux le commentaire
+     * @param recipe nom de la recette dont on veux le commentaire
+     * @return le commentaire si il existe, sinon ""
+     */
+    public String getComment(String username,String recipe){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(AVIS_TABLE,
+                new String[]{AVIS_COMMENTAIRE_COLUMN},
+                AVIS_AUTHOR_COLUMN + " ='" + username + "'AND " + AVIS_RECETTE_COLUMN + " ='" + recipe + "'",
+                null,
+                null,
+                null,
+                null);
+        if(cursor.getCount()==0){
+            return "";
+        }
+        else {
+            return cursor.getString(1);
+        }
+    }
 
     public String getAge(String username) {
         SQLiteDatabase db=this.getReadableDatabase();
