@@ -11,9 +11,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/**
- * Created by Laurent on 23/04/2017.
- */
 
 public class SignInActivity extends Activity {
     private static final String TAG="SignInActivity";
@@ -47,7 +44,14 @@ public class SignInActivity extends Activity {
             }
         });
     }
+    @Override
+    // Empeche la possibilite de revenir en arriere
+    public void onBackPressed() {}
 
+    /**
+     * Fonction appelee quand on appuie sur le bouton log in
+     * Va verifier les informations donnees. Si elles sont vraies, demarre l'activitee du menu
+     */
     public void  signin() {
         final String username=this.username_text.getText().toString();
         final String password=this.password_text.getText().toString();
@@ -63,6 +67,7 @@ public class SignInActivity extends Activity {
         progress.setMessage(this.getString(R.string.authenticate_label));
         progress.show();
 
+        // On laisse l'animation de progression pendant 3 secondes avant de continuer le programme
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     @Override
@@ -76,6 +81,10 @@ public class SignInActivity extends Activity {
                     }
                 },3000);
     }
+
+    /**
+     * Verifie que le @username et @password soient valides (=pas vide)
+     */
     public boolean validateData(String username, String password) {
         boolean flag=true;
         if(username.isEmpty()) {
@@ -89,14 +98,17 @@ public class SignInActivity extends Activity {
 
         return flag;
     }
+    /**
+     * Verifie que @password correspond bien a @username dans la DB
+     */
     public boolean checkDataDB(String username, String password) {
         MyDatabase db=new MyDatabase(this);
-        if(db.open()) {
-            return db.checkPassword(username,password);
-        } else {
-            throw new Error("Impossible d'ouvrir la base de donnees");
-        }
+        return db.checkPassword(username,password);
     }
+
+    /**
+     * Demarre l'activitee menu et fourni le nom d'utilisateur de celui qui s'est connecte
+     */
     public void signinSuccess(String username) {
         this.signin_button.setEnabled(true);
         this.signup_link.setEnabled(true);
@@ -104,6 +116,10 @@ public class SignInActivity extends Activity {
         intent.putExtra("USERNAME_INFO",username);
         this.startActivityForResult(intent,REQUEST_CODE);
     }
+
+    /**
+     * Montre un message d'erreur et reactive le bouton, lien qui avait precedemment ete desactive
+     */
     public void signinFailed() {
         Toast.makeText(this.getBaseContext(), this.getString(R.string.unsuccessfull_login_label), Toast.LENGTH_LONG).show();
         this.signin_button.setEnabled(true);

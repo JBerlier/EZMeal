@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EzMeal</string>
+
+    <string name="username_label">Nom d\'utilisateur</string>
+    <string name="password_label">Mot de passe</string>
+    <string name="old_password_label">Ancien mot de passe</string>
+    <string name="new_password_label">Nouveau mot de passe</string>
+    <string name="age_label">Age</string>
+    <string name="address_label">Addresse</string>
+    <string name="gender_label">Sexe</string>
+    <string name="login_label">Se connecter</string>
+    <string name="register_label">S\'enregistrer</string>
+    <string name="no_account_label">Pas encore de compte ? Créez-en un</string>
+    <string name="already_account_label">Déjà un compte ? Connectez-vous</string>
+    <string name="authenticate_label">Authentification...</string>
+    <string name="account_change_label">Sauvegarder informations</string>
+    <string-array name="gender">
+        <item name="gender_male_label">Homme</item>
+        <item name="gender_female_label">Femme</item>
+        <item name="gender_other_label">Autre</item>
+    </string-array>
+
+    <string name="cancel_label">Annuler</string>
+    <string name="pause_label">Pause</string>
+    <string name="continue_label">Continuer</string>
+    <string name="run_background_label">Tourner en arrière plan</string>
+    <string name="timer_ended_title_label">Temps écoulé</string>
+    <string name="timer_ended_label">Le timer est fini, il est temps de passer à l\'étape suivante</string>
+    <string name="timer_ended_stop_label">Allez à l\'étape suivante</string>
+
+    <string name="invalid_username_label">Entrez un nom d\'utilisateur valide</string>
+    <string name="invalid_password_label">Entrez un mot de passe valide</string>
+    <string name="invalid_age_label">Entrez un age valide</string>
+    <string name="invalid_address_label">Entrez une addresse valide</string>
+    <string name="invalid_gender_label">Entrez un sexe valide</string>
+
+    <string name="unsuccessfull_login_label">Echec de la connexion, réessayez</string>
+    <string name="unsuccessfull_register_label">Echec de l\'enregitrement, réessayez</string>
+    <string name="unsuccessfull_change_label">Echec des modifications, réessayez</string>
+</resources>

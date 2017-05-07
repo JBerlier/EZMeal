@@ -12,12 +12,12 @@
         android:orientation="vertical"
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
-        android:paddingTop="56dp">
+        android:paddingTop="30dp">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="108dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="36dp"
+            android:layout_marginBottom="30dp"
             android:src="@drawable/logo" />
 
         <!-- Username label -->
@@ -205,13 +205,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="24dp"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="140dp"
                 android:padding="12dp"
                 android:layout_gravity="center_vertical"
-                android:alpha="0.9"
                 android:background="@drawable/rounded"
                 android:backgroundTint="@color/orange"
                 android:textColor="@color/white"
+                android:alpha="0.9"
                 android:text="@string/cancel_label"/>
             <Button
                 android:id="@+id/account_change_button"
@@ -219,13 +219,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="24dp"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="140dp"
                 android:padding="12dp"
                 android:layout_gravity="center_vertical"
-                android:alpha="0.9"
                 android:background="@drawable/rounded"
                 android:backgroundTint="@color/orange"
                 android:textColor="@color/white"
+                android:alpha="0.9"
                 android:text="@string/account_change_label"/>
         </LinearLayout>
     </LinearLayout>

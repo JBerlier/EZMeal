@@ -2,6 +2,7 @@ package be.lsinf1225.ezmeal;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.List;
 /**
  * les fonctions getTypes et getSubTypes renvoient une erreur "no such table: recette ..."
  * TO DO comprendre pourquoi
+ * *=> supprime ton émulateur et crée en un autre il créera une nouvelle database et celle actuelle fonctionne
  * Created by marti on 28-04-17.
  */
 
@@ -52,7 +55,6 @@ public class search extends Activity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
         spinner_subtype.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -64,7 +66,6 @@ public class search extends Activity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
@@ -99,15 +100,15 @@ public class search extends Activity {
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, types);
+                R.layout.spinner_item, types);
        ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this,
-               android.R.layout.simple_spinner_item, subtypes);
+               R.layout.spinner_item, subtypes);
 
         // Drop down layout style - list view with radio button
         dataAdapter1
-                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                .setDropDownViewResource(R.layout.spinner_dropdown_item);
        dataAdapter2
-               .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+               .setDropDownViewResource(R.layout.spinner_dropdown_item);
 
         // attaching data adapter to spinner
         spinner_type.setAdapter(dataAdapter1);

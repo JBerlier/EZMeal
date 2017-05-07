@@ -13,9 +13,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/**
- * Created by Laurent on 05/05/2017.
- */
 
 public class AccountActivity extends Activity {
     private static final String TAG="AccountActivity";
@@ -31,7 +28,7 @@ public class AccountActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.account_info);
-        if(this.getIntent().hasExtra("USERNAME_INFO"))
+        if(this.getIntent().hasExtra("USERNAME_INFO")) // Recupere le nom d'utilisateur
             this.username=this.getIntent().getStringExtra("USERNAME_INFO");
 
         this.username_input=(EditText)this.findViewById(R.id.username_input);
@@ -60,6 +57,7 @@ public class AccountActivity extends Activity {
         this.putInformation();
     }
 
+    // Remplit les champs avec les informations de l'utilisateur, sauf le mot de passe
     public void putInformation() {
         MyDatabase db=new MyDatabase(this);
         String age=db.getAge(username);
@@ -70,9 +68,10 @@ public class AccountActivity extends Activity {
         this.age_input.setText(age);
         this.address_input.setText(address);
 
+        // On doit reprendre le sexe de l'utilisateur dans la DB et le traduire
         String[] listGender=this.getResources().getStringArray(R.array.gender);
-        int index=0;
-        switch (gender) {
+        int index=0; // Indice dans la ressource ou la traduction se trouve
+        switch(gender) {
             case "Male":
                 gender=listGender[0];
                 index=0;
@@ -89,11 +88,18 @@ public class AccountActivity extends Activity {
         listGender[index]=listGender[0];
         listGender[0]=gender;
 
+        // Remplit la liste avec les differents sexe en commencant par celui de l'utilisateur
         ArrayAdapter<CharSequence> adapter=new ArrayAdapter<CharSequence>(this,
                 android.R.layout.simple_spinner_item, listGender);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.gender_spinner.setAdapter(adapter);
     }
+
+    /**
+     * Met a jour les informations dans la DB
+     * Le mot de passe est change si et seulement le champ de l'ancien mot de passe est correct et que
+     *      le nouveau mot de passe n'est pas vide
+     */
     public void change_info() {
         final String new_username=username_input.getText().toString();
         final String old_password=old_password_input.getText().toString();
@@ -114,6 +120,7 @@ public class AccountActivity extends Activity {
         progress.setMessage(this.getString(R.string.authenticate_label));
         progress.show();
 
+        // Joue l'animation de progression pendant trois secondes avant de continuer le programme
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     @Override
@@ -127,6 +134,15 @@ public class AccountActivity extends Activity {
                     }
                 },3000);
     }
+
+    /**
+     * Verifie que les differentes informations donnees sont valides
+     * Une information est valide si : le champ n'est pas vide
+     *                                 @age est bien un ciffre positif < 100
+     *                                 @gender est bien string contenu dans la liste de sexe contenu dans les ressources
+     *                                 @username n'existe pas encore dans la DB
+     * Quand une information n'est pas bonne, affiche un message d'erreur a cote du champ concerne
+     */
     public boolean validateInfo(String username, String old_passsword, String new_password, String age, String address, String gender) {
         boolean flag=true;
         MyDatabase db=new MyDatabase(this);
@@ -135,10 +151,12 @@ public class AccountActivity extends Activity {
             this.username_input.setError("Enter a valid username");
             flag=false;
         }
+        // On ne peut pas changer le mot de passe si le nouveau mot de passe est vide
         if(!old_passsword.isEmpty() && new_password.isEmpty()) {
             this.old_password_input.setError("No new password entered");
             flag=false;
         }
+        // On ne peut pas change le mot de passe si l'ancien mot de passe est vide
         if(old_passsword.isEmpty() && !new_password.isEmpty()) {
             this.new_password_input.setError("No old password entered");
             flag=false;
@@ -164,10 +182,12 @@ public class AccountActivity extends Activity {
             errorText.setText("Enter a valid gender");
             flag=false;
         }
+        // Verifie si le nouveau nom d'utilisateur est deja dans la DB
         if(db.checkUsername(username) && !this.username.equals(username)) {
             this.username_input.setError("Username already taken");
             flag=false;
         }
+        // Si les deux champs pour le mot de passe sont remplis, indique si l'ancien mot de passe est correct
         if(!new_password.isEmpty() && !old_passsword.isEmpty() && !db.checkPassword(this.username,old_passsword)) {
             this.old_password_input.setError("Wrong password");
             flag=false;
@@ -183,6 +203,7 @@ public class AccountActivity extends Activity {
             throw new Error("Impossible d'ouvrir la DB");
         }
     }
+    // Verifie que @elem est contenu dans @array
     public boolean arrayContains(String elem, String[] array) {
         int size=array.length;
         for(int i=0; i<size; i++) {
@@ -191,11 +212,13 @@ public class AccountActivity extends Activity {
         }
         return false;
     }
+    // Echec des changements -> affiche message d'erreur + reactive le bouton/lien
     public void changeFailed() {
         this.change_info_button.setEnabled(true);
         this.cancel_button.setEnabled(true);
         Toast.makeText(this.getBaseContext(),this.getString(R.string.unsuccessfull_change_label), Toast.LENGTH_LONG).show();
     }
+    // Success de la modification -> lance l'activitee du menu
     public void changeSuccess() {
         this.cancel_button.setEnabled(true);
         this.change_info_button.setEnabled(true);

@@ -44,16 +44,18 @@ public class TimerActivity extends Activity {
         this.pause_button=(Button)this.findViewById(R.id.pause_button);
         this.run_background=(Button)this.findViewById(R.id.run_background_button);
 
+        // Thread qui va permettre l'affichage du timer + faire evoluer le temps du timer
         new Thread(new Runnable() {
             @Override
             public void run() {
                 long initial_time=System.currentTimeMillis();
                 long current_time=initial_time;
                 long old_time=current_time;
-                while(percent_progress<=100 && !flagCancel) {
+                while(percent_progress<=100 && !flagCancel) { // Tant qu'on a pas atteint la fin du timer ou annuler celui-ci
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
+                            // Mise a jour de l'affichage
                             progressBar.setProgress(percent_progress);
                             progressText.setText(time_progress);
                         }
@@ -64,12 +66,13 @@ public class TimerActivity extends Activity {
                         e.printStackTrace();
                     }
                     current_time=System.currentTimeMillis();
-                    if(current_time-old_time>=1000 && !pauseState) {
+                    if(current_time-old_time>=1000 && !pauseState) { // Si une seconde s'est ecoule change les valeures
                         old_time=System.currentTimeMillis();
                         long delta=(old_time-initial_time)/1000;
                         percent_progress=(int)(100*delta/time_tospend);
                         time_progress=getTimeString(time_tospend-delta);
                     }
+                    // Quand on est en pause, on ajoute le temps ecoule au temps initial pour garder le bon temps
                     if(pauseState) {
                         long start_pause=System.currentTimeMillis();
                         while(pauseState) {
@@ -80,7 +83,7 @@ public class TimerActivity extends Activity {
                             }
                         }
                         long end_pause=System.currentTimeMillis();
-                        initial_time=initial_time-start_pause+end_pause;
+                        initial_time=initial_time-start_pause+end_pause; // On incremente le temps passe en pause au temps initial
                     }
                 }
                 alertMessage();
@@ -107,19 +110,26 @@ public class TimerActivity extends Activity {
             }
         });
     }
+    @Override
+    // Empeche de quitter l'activitee avec le bouton de retour
+    public void onBackPressed() {}
 
     public String getTimeString(long time) {
+        time=time%time_tospend;
         long minutes=time/60;
         long secondes=time%60;
         return Long.toString(minutes)+":"+Long.toString(secondes);
     }
+    // Arrete le timer et retourne a l'etape de la recette
     public void cancel(){
         this.flagCancel=true;
         // Intent etape recette
     }
+    // Affiche le layout de l'etape de la recette en restant dans cette activitee pour afficher le message d'alerte
     public void run_background() {
         //this.setContentView();
     }
+    // Met le flag de la pause a true et change le texte du bouton concerne
     public void pause_continue(){
         if(pauseState) {
             this.pauseState=false;
@@ -129,6 +139,7 @@ public class TimerActivity extends Activity {
             this.pause_button.setText(R.string.continue_label);
         }
     }
+    // Montre un message d'alerte
     public void alertMessage() {
         this.runOnUiThread(new Runnable() {
             public void run() {

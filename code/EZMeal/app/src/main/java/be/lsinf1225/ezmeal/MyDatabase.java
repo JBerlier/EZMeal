@@ -4,16 +4,25 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 
 /**
- * Created by Laurent on 25/04/2017.
+ * TO DO : Peupler listRecette
+ *         Charger toutes les images
+ *         Charger touts les videos
  */
 
 public class MyDatabase extends SQLiteOpenHelper {
@@ -73,7 +82,6 @@ public class MyDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
         //creation table user
         db.execSQL("DROP TABLE IF EXISTS '"+USER_TABLE+"';");
         db.execSQL("CREATE TABLE '"+USER_TABLE+"' ('"+
@@ -91,30 +99,29 @@ public class MyDatabase extends SQLiteOpenHelper {
                 "('Topichef', 'toptop', 53, 'Avenue des plats 10', 'Male');"
         );
 
-        
-        /*//creation table step
+
+        //creation table step
         db.execSQL("DROP TABLE IF EXISTS '"+STEP_TABLE+"';");
->>>>>>> dcf21769b1bf338ed7a667576f3224e4d8088275
         db.execSQL("CREATE TABLE '"+STEP_TABLE+"' ('"+
-                RECETTE_NAME_COLUMN+"' TEXT NOT NULL PRIMARY KEY, '"+
-                STEP_NAME_COLUMN+"' TEXT NOT NULL, '"+
+                STEP_NAME_COLUMN+"' TEXT NOT NULL PRIMARY KEY, '"+
+                RECETTE_NAME_COLUMN+"' TEXT NOT NULL, '"+
                 STEP_NUMBER_COLUMN+"' INTEGER NOT NULL, '"+
                 STEP_EXPLANATION_COLUMN+"' TEXT NOT NULL, '"+
-                STEP_PICTURE_COLUMN+"' BLOB, '"+
-                STEP_VIDEO_COLUMN+"' BLOB, '"+
+                STEP_PICTURE_COLUMN+"' TEXT, '"+
+                STEP_VIDEO_COLUMN+"' TEXT, '"+
                 STEP_TIME_COLUMN+"' INTEGER NOT NULL, '"+
                 STEP_TYPE_COLUMN+"' TEXT NOT NULL)");
-        db.execSQL("INSERT INTO "+STEP_TABLE+"("+RECETTE_NAME_COLUMN+","+STEP_NAME_COLUMN+", "+STEP_NUMBER_COLUMN+", "+STEP_EXPLANATION_COLUMN+", "+STEP_PICTURE_COLUMN+", "+STEP_VIDEO_COLUMN+", "+STEP_TIME_COLUMN+", "+STEP_TYPE_COLUMN+")"+
-                "VALUES ('Lasagnes','Couper des oignons', 1, 'Coupez tout d'abord les oignons en petits cubes de 1cm de côté', oignon1.jpg,, 10, 'preparation')," +
-                "('Lasagnes','Rajout de la sauce tomate', 2, 'Mettez maintenant la sauce tomate avec la viande entre chaque pâte',,,5,'preparation')" +
-                "('Lasagnes','Cuisson de lasagne', 3, 'Mettez maintenant cuire la lasagne durant 30 minutes',,,30,''cuisson)"
-        );*/
+        db.execSQL("INSERT INTO "+STEP_TABLE+"( "+STEP_NAME_COLUMN+", "+RECETTE_NAME_COLUMN+", "+STEP_NUMBER_COLUMN+", "+STEP_EXPLANATION_COLUMN+", "+STEP_TIME_COLUMN+", "+STEP_TYPE_COLUMN+")"+
+                "VALUES ('Cuire la lasagne', 'Lasagne', 2, 'Mettre la lasagne au four à 200', 30, 'cuisson')," +
+                "('Couper les oignons', 'Lasagne', 1, 'Couper les oignons en petits cubes de 1cm de côté', 10, 'preparation')"
+        );
 
         //creation table recette
         db.execSQL("DROP TABLE IF EXISTS '"+RECETTE_TABLE+"';");
         db.execSQL("CREATE TABLE '"+RECETTE_TABLE+"' ('"+
                 RECETTE_NAME_COLUMN+"' TEXT NOT NULL PRIMARY KEY, '"+
                 RECETTE_DESCRIPTION_COLUMN+"' TEXT NOT NULL, '"+
+                RECETTE_PICTURE_COLUMN+"' BLOB, '"+
                 RECETTE_DATE_COLUMN+"' DATETIME NOT NULL, '"+
                 RECETTE_AUTHOR_COLUMN+"' TEXT NOT NULL, '"+
                 RECETTE_NBRE_PERS_COLUMN+"' INTEGER NOT NULL, '"+
@@ -148,7 +155,13 @@ public class MyDatabase extends SQLiteOpenHelper {
                 "('Morgane','Toasts aux champignons','5','juste parfait')"
         );
 
-
+        // Completer listRecette + listDrawableID ==> !!!!!! doivent etre de la meme taille
+        String[] listRecette={"Lasagnes"};
+        Integer[] listDrawableID={R.drawable.lasagne};
+        for(int i=0; i<listRecette.length; i++) {
+            String SQLrequest="UPDATE "+RECETTE_TABLE+" SET "+RECETTE_PICTURE_COLUMN+"=? WHERE "+RECETTE_NAME_COLUMN+"='"+listRecette[i]+"';";
+            this.loadImage(db, listDrawableID[i], SQLrequest);
+        }
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -162,54 +175,12 @@ public class MyDatabase extends SQLiteOpenHelper {
     }
     public boolean open() {
         try {
-            getWritableDatabase();
+            this.getWritableDatabase();
             return true;
         } catch (Throwable t) {
             return false;
         }
     }
-
-
-    public boolean checkUsernameDB(String username) {
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(USER_TABLE,
-                new String[]{USER_USERNAME_COLUMN},
-                USER_USERNAME_COLUMN + " ='" + username + "'",
-                null,
-                null,
-                null,
-                null);
-
-        if (cursor.getCount() == 0) {
-            cursor.close();
-            return false;
-        } else {
-            cursor.close();
-            return true;
-        }
-    }
-
-    /*public boolean addDataRegister(String username, String password, String age, String address, String gender) {
-        int index = this.getIndex(this.context.getResources().getStringArray(R.array.gender), gender);
-        switch (index) {
-            case 0:
-                gender = "Homme";
-                break;
-            case 1:
-                gender = "Femme";
-                break;
-            case 2:
-                gender = "Autre";
-                break;
-        }
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        db.execSQL("INSERT INTO " + USER_TABLE + "(" + USER_USERNAME_COLUMN + "," + USER_PASWD_COLUMN + "," + USER_AGE_COLUMN + "," + USER_ADDRESS_COLUMN + "," + USER_GENDER_COLUMN + ")" +
-                "VALUES ('" + username + "','" + password + "','" + age + "','" + address + "','" + gender + "');");
-        return true;
-    }*/
-
 
     /**
      * Ajoute ou écrase une commentaire d'un utilsateur sur un recette
@@ -236,7 +207,6 @@ public class MyDatabase extends SQLiteOpenHelper {
                     ,AVIS_TABLE,AVIS_COMMENTAIRE_COLUMN,comment,AVIS_AUTHOR_COLUMN,username,AVIS_RECETTE_COLUMN,recipe));
         }
     }
-
     /**
      * Ajoute ou écrase une note d'un utilsateur sur un recette
      * @param grade note, inclus dans [0 , 5]
@@ -264,39 +234,67 @@ public class MyDatabase extends SQLiteOpenHelper {
                     , AVIS_TABLE, AVIS_NOTE_COLUMN, grade, AVIS_AUTHOR_COLUMN, username, AVIS_RECETTE_COLUMN, recipe));
         }
     }
-
-    public String getStepNameColumn(String recette_name, int step_number) {
+    public String getStepNameColumn(String recette_name, int step_number){
+        Log.d(this.TAG, "Rentree dans get step_name");
         SQLiteDatabase db = this.getReadableDatabase();
+        Log.d(this.TAG, "db en lecture");
         Cursor cursor = db.query(STEP_TABLE,
-                new String[]{STEP_NAME_COLUMN},
-                RECETTE_NAME_COLUMN + "='" + recette_name + "'" + STEP_NUMBER_COLUMN + "='" + step_number + "'",
-                null, null, null, null);
-        String res = cursor.getString(0);
+                new String[]{STEP_NAME_COLUMN, STEP_NUMBER_COLUMN},
+                RECETTE_NAME_COLUMN + " ='"+recette_name+"'",
+                null, null, null,null);
+        Log.d(this.TAG, "Cursor cree");
+        if (cursor.moveToFirst()){
+            while(!cursor.isAfterLast()){
+                if (step_number == cursor.getInt(cursor.getColumnIndex(STEP_NUMBER_COLUMN))){
+                    String res = cursor.getString(cursor.getColumnIndex(STEP_NAME_COLUMN));
+
+                    cursor.close();
+
+                    return res;
+                }
+
+                cursor.moveToNext();
+            }
+        }
         cursor.close();
 
-        return res;
+        return "Pas de nom d'étape disponible";
     }
-
     public String getStepExplanationColumn(String recette_name, int step_number) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(STEP_TABLE,
-                new String[]{STEP_EXPLANATION_COLUMN},
-                RECETTE_NAME_COLUMN + "='" + recette_name + "'" + STEP_NUMBER_COLUMN + "='" + step_number + "'",
+                new String[]{STEP_EXPLANATION_COLUMN,STEP_NUMBER_COLUMN},
+                RECETTE_NAME_COLUMN + " ='"+recette_name+"'",
                 null, null, null, null);
-        String res = cursor.getString(0);
+
+        if (cursor.moveToFirst()){
+            while(!cursor.isAfterLast()){
+                if (step_number == cursor.getInt(cursor.getColumnIndex(STEP_NUMBER_COLUMN))){
+                    String res = cursor.getString(cursor.getColumnIndex(STEP_EXPLANATION_COLUMN));
+
+                    cursor.close();
+
+                    return res;
+                }
+
+                cursor.moveToNext();
+            }
+        }
         cursor.close();
 
-        return res;
+        return "Pas d'explication d'étape disponible";
     }
     public int getNbStep(String recette_name) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(STEP_TABLE,
                 new String[]{STEP_EXPLANATION_COLUMN},
-                RECETTE_NAME_COLUMN + "='" + recette_name + "'",
-                null, null, null, null);
+                RECETTE_NAME_COLUMN + " ='"+recette_name+"'",
+                null, null, null,null);
         int count = cursor.getCount();
 
-        return count - 1;
+        cursor.close();
+
+        return count-1;
     }
     public List<String> getTypes() {
 
@@ -373,8 +371,7 @@ public class MyDatabase extends SQLiteOpenHelper {
             return suggestions;
         }
 
-        public List<String> catalog()
-    {
+    public List<String> catalog() {
         List<String> catalogue = new ArrayList<>();;
         String selectQuery="SELECT "+RECETTE_NAME_COLUMN+" FROM "+RECETTE_TABLE;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -489,6 +486,23 @@ public class MyDatabase extends SQLiteOpenHelper {
         cursor.close();
         throw new Error("User not found");
     }
+    public Bitmap getImage(String SQLrequest) {
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor c=db.rawQuery(SQLrequest,null);
+        if(c.moveToFirst()) {
+            byte[] img=c.getBlob(0);
+            c.close();
+            return BitmapFactory.decodeByteArray(img,0,img.length);
+        }
+        if(c!=null && !c.isClosed()) {
+            c.close();
+        }
+        return null;
+    }
+    public Bitmap getImageRecette(String recette) {
+        String SQLrequest="SELECT "+RECETTE_PICTURE_COLUMN+" FROM "+RECETTE_TABLE+" WHERE "+RECETTE_NAME_COLUMN+"='"+recette+"';";
+        return this.getImage(SQLrequest);
+    }
 
     // Retourne true si @username est dans la DB
     public boolean checkUsername(String username) {
@@ -529,6 +543,7 @@ public class MyDatabase extends SQLiteOpenHelper {
         return false;
     }
 
+    // Remplace les valeurs donnees dans la DB, modifie le mot de passe que si @password n'est pas vide
     public boolean replaceData(String old_username, String new_username, String password, String age, String address, String gender) {
         SQLiteDatabase db=this.getReadableDatabase();
         db.execSQL("UPDATE "+USER_TABLE
@@ -547,6 +562,7 @@ public class MyDatabase extends SQLiteOpenHelper {
         return true;
     }
 
+    // Ajoute les informations donnees dans la DB
     public boolean addData(String username, String password, String age, String address, String gender) {
         String[] listGender=this.context.getResources().getStringArray(R.array.gender);
         int index=0;
@@ -570,5 +586,17 @@ public class MyDatabase extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO "+USER_TABLE+"("+USER_USERNAME_COLUMN+","+USER_PASWD_COLUMN+","+USER_AGE_COLUMN+","+USER_ADDRESS_COLUMN+","+USER_GENDER_COLUMN+")"+
                 "VALUES ('"+username+"','"+password+"','"+age+"','"+address+"','"+gender+"');");
         return true;
+    }
+    public void loadImage(SQLiteDatabase db, int drawableID, String SQLrequest) {
+        Drawable drawable=this.context.getResources().getDrawable(drawableID);
+        Bitmap bitmap=((BitmapDrawable)drawable).getBitmap();
+        ByteArrayOutputStream stream=new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,stream);
+        byte[] array=stream.toByteArray();
+
+        SQLiteStatement statement=db.compileStatement(SQLrequest);
+        statement.clearBindings();
+        statement.bindBlob(1,array);
+        statement.executeInsert();
     }
 }

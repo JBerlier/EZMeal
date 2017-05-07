@@ -14,9 +14,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/**
- * Created by Laurent on 24/04/2017-25/04.
- */
 
 public class SignUpActivity extends Activity {
     private static final String TAG="SignUpActivity";
@@ -40,6 +37,7 @@ public class SignUpActivity extends Activity {
         this.signin_link=(TextView)this.findViewById(R.id.signin_link);
         this.gender_spinner=(Spinner)this.findViewById(R.id.gender_spinner);
 
+        // On place les differents sexe dans la liste du spinner
         ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,
                 R.array.gender,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -60,6 +58,10 @@ public class SignUpActivity extends Activity {
         });
     }
 
+    /**
+     * Fonction appelee quand on appuie sur le bouton register
+     * Va verifier les informations donnees. Si elles sont vraies, demarre l'activitee de connexion
+     */
     public void signup() {
         final String username=this.username_text.getText().toString();
         final String password=this.password_text.getText().toString();
@@ -78,6 +80,7 @@ public class SignUpActivity extends Activity {
         progress.setMessage(this.getString(R.string.authenticate_label));
         progress.show();
 
+        // On laisse l'animation de progression pendant 3 secondes avant de continuer le programme
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     @Override
@@ -91,6 +94,14 @@ public class SignUpActivity extends Activity {
                     }
                 },3000);
     }
+    /**
+     * Verifie que les differentes informations donnees sont valides
+     * Une information est valide si : elle n'est pas vide
+     *                                 age est bien un ciffre positif < 100
+     *                                 gender est bien string contenu dans la liste de sexe contenu dans les ressources
+     *                                 username n'existe pas encore dans la DB
+     * Quand une information n'est pas bonne, affiche un message d'erreur a cote du champ concerne
+     */
     public boolean validateData(String username, String password, String age, String address, String gender) {
         boolean flag=true;
         if(username.isEmpty()) {
@@ -138,6 +149,7 @@ public class SignUpActivity extends Activity {
             throw new Error("Impossible d'ouvir la DB");
         }
     }
+    // Verifie que @elem est contenu dans @array
     public boolean arrayContains(String elem, String[] array) {
         int size=array.length;
         for(int i=0; i<size; i++) {
@@ -146,12 +158,14 @@ public class SignUpActivity extends Activity {
         }
         return false;
     }
+    // Success de l'enregistrement -> lance l'activitee de connexion
     public void signupSuccess() {
         this.signup_button.setEnabled(true);
         this.signin_link.setEnabled(true);
         Intent intent=new Intent(SignUpActivity.this,SignInActivity.class);
         this.startActivityForResult(intent,REQUEST_CODE);
     }
+    // Enregistrement rate -> affiche message d'erreur + reactive le bouton/lien
     public void signupFailed() {
         Toast.makeText(this.getBaseContext(), this.getString(R.string.unsuccessfull_register_label), Toast.LENGTH_LONG).show();
         this.signup_button.setEnabled(true);
