@@ -70,7 +70,8 @@
             android:layout_marginBottom="24dp"
             android:padding="12dp"
             android:background="@drawable/rounded"
-            android:backgroundTint="@color/gray"
+            android:backgroundTint="@color/orange"
+            android:textColor="@color/white"
             android:alpha="0.9"
             android:text="@string/login_label"/>
 
