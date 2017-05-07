@@ -156,8 +156,8 @@ public class MyDatabase extends SQLiteOpenHelper {
         );
 
         // Completer listRecette + listDrawableID ==> !!!!!! doivent etre de la meme taille
-        String[] listRecette={"Lasagnes"};
-        Integer[] listDrawableID={R.drawable.lasagne};
+        String[] listRecette={"Lasagnes","Muffins au chocolat","Toasts aux champignons"};
+        Integer[] listDrawableID={R.drawable.lasagne,R.drawable.muffins,R.drawable.toast};
         for(int i=0; i<listRecette.length; i++) {
             String SQLrequest="UPDATE "+RECETTE_TABLE+" SET "+RECETTE_PICTURE_COLUMN+"=? WHERE "+RECETTE_NAME_COLUMN+"='"+listRecette[i]+"';";
             this.loadImage(db, listDrawableID[i], SQLrequest);
