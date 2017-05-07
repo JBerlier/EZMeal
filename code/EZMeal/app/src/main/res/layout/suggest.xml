@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:text="Nous vous proposons aujourd'hui :"
         android:textAlignment="viewStart"
+        android:gravity="start"
         android:textColor="@color/orange"
         android:textSize="20sp"
         app:layout_constraintTop_toTopOf="parent"

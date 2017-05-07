@@ -2,6 +2,7 @@ package be.lsinf1225.ezmeal;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -71,6 +72,9 @@ public class suggest extends Activity {
                 }
             }
         });
+
+        Bitmap bitmap=db.getImageRecette(suggestion);
+        imageButton.setImageBitmap(bitmap);
     }
 
 }

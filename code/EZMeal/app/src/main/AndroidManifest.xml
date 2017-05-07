@@ -9,6 +9,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
         <activity android:name=".SignUpActivity"></activity>
         <activity android:name=".SignInActivity">
            <intent-filter>
@@ -19,12 +22,12 @@
         <activity android:name=".AccountActivity"></activity>
         <activity android:name=".TimerActivity"></activity>
 
+        <activity android:name=".Etape_middle"></activity>
         <activity android:name=".menu"></activity>
         <activity android:name=".SearchResult"></activity>
         <activity android:name=".search"></activity>
         <activity android:name=".catalogue"></activity>
         <activity android:name=".suggest"></activity>
-        <activity android:name=".Etape_middle"></activity>
         <activity android:name=".AvisActivity"></activity>
     </application>
 
