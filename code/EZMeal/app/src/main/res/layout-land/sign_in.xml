@@ -4,13 +4,13 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/login_background"
-    tools:context="be.lsinf1225.ezmeal.SignUpActivity">
+    tools:context="be.lsinf1225.ezmeal.SignInActivity">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="56dp"
+        android:paddingTop="30dp"
         android:paddingLeft="24dp"
         android:paddingRight="24dp">
 
@@ -18,7 +18,7 @@
             android:src="@drawable/logo"
             android:layout_width="wrap_content"
             android:layout_height="108dp"
-            android:layout_marginBottom="36dp"
+            android:layout_marginBottom="30dp"
             android:layout_gravity="center_horizontal" />
 
         <!-- Username Label -->
@@ -28,7 +28,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/rounded"
-            android:backgroundTint="#FFFFFF"
+            android:backgroundTint="@color/white"
             android:alpha="0.75">
             <EditText
                 android:id="@+id/username_input"
@@ -48,7 +48,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/rounded"
-            android:backgroundTint="#FFFFFF"
+            android:backgroundTint="@color/white"
             android:alpha="0.75">
             <EditText
                 android:id="@+id/password_input"
@@ -62,62 +62,8 @@
                 android:hint="@string/password_label"/>
         </LinearLayout>
 
-        <!-- Age Label -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/rounded"
-            android:backgroundTint="#FFFFFF"
-            android:alpha="0.75">
-            <EditText
-                android:id="@+id/age_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_gravity="center_vertical"
-                android:inputType="number"
-                android:hint="@string/age_label"/>
-        </LinearLayout>
-
-        <!-- Address Label -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/rounded"
-            android:backgroundTint="#FFFFFF"
-            android:alpha="0.75">
-            <EditText
-                android:id="@+id/address_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_gravity="center_vertical"
-                android:hint="@string/address_label"/>
-        </LinearLayout>
-
-        <!-- Gender Label -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/rounded"
-            android:backgroundTint="#FFFFFF"
-            android:alpha="0.75">
-            <Spinner
-                android:id="@+id/gender_spinner"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
-                android:layout_gravity="center_vertical"/>
-        </LinearLayout>
-
         <Button
-            android:id="@+id/signup_button"
+            android:id="@+id/signin_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -127,16 +73,16 @@
             android:backgroundTint="@color/orange"
             android:textColor="@color/white"
             android:alpha="0.9"
-            android:text="@string/register_label"/>
+            android:text="@string/login_label"/>
 
         <TextView
-            android:id="@+id/signin_link"
+            android:id="@+id/signup_link"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:textColor="@color/silver"
             android:gravity="center"
-            android:text="@string/already_account_label"
+            android:text="@string/no_account_label"
             android:textStyle="bold"
             android:textSize="16dip"/>
 

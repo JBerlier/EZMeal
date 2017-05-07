@@ -14,9 +14,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/**
- * Created by Laurent on 24/04/2017-25/04.
- */
 
 public class SignUpActivity extends Activity {
     private static final String TAG="SignUpActivity";
@@ -31,6 +28,7 @@ public class SignUpActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.sign_up);
+
         this.username_text=(EditText)this.findViewById(R.id.username_input);
         this.password_text=(EditText)this.findViewById(R.id.password_input);
         this.age_text=(EditText)this.findViewById(R.id.age_input);
@@ -38,6 +36,8 @@ public class SignUpActivity extends Activity {
         this.signup_button=(Button)this.findViewById(R.id.signup_button);
         this.signin_link=(TextView)this.findViewById(R.id.signin_link);
         this.gender_spinner=(Spinner)this.findViewById(R.id.gender_spinner);
+
+        // On place les differents sexe dans la liste du spinner
         ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,
                 R.array.gender,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -52,29 +52,17 @@ public class SignUpActivity extends Activity {
         this.signin_link.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG,"Changing to sign in");
-
                 Intent intent=new Intent(SignUpActivity.this,SignInActivity.class);
                 startActivityForResult(intent,REQUEST_CODE);
             }
         });
     }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d(this.TAG,"Receive an intent");
-        if(requestCode==this.REQUEST_CODE && resultCode==this.RESULT_OK) {
-            Log.d(this.TAG,"Successfull intent");
-        }
-    }
-    @Override
-    public void onBackPressed() {
-        Log.d(this.TAG,"Back button pressed");
-        this.moveTaskToBack(false);
-    }
 
+    /**
+     * Fonction appelee quand on appuie sur le bouton register
+     * Va verifier les informations donnees. Si elles sont vraies, demarre l'activitee de connexion
+     */
     public void signup() {
-        Log.d(TAG,"Register");
-
         final String username=this.username_text.getText().toString();
         final String password=this.password_text.getText().toString();
         final String age=this.age_text.getText().toString();
@@ -86,11 +74,13 @@ public class SignUpActivity extends Activity {
         }
 
         this.signup_button.setEnabled(false);
+        this.signin_link.setEnabled(false);
         final ProgressDialog progress=new ProgressDialog(SignUpActivity.this);
         progress.setIndeterminate(true);
         progress.setMessage(this.getString(R.string.authenticate_label));
         progress.show();
 
+        // On laisse l'animation de progression pendant 3 secondes avant de continuer le programme
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     @Override
@@ -104,47 +94,49 @@ public class SignUpActivity extends Activity {
                     }
                 },3000);
     }
+    /**
+     * Verifie que les differentes informations donnees sont valides
+     * Une information est valide si : elle n'est pas vide
+     *                                 age est bien un ciffre positif < 100
+     *                                 gender est bien string contenu dans la liste de sexe contenu dans les ressources
+     *                                 username n'existe pas encore dans la DB
+     * Quand une information n'est pas bonne, affiche un message d'erreur a cote du champ concerne
+     */
     public boolean validateData(String username, String password, String age, String address, String gender) {
-        Log.d(this.TAG,"Validating : Username = "+username+"\tPassword = "+password+"\t Age = "+age+"\t address = "+address+"\t gender = "+gender);
-
         boolean flag=true;
         if(username.isEmpty()) {
-            this.username_text.setError("Enter a valid username");
+            this.username_text.setError(this.getString(R.string.invalid_username_label));
             flag=false;
         }
         if(password.isEmpty()) {
-            this.password_text.setError("Enter a valid password");
+            this.password_text.setError(this.getString(R.string.invalid_password_label));
             flag=false;
         }
         try {
             int age_number=Integer.parseInt(age);
             if(age_number<=0 || age_number>100) {
-                this.age_text.setError("Enter a valid age");
+                this.age_text.setError(this.getString(R.string.invalid_age_label));
                 flag=false;
             }
         } catch(NumberFormatException e) {
-            this.age_text.setError("Enter a valid age");
+            this.age_text.setError(this.getString(R.string.invalid_age_label));
             flag=false;
         }
         if(address.isEmpty()) {
-            this.address_text.setError("Enter a valid address");
+            this.address_text.setError(this.getString(R.string.invalid_address_label));
             flag=false;
         }
         if(!this.arrayContains(gender,this.getResources().getStringArray(R.array.gender))) {
             TextView errorText=(TextView)this.gender_spinner.getSelectedView();
             errorText.setError("");
             errorText.setTextColor(Color.RED);
-            errorText.setText("Enter a valid gender");
+            errorText.setText(this.getString(R.string.invalid_gender_label));
             flag=false;
         }
         MyDatabase db=new MyDatabase(this);
-        if(db.open()) {
-            if(db.checkUsernameDB(username)) {
-                this.username_text.setError("Username already taken");
-                flag=false;
-            }
-        } else {
-            throw new Error("Impossible d'ouvir la base de donnees");
+        if(db.checkUsername(username)) {
+            this.username_text.setError(this.getString(R.string.invalid_username_label));
+            flag = false;
         }
 
         return flag;
@@ -152,11 +144,12 @@ public class SignUpActivity extends Activity {
     public boolean addToDB(String username, String password, String age, String address, String gender) {
         MyDatabase db=new MyDatabase(this);
         if(db.open()) {
-            return db.addDataRegister(username,password,age,address,gender);
+            return db.addData(username,password,age,address,gender);
         } else {
-            throw new Error("Impossible d'ouvir la base de donnees");
+            throw new Error("Impossible d'ouvir la DB");
         }
     }
+    // Verifie que @elem est contenu dans @array
     public boolean arrayContains(String elem, String[] array) {
         int size=array.length;
         for(int i=0; i<size; i++) {
@@ -165,17 +158,17 @@ public class SignUpActivity extends Activity {
         }
         return false;
     }
+    // Success de l'enregistrement -> lance l'activitee de connexion
     public void signupSuccess() {
-        Log.d(this.TAG,"Successfull login");
-
         this.signup_button.setEnabled(true);
+        this.signin_link.setEnabled(true);
         Intent intent=new Intent(SignUpActivity.this,SignInActivity.class);
         this.startActivityForResult(intent,REQUEST_CODE);
     }
+    // Enregistrement rate -> affiche message d'erreur + reactive le bouton/lien
     public void signupFailed() {
-        Log.d(this.TAG,"Unssuccessful registering");
-
-        Toast.makeText(this.getBaseContext(), "Unsuccessful registering, try again", Toast.LENGTH_LONG).show();
+        Toast.makeText(this.getBaseContext(), this.getString(R.string.unsuccessfull_register_label), Toast.LENGTH_LONG).show();
         this.signup_button.setEnabled(true);
+        this.signin_link.setEnabled(true);
     }
 }

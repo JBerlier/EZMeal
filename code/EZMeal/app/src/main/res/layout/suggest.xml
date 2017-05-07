@@ -11,12 +11,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Suggestion du jour"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/orange"
         android:textSize="30sp"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="49dp"
         android:layout_marginLeft="67dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="67dp" />
 
     <TextView
         android:id="@+id/textView4"
@@ -24,30 +25,57 @@
         android:layout_height="wrap_content"
         android:text="Nous vous proposons aujourd'hui :"
         android:textAlignment="viewStart"
-        android:textColor="@color/colorPrimaryDark"
+        android:gravity="start"
+        android:textColor="@color/orange"
         android:textSize="20sp"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="134dp"
-        android:layout_marginLeft="-26dp"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/button_autre"
+        android:layout_width="179dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="419dp"
         android:text="Autre suggestion"
-        android:textColor="@color/colorPrimaryDark"
-        android:layout_marginLeft="113dp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:textColor="@color/white"
+        android:background="@drawable/rounded"
+        android:backgroundTint="@color/orange"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="319dp" />
+        android:layout_marginStart="113dp"
+        android:layout_marginLeft="75dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button
         android:id="@+id/button_retour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="retour"
-        android:textColor="@color/colorPrimaryDark"
-        tools:layout_editor_absoluteX="-8dp"
+        android:textColor="@color/white"
+        android:background="@drawable/rounded"
+        android:backgroundTint="@color/orange"
+        tools:layout_editor_absoluteX="-7dp"
         tools:layout_editor_absoluteY="-6dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="275dp"
+        android:layout_height="182dp"
+        app:srcCompat="@drawable/lasagne"
+        android:layout_marginLeft="55dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="183dp" />
+
+    <TextView
+        android:id="@+id/Recette_name"
+        android:layout_width="388dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="-2dp"
+        android:layout_marginTop="375dp"
+        android:textAlignment="center"
+        android:textColor="@color/orange"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

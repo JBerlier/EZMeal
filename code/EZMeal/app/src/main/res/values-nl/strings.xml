@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EzMeal</string>
+
+    <string name="username_label">Gebruikersnaam</string>
+    <string name="password_label">Wachtwoord</string>
+    <string name="old_password_label">Oud wachtwoord</string>
+    <string name="new_password_label">Nieuw wachtwoord</string>
+    <string name="age_label">Leeftijd</string>
+    <string name="address_label">Adres</string>
+    <string name="gender_label">Geslacht</string>
+    <string name="login_label">Log in</string>
+    <string name="register_label">Registreren</string>
+    <string name="no_account_label">Nog geen account ? Creëer er een</string>
+    <string name="already_account_label">Al een account ? Log in</string>
+    <string name="authenticate_label">Authenticatie...</string>
+    <string name="account_change_label">Sla accountinstelling op</string>
+    <string-array name="gender">
+        <item name="gender_male_label">Mannetje</item>
+        <item name="gender_female_label">Vrouw</item>
+        <item name="gender_other_label">Anders</item>
+    </string-array>
+
+    <string name="cancel_label">Annuleer</string>
+    <string name="pause_label">Pauze</string>
+    <string name="continue_label">Voortzetten</string>
+    <string name="run_background_label">Laten lopen in achtergrond</string>
+    <string name="timer_ended_title_label">Verstreken tijd</string>
+    <string name="timer_ended_label">De timer is klaar, de tihd om naar de volgender stap te gaan</string>
+    <string name="timer_ended_stop_label">Ga naar de volgende stap</string>
+
+    <string name="invalid_username_label">Voer een geldige gebruikersnaam in</string>
+    <string name="invalid_password_label">Voer een geldig wachtwoord in</string>
+    <string name="invalid_age_label">Vul een geldige leeftijd in</string>
+    <string name="invalid_address_label">Voer een geldig adres in</string>
+    <string name="invalid_gender_label">Voer een geldig geslacht in</string>
+
+    <string name="unsuccessfull_login_label">Niet succesvol inloggen, probeer het opnieuw</string>
+    <string name="unsuccessfull_register_label">Niet succesvol registeren, probeer het opnieuw</string>
+    <string name="unsuccessfull_change_label">Niet succesvolle wijziging, probeet het opnieuw</string>
+</resources>
