@@ -37,4 +37,27 @@
     <string name="unsuccessfull_login_label">Unsuccessfull log in, try again</string>
     <string name="unsuccessfull_register_label">Unsuccessfull registering, try again</string>
     <string name="unsuccessfull_change_label">Unsuccessfull change, try again</string>
+    <string name="avis">Give your recommendation</string>
+    <string name="set_grade">Send Grade</string>
+    <string name="set_comment">Send comment</string>
+    <string name="suggest_picture">Picture of the recipe</string>
+    <string name="menu">Menu</string>
+    <string name="profil">User profile</string>
+    <string name="suggestion">Today\'s suggestion</string>
+    <string name="catalogue">Catalog</string>
+    <string name="recherche">Research</string>
+    <string name="déconnexion">Sign out</string>
+
+    <string name="propose_sent">Today we suggest you: </string>
+    <string name="retour">Back</string>
+    <string name="autre_suggestion">Other suggestions</string>
+    <string name="plus_de_sug">No more suggestions</string>
+
+    <string name="par_type">By type:</string>
+    <string name="par_soust">By subtype:</string>
+    <string name="par_mot">By keyword:</string>
+    <string name="lancer_recherche">Search</string>
+    <string name="pas_de_result">No results</string>
+    <string name="autre_rech">Other researchs</string>
+    <string name="retour_menu">Back to menu</string>
 </resources>

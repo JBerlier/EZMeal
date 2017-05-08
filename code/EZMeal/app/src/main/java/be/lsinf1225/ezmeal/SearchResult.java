@@ -46,18 +46,24 @@ public class SearchResult extends ListActivity {
         recettes=db.search(searched_keyword,searched_type,searched_subtype);
         if (recettes.isEmpty())
         {
-            Toast.makeText(SearchResult.this, "Pas de résultats", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SearchResult.this, getString(R.string.pas_de_result), Toast.LENGTH_SHORT).show();
         }
-        recettes.add("autre recherche");
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, recettes);
+        recettes.add(getString(R.string.autre_rech));
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.simple_list_item, recettes);
         setListAdapter(adapter);
         getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 chosenRecette = recettes.get(position);
-                if(chosenRecette.equals("autre recherche"))
+                if(chosenRecette.equals(getString(R.string.autre_rech)))
                 {
                     Intent i = new Intent(SearchResult.this, search.class);
+                    startActivityForResult(i, REQUEST_CODE);
+                }
+                else
+                {
+                    Intent i = new Intent(SearchResult.this, menu.class);//menu->RecetteActivity
+                    i.putExtra("recette",chosenRecette);
                     startActivityForResult(i, REQUEST_CODE);
                 }
             }

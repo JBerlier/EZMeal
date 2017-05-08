@@ -28,20 +28,21 @@ public class catalogue extends ListActivity {
         super.onCreate(savedInstanceState);
         MyDatabase db = new MyDatabase(this);
         recettes=db.catalog();
-        recettes.add("retour au menu");
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,recettes);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.simple_list_item,recettes);
         setListAdapter(adapter);
         getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 chosenrecette=recettes.get(position);
-                if(chosenrecette.equals("retour au menu"))
-                {
-                    Intent i = new Intent(catalogue.this, menu.class);
-                    startActivityForResult(i, REQUEST_CODE);
-                }
+                Intent i = new Intent(catalogue.this, menu.class);//menu->RecetteActivity
+                i.putExtra("recette",chosenrecette);
+                startActivityForResult(i, REQUEST_CODE);
             }
         });
     }
-
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(catalogue.this, menu.class);
+        startActivityForResult(i, REQUEST_CODE);
+    }
 }

@@ -38,4 +38,29 @@
     <string name="unsuccessfull_login_label">Niet succesvol inloggen, probeer het opnieuw</string>
     <string name="unsuccessfull_register_label">Niet succesvol registeren, probeer het opnieuw</string>
     <string name="unsuccessfull_change_label">Niet succesvolle wijziging, probeet het opnieuw</string>
+    <string name="avis">Geef u mening</string>
+    <string name="set_grade">Zend nota</string>
+    <string name="set_comment">Zend comentaar</string>
+
+    <string name="suggest_picture">Photo van de kookrecept</string>
+    <string name="menu">Menu</string>
+    <string name="profil">Profiel</string>
+    <string name="suggestion">Schotel van de dag</string>
+    <string name="catalogue">Catalogus</string>
+    <string name="recherche">Zoeken</string>
+    <string name="déconnexion">Ontkoppeling</string>
+
+    <string name="propose_sent">Vandag we suggereren: </string>
+    <string name="retour">terug</string>
+    <string name="autre_suggestion">Andere suggestie</string>
+    <string name="plus_de_sug">Geen meer suggestie</string>
+
+
+    <string name="par_type">Door type:</string>
+    <string name="par_soust">Door subtype:</string>
+    <string name="par_mot">Door sleutelwoord:</string>
+    <string name="lancer_recherche">Zoeken</string>
+    <string name="pas_de_result">Geen uitslag</string>
+    <string name="autre_rech">Andere zoeken</string>
+    <string name="retour_menu">Terug naar menu</string>
 </resources>

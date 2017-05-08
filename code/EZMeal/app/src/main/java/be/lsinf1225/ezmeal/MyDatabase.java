@@ -10,18 +10,13 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.StringTokenizer;
 
 /**
- * TO DO : Peupler listRecette
- *         Charger toutes les images
+ * TO DO : Charger toutes les images
  *         Charger touts les videos
  */
 
@@ -30,7 +25,7 @@ public class MyDatabase extends SQLiteOpenHelper {
     private static final String TAG = "MyDatabase";
     private static final String DATABASE_NAME = "database.sqlite";
     private static final int DATABASE_VERSION = 2;
-    private static Context context;
+    private Context context;
 
     private static final String AVIS_TABLE = "avis";
     private static final String AVIS_AUTHOR_COLUMN = "username";
@@ -99,7 +94,6 @@ public class MyDatabase extends SQLiteOpenHelper {
                 "('Topichef', 'toptop', 53, 'Avenue des plats 10', 'Male');"
         );
 
-
         //creation table step
         db.execSQL("DROP TABLE IF EXISTS '"+STEP_TABLE+"';");
         db.execSQL("CREATE TABLE '"+STEP_TABLE+"' ('"+
@@ -145,7 +139,6 @@ public class MyDatabase extends SQLiteOpenHelper {
                 "PRIMARY KEY("+AVIS_AUTHOR_COLUMN+", "+AVIS_RECETTE_COLUMN+"),"+
                 "FOREIGN KEY("+AVIS_RECETTE_COLUMN+") REFERENCES "+RECETTE_TABLE+","+
                 "FOREIGN KEY("+AVIS_AUTHOR_COLUMN+") REFERENCES "+USER_TABLE+")");
-
         db.execSQL("INSERT INTO "+AVIS_TABLE+" ("+AVIS_AUTHOR_COLUMN+","+AVIS_RECETTE_COLUMN+","+AVIS_NOTE_COLUMN+","+AVIS_COMMENTAIRE_COLUMN+")"+
         " VALUES ('Laurent','Lasagnes',5,'trop bon :p'),"+
                 "('Laurent','Muffins au chocolat',2,'trop sucré'),"+
@@ -155,9 +148,8 @@ public class MyDatabase extends SQLiteOpenHelper {
                 "('Morgane','Toasts aux champignons','5','juste parfait')"
         );
 
-        // Completer listRecette + listDrawableID ==> !!!!!! doivent etre de la meme taille
-        String[] listRecette={"Lasagnes"};
-        Integer[] listDrawableID={R.drawable.lasagne};
+        String[] listRecette={"Lasagnes","Muffins au chocolat","Toasts aux champignons"};
+        Integer[] listDrawableID={R.drawable.lasagne,R.drawable.muffins,R.drawable.toast};
         for(int i=0; i<listRecette.length; i++) {
             String SQLrequest="UPDATE "+RECETTE_TABLE+" SET "+RECETTE_PICTURE_COLUMN+"=? WHERE "+RECETTE_NAME_COLUMN+"='"+listRecette[i]+"';";
             this.loadImage(db, listDrawableID[i], SQLrequest);
@@ -192,7 +184,7 @@ public class MyDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor cursor=db.query(AVIS_TABLE,
                 new String[]{AVIS_AUTHOR_COLUMN}, //on prend une seule colonne car on n'est interessé que par le nombre de lignes
-                AVIS_AUTHOR_COLUMN+" ='"+username+"'AND"+AVIS_RECETTE_COLUMN+" ='"+recipe+"'",
+                AVIS_AUTHOR_COLUMN+" ='"+username+"'AND "+AVIS_RECETTE_COLUMN+" ='"+recipe+"'",
                 null,
                 null,
                 null,
@@ -206,6 +198,7 @@ public class MyDatabase extends SQLiteOpenHelper {
             db.execSQL(String.format("UPDATE %1$s SET %2$s = '%3$s' WHERE %4$s = '%5$s' AND %6$s = '%7$s'"
                     ,AVIS_TABLE,AVIS_COMMENTAIRE_COLUMN,comment,AVIS_AUTHOR_COLUMN,username,AVIS_RECETTE_COLUMN,recipe));
         }
+        cursor.close();
     }
     /**
      * Ajoute ou écrase une note d'un utilsateur sur un recette
@@ -230,9 +223,10 @@ public class MyDatabase extends SQLiteOpenHelper {
             db.execSQL(String.format("INSERT INTO %1$s(%2$s,%3$s,%4$s,%5$s) VALUES ('%6$s','%7$s','%8$s',NULL);",
                     AVIS_TABLE, AVIS_AUTHOR_COLUMN, AVIS_RECETTE_COLUMN, AVIS_NOTE_COLUMN, AVIS_COMMENTAIRE_COLUMN, username, recipe, grade));
         } else {//si il ya déja un avis créé
-            db.execSQL(String.format("UPDATE %1$s SET %2$s = %3$s WHERE %4$s = %5$s AND %6$s = %7$s"
+            db.execSQL(String.format("UPDATE %1$s SET %2$s = '%3$s' WHERE %4$s = '%5$s' AND %6$s = '%7$s'"
                     , AVIS_TABLE, AVIS_NOTE_COLUMN, grade, AVIS_AUTHOR_COLUMN, username, AVIS_RECETTE_COLUMN, recipe));
         }
+        cursor.close();
     }
     public String getStepNameColumn(String recette_name, int step_number){
         Log.d(this.TAG, "Rentree dans get step_name");
@@ -386,6 +380,82 @@ public class MyDatabase extends SQLiteOpenHelper {
         return catalogue;
     }
 
+    /**
+     * Renvoye une note
+     * @param username nom de l'utilisateur dont on veux la note
+     * @param recipe nom de la recette dont on veut la note
+     * @return la note si elle existe, sinon 0
+     */
+    public int getGrade(String username,String recipe){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(AVIS_TABLE,
+                new String[]{AVIS_NOTE_COLUMN},
+                AVIS_AUTHOR_COLUMN + " ='" + username + "'AND " + AVIS_RECETTE_COLUMN + " ='" + recipe + "'",
+                null,
+                null,
+                null,
+                null);
+        if(!cursor.moveToFirst()){
+            cursor.close();
+            return 0;
+        }
+        else {
+            int tmp=cursor.getInt(cursor.getColumnIndex(AVIS_NOTE_COLUMN));
+            cursor.close();
+            return tmp;
+        }
+    }
+
+    /**
+     * Calcule la moyenne des notes d'une recette
+     * @param recipe nom de la recette
+     * @return moyenne des notes ou null
+     */
+    public float getAvgGrade(String recipe){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(AVIS_TABLE,
+                new String[]{"AVG("+AVIS_NOTE_COLUMN+")"},
+                AVIS_RECETTE_COLUMN + " ='" + recipe + "'",
+                null,
+                null,
+                null,
+                null);
+
+        if(cursor.moveToFirst()) {
+            float avg = cursor.getFloat(cursor.getColumnIndex("AVG(" + AVIS_NOTE_COLUMN + ")"));
+            cursor.close();
+            return avg;
+        }
+            cursor.close();
+            return 0;
+    }
+
+    /**
+     * Renvoye un commentaire
+     * @param username nom de l'utilisateur dont on veux le commentaire
+     * @param recipe nom de la recette dont on veux le commentaire
+     * @return le commentaire si il existe, sinon ""
+     */
+    public String getComment(String username,String recipe){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(AVIS_TABLE,
+                new String[]{AVIS_COMMENTAIRE_COLUMN},
+                AVIS_AUTHOR_COLUMN + " ='" + username + "'AND " + AVIS_RECETTE_COLUMN + " ='" + recipe + "'",
+                null,
+                null,
+                null,
+                null);
+        if(!cursor.moveToFirst()){
+            cursor.close();
+            return "";
+        }
+        else {
+            String tmp=cursor.getString(cursor.getColumnIndex(AVIS_COMMENTAIRE_COLUMN));
+            cursor.close();
+            return tmp;
+        }
+    }
+
     public String getAge(String username) {
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor cursor=db.query(USER_TABLE,
@@ -440,19 +510,31 @@ public class MyDatabase extends SQLiteOpenHelper {
         cursor.close();
         throw new Error("User not found");
     }
-    public Bitmap getImage(String SQLrequest) {
+
+    private Bitmap getImage(String SQLrequest) {
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor c=db.rawQuery(SQLrequest,null);
         if(c.moveToFirst()) {
             byte[] img=c.getBlob(0);
             c.close();
-            return BitmapFactory.decodeByteArray(img,0,img.length);
+            if (img==null){//si il n'y as pas d'images
+                return null;
+            }
+            else {
+                return BitmapFactory.decodeByteArray(img, 0, img.length);
+            }
         }
         if(c!=null && !c.isClosed()) {
             c.close();
         }
         return null;
     }
+
+    /**
+     * recherche la photo d'une recette
+     * @param recette nom de la recette
+     * @return l'image si elle existe, sinon null
+     */
     public Bitmap getImageRecette(String recette) {
         String SQLrequest="SELECT "+RECETTE_PICTURE_COLUMN+" FROM "+RECETTE_TABLE+" WHERE "+RECETTE_NAME_COLUMN+"='"+recette+"';";
         return this.getImage(SQLrequest);

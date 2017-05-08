@@ -16,17 +16,9 @@ import android.widget.Toast;
 
 import java.util.List;
 
-/**
- * les fonctions getTypes et getSubTypes renvoient une erreur "no such table: recette ..."
- * TO DO comprendre pourquoi
- * *=> supprime ton émulateur et crée en un autre il créera une nouvelle database et celle actuelle fonctionne
- * Created by marti on 28-04-17.
- */
-
 
 public class search extends Activity {
     private static final int REQUEST_CODE = 1 ;
-    private Button buttonRetour ;
     private Button buttonSearch ;
     private EditText keyword;
     private Spinner spinner_type;
@@ -39,31 +31,25 @@ public class search extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
         keyword =(EditText) findViewById(R.id.editText_keywords);
-        buttonRetour = (Button) findViewById(R.id.button_retour);
         buttonSearch = (Button) findViewById(R.id.button_search);
         spinner_type = (Spinner) findViewById(R.id.spinner_type);
         spinner_subtype = (Spinner) findViewById(R.id.spinner_subtype);
 
         loadSpinnerData();
-        MyDatabase db = new MyDatabase(this);
         spinner_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 searched_type = parent.getItemAtPosition(position).toString();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
         spinner_subtype.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 searched_subtype = parent.getItemAtPosition(position).toString();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -80,13 +66,11 @@ public class search extends Activity {
                 startActivityForResult(i, REQUEST_CODE);
             }
         });
-        buttonRetour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(search.this, menu.class);
-                startActivityForResult(i, REQUEST_CODE);
-            }
-        });
+    }
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(search.this, menu.class);
+        startActivityForResult(i, REQUEST_CODE);
     }
 
     /**
@@ -94,7 +78,6 @@ public class search extends Activity {
      * */
    private void loadSpinnerData() {
        MyDatabase db = new MyDatabase(this);
-       Log.d("Laurent","1");
        List<String> types =db.getTypes();
        List<String> subtypes = db.getSubTypes();
 
@@ -115,4 +98,3 @@ public class search extends Activity {
         spinner_subtype.setAdapter(dataAdapter2);
     }
 }
-

@@ -6,9 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-/**
- * TO DO : Send username to the next activity for activities (think if useful for wich, etc)
- */
+
 public class menu extends AppCompatActivity {
     private static final int REQUEST_CODE = 1 ;
     private Button ButtonSearch ;

@@ -38,4 +38,29 @@
     <string name="unsuccessfull_login_label">Echec de la connexion, réessayez</string>
     <string name="unsuccessfull_register_label">Echec de l\'enregitrement, réessayez</string>
     <string name="unsuccessfull_change_label">Echec des modifications, réessayez</string>
+    <string name="avis">Donnez votre avis</string>
+    <string name="set_grade">Envoyez note</string>
+    <string name="set_comment">Envoye commentaire</string>
+    <string name="suggest_picture">Photo de la recette</string>
+    <string name="menu">Menu</string>
+    <string name="profil">Profil utilisateur</string>
+    <string name="suggestion">Suggestion du jour</string>
+    <string name="catalogue">Catalogue</string>
+    <string name="recherche">Recherche</string>
+    <string name="déconnexion">Déconnexion</string>
+
+    <string name="propose_sent">Nous vous proposons aujourd\'hui: </string>
+    <string name="retour">retour</string>
+    <string name="autre_suggestion">Autre suggestion</string>
+    <string name="plus_de_sug">Plus de suggestions</string>
+
+
+    <string name="par_type">Par type:</string>
+    <string name="par_soust">Par sous-type:</string>
+    <string name="par_mot">Par mots clés:</string>
+    <string name="lancer_recherche">Lancer recherche</string>
+    <string name="pas_de_result">Pas de résultats</string>
+    <string name="autre_rech">Autre recherche</string>
+    <string name="retour_menu">Retour au menu</string>
+
 </resources>
