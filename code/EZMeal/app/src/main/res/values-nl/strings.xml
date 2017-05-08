@@ -41,4 +41,22 @@
     <string name="avis">Geef u mening</string>
     <string name="set_grade">Zend nota</string>
     <string name="set_comment">Zend comentaar</string>
+    <string name="back_label">Terug</string>
+    <string name="suggest_title">Suggestie van de dag</string>
+    <string name="suggest_text">We voorstellen u vandaag</string>
+    <string name="other_suggestion">Andere suggestie</string>
+    <string name="suggest_picture">Photo van de kookrecept</string>
+    <string name="Search_label">Zoeken</string>
+    <string name="Search_launch">Zoeken</string>
+    <string name="Search_type">Door type:</string>
+    <string name="Search_under_type">Door under-type</string>
+    <string name="Search_key_word">Door sleutelwoorden</string>
+    <string name="etap_prec">Vorige step</string>
+    <string name="etape_suiv">Volgende step</string>
+    <string name="Menu_title">Keuzemenu</string>
+    <string name="Menu_catalogue">Cataloog</string>
+    <string name="Menu_search">Zoeken</string>
+    <string name="Menu_suggest">Suggestie of the dag</string>
+    <string name="Menu_user">Gebruikersrekening</string>
+    <string name="Menu_sign_out">Uitloggen</string>
 </resources>
