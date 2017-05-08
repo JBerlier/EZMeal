@@ -13,12 +13,9 @@
         android:alpha="0.9"
         android:background="@drawable/rounded"
         android:backgroundTint="@color/orange"
-        android:text="@string/back_label"
-        android:textColor="@color/white"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="0dp"
-        android:layout_marginLeft="0dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+
+        android:text="@string/retour"
+        android:textColor="@color/white" />
 
     <TextView
         android:id="@+id/textView8"
@@ -28,7 +25,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="270dp"
         android:backgroundTint="@color/gray"
-        android:text="@string/Search_under_type"
+
+        android:text="@string/par_soust"
         android:textColor="@color/orange"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -41,7 +39,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="92dp"
-        android:text="@string/Search_key_word"
+        android:text="@string/par_mot"
         android:textColor="@color/orange"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -53,7 +51,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="121dp"
         android:layout_marginTop="16dp"
-        android:text="@string/Search_label"
+        android:text="@string/recherche"
         android:textColor="@color/orange"
         android:textSize="30sp"
         app:layout_constraintTop_toTopOf="parent"
@@ -68,8 +66,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="187dp"
-        android:text="@string/Search_type"
+        android:layout_marginTop="183dp"
+        android:text="@string/par_type"
         android:textColor="@color/orange"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -111,20 +109,24 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <Button
         android:id="@+id/button_search"
-        android:layout_width="188dp"
-        android:layout_height="57dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="113dp"
-        android:layout_marginTop="390dp"
+        android:layout_width="224dp"
+        android:layout_height="55dp"
         android:alpha="0.9"
+        android:gravity="center"
         android:background="@drawable/rounded"
         android:backgroundTint="@color/orange"
+        android:text="@string/lancer_recherche"
         android:drawableLeft="@drawable/ic_search_black_24dp"
-        android:text="@string/Search_launch"
         android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="389dp"
+        android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent" />
+
 
 </android.support.constraint.ConstraintLayout>

@@ -41,22 +41,26 @@
     <string name="avis">Donnez votre avis</string>
     <string name="set_grade">Envoyez note</string>
     <string name="set_comment">Envoye commentaire</string>
-    <string name="back_label">Retour</string>
-    <string name="suggest_title">Suggestion du jour</string>
-    <string name="suggest_text">Nous vous proposont aujourd\'hui</string>
-    <string name="other_suggestion">Autre suggestion</string>
     <string name="suggest_picture">Photo de la recette</string>
-    <string name="Search_label">Recherche</string>
-    <string name="Search_launch">Chercher</string>
-    <string name="Search_type">Par type:</string>
-    <string name="Search_under_type">Par sous-type:</string>
-    <string name="Search_key_word">Par mot-clés:</string>
-    <string name="etap_prec">Etape précédante</string>
-    <string name="etape_suiv">Etape suivante</string>
-    <string name="Menu_title">Menu</string>
-    <string name="Menu_catalogue">Catalogue</string>
-    <string name="Menu_search">Recherche</string>
-    <string name="Menu_sign_out">Déconnection</string>
-    <string name="Menu_suggest">Suggestion du jour</string>
-    <string name="Menu_user">Profil utilisateur</string>
+    <string name="menu">Menu</string>
+    <string name="profil">Profil utilisateur</string>
+    <string name="suggestion">Suggestion du jour</string>
+    <string name="catalogue">Catalogue</string>
+    <string name="recherche">Recherche</string>
+    <string name="déconnexion">Déconnexion</string>
+
+    <string name="propose_sent">Nous vous proposons aujourd\'hui: </string>
+    <string name="retour">retour</string>
+    <string name="autre_suggestion">Autre suggestion</string>
+    <string name="plus_de_sug">Plus de suggestions</string>
+
+
+    <string name="par_type">Par type:</string>
+    <string name="par_soust">Par sous-type:</string>
+    <string name="par_mot">Par mots clés:</string>
+    <string name="lancer_recherche">Lancer recherche</string>
+    <string name="pas_de_result">Pas de résultats</string>
+    <string name="autre_rech">Autre recherche</string>
+    <string name="retour_menu">Retour au menu</string>
+
 </resources>

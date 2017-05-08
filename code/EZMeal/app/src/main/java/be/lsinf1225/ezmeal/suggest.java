@@ -14,14 +14,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-/**TO DO relier le buttonImage à la recette et charger la bonne image en fonction de la recette dans le imagebutton
+/**TO DO relier le buttonImage à la recette
  * Created by marti on 28-04-17.
  */
 
 public class suggest extends Activity {
     private static final int REQUEST_CODE = 1 ;
-    private Button ButtonRetour ;
-    private Button ButtonAutre;
     private ImageButton imageButton;
     private TextView Recette_name;
     private RatingBar note;
@@ -40,7 +38,7 @@ public class suggest extends Activity {
         Recette_name =(TextView) findViewById(R.id.Recette_name);
         Recette_name.setText(suggestion);
 
-        ButtonRetour = (Button) findViewById(R.id.button_retour);
+        Button ButtonRetour = (Button) findViewById(R.id.button_retour);
         ButtonRetour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,19 +58,20 @@ public class suggest extends Activity {
                                            @Override
                                            public void onClick(View arg0) {
 
-                                               Toast.makeText(suggest.this,
-                                                       "ImageButton is clicked!", Toast.LENGTH_SHORT).show();
+                                               Intent i = new Intent(suggest.this, menu.class);//menu->RecetteActivity
+                                               i.putExtra("recette",suggestion);
+                                               startActivityForResult(i, REQUEST_CODE);
 
                                            }
                                        });
-        ButtonAutre = (Button) findViewById(R.id.button_autre);
+        Button ButtonAutre = (Button) findViewById(R.id.button_autre);
         ButtonAutre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 index++;
                 if (index>=suggestions.size())
                 {
-                    Toast.makeText(suggest.this, "Plus de suggestions", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(suggest.this,R.string.plus_de_sug, Toast.LENGTH_SHORT).show();
                 }
                 else {
                     suggestion = suggestions.get(index);

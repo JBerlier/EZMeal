@@ -44,20 +44,25 @@
     <string name="unsuccessfull_login_label">Unsuccessfull log in, try again</string>
     <string name="unsuccessfull_register_label">Unsuccessfull registering, try again</string>
     <string name="unsuccessfull_change_label">Unsuccessfull change, try again</string>
-    <string name="back_label">Back</string>
-    <string name="suggest_title">Suggestion of the day</string>
-    <string name="suggest_text">We Suggest you today</string>
-    <string name="other_suggestion">Other suggestion</string>
     <string name="suggest_picture">Picture of the recipe</string>
-    <string name="Search_label">Search</string>
-    <string name="Search_key_word">By key-word:</string>
-    <string name="Search_type">By type:</string>
-    <string name="Search_under_type">By under-type:</string>
-    <string name="Search_launch">Launch research</string>
-    <string name="Menu_sign_out">Sign-out</string>
-    <string name="Menu_title">Menu</string>
-    <string name="Menu_user">User profile</string>
-    <string name="Menu_suggest">Suggestion of the day</string>
-    <string name="Menu_catalogue">Catalogue</string>
-    <string name="Menu_search">Search</string>
+    <string name="menu">Menu</string>
+    <string name="profil">Profil utilisateur</string>
+    <string name="suggestion">Suggestion du jour</string>
+    <string name="catalogue">Datalogue</string>
+    <string name="recherche">Recherche</string>
+    <string name="déconnexion">Déconnexion</string>
+
+    <string name="propose_sent">Nous vous proposons aujourd\'hui: </string>
+    <string name="retour">retour</string>
+    <string name="autre_suggestion">Autre suggestion</string>
+    <string name="plus_de_sug">Plus de suggestions</string>
+
+
+    <string name="par_type">Par type:</string>
+    <string name="par_soust">Par sous-type:</string>
+    <string name="par_mot">Par mots clés:</string>
+    <string name="lancer_recherche">Lancer recherche</string>
+    <string name="pas_de_result">Pas de résultats</string>
+    <string name="autre_rech">Autre recherche</string>
+    <string name="retour_menu">Retour au menu</string>
 </resources>

@@ -40,22 +40,25 @@
     <string name="avis">Give your recommendation</string>
     <string name="set_grade">Send Grade</string>
     <string name="set_comment">Send comment</string>
-    <string name="back_label">Back</string>
-    <string name="suggest_title">Suggestion of the day</string>
-    <string name="suggest_text">We suggest you today</string>
-    <string name="other_suggestion">Other suggestion</string>
     <string name="suggest_picture">Picture of the recipe</string>
-    <string name="Search_type">By type:</string>
-    <string name="Search_under_type">By under-type:</string>
-    <string name="Search_launch">Launch research</string>
-    <string name="Search_key_word">By keyword:</string>
-    <string name="Search_label">Search</string>
-    <string name="etap_prec">Preceding step</string>
-    <string name="etape_suiv">Following step</string>
-    <string name="Menu_sign_out">Sign-out</string>
-    <string name="Menu_title">Menu</string>
-    <string name="Menu_user">User profile</string>
-    <string name="Menu_suggest">Suggestion of the day</string>
-    <string name="Menu_catalogue">Catalogue</string>
-    <string name="Menu_search">Search</string>
+    <string name="menu">Menu</string>
+    <string name="profil">User profile</string>
+    <string name="suggestion">Today\'s suggestion</string>
+    <string name="catalogue">Catalog</string>
+    <string name="recherche">Research</string>
+    <string name="déconnexion">Sign out</string>
+
+    <string name="propose_sent">Today we suggest you: </string>
+    <string name="retour">back</string>
+    <string name="autre_suggestion">Other suggestion</string>
+    <string name="plus_de_sug">No more suggestion</string>
+
+
+    <string name="par_type">By type:</string>
+    <string name="par_soust">By subtype:</string>
+    <string name="par_mot">By keyword:</string>
+    <string name="lancer_recherche">Search</string>
+    <string name="pas_de_result">No results</string>
+    <string name="autre_rech">Auther research</string>
+    <string name="retour_menu">Back to menu</string>
 </resources>

@@ -41,22 +41,26 @@
     <string name="avis">Geef u mening</string>
     <string name="set_grade">Zend nota</string>
     <string name="set_comment">Zend comentaar</string>
-    <string name="back_label">Terug</string>
-    <string name="suggest_title">Suggestie van de dag</string>
-    <string name="suggest_text">We voorstellen u vandaag</string>
-    <string name="other_suggestion">Andere suggestie</string>
+
     <string name="suggest_picture">Photo van de kookrecept</string>
-    <string name="Search_label">Zoeken</string>
-    <string name="Search_launch">Zoeken</string>
-    <string name="Search_type">Door type:</string>
-    <string name="Search_under_type">Door under-type</string>
-    <string name="Search_key_word">Door sleutelwoorden</string>
-    <string name="etap_prec">Vorige step</string>
-    <string name="etape_suiv">Volgende step</string>
-    <string name="Menu_title">Keuzemenu</string>
-    <string name="Menu_catalogue">Cataloog</string>
-    <string name="Menu_search">Zoeken</string>
-    <string name="Menu_suggest">Suggestie of the dag</string>
-    <string name="Menu_user">Gebruikersrekening</string>
-    <string name="Menu_sign_out">Uitloggen</string>
+    <string name="menu">Menu</string>
+    <string name="profil">Profiel</string>
+    <string name="suggestion">Schotel van de dag</string>
+    <string name="catalogue">Catalogus</string>
+    <string name="recherche">Zoeken</string>
+    <string name="déconnexion">Ontkoppeling</string>
+
+    <string name="propose_sent">Vandag we suggereren: </string>
+    <string name="retour">terug</string>
+    <string name="autre_suggestion">Andere suggestie</string>
+    <string name="plus_de_sug">Geen meer suggestie</string>
+
+
+    <string name="par_type">Door type:</string>
+    <string name="par_soust">Door subtype:</string>
+    <string name="par_mot">Door sleutelwoord:</string>
+    <string name="lancer_recherche">Zoeken</string>
+    <string name="pas_de_result">Geen uitslag</string>
+    <string name="autre_rech">Andere zoeken</string>
+    <string name="retour_menu">Terug naar menu</string>
 </resources>
