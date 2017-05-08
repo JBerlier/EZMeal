@@ -16,13 +16,6 @@ import android.widget.Toast;
 
 import java.util.List;
 
-/**
- * les fonctions getTypes et getSubTypes renvoient une erreur "no such table: recette ..."
- * TO DO comprendre pourquoi
- * *=> supprime ton émulateur et crée en un autre il créera une nouvelle database et celle actuelle fonctionne
- * Created by marti on 28-04-17.
- */
-
 
 public class search extends Activity {
     private static final int REQUEST_CODE = 1 ;
@@ -45,25 +38,20 @@ public class search extends Activity {
         spinner_subtype = (Spinner) findViewById(R.id.spinner_subtype);
 
         loadSpinnerData();
-        MyDatabase db = new MyDatabase(this);
         spinner_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 searched_type = parent.getItemAtPosition(position).toString();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
         spinner_subtype.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 searched_subtype = parent.getItemAtPosition(position).toString();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -94,7 +82,6 @@ public class search extends Activity {
      * */
    private void loadSpinnerData() {
        MyDatabase db = new MyDatabase(this);
-       Log.d("Laurent","1");
        List<String> types =db.getTypes();
        List<String> subtypes = db.getSubTypes();
 
@@ -115,4 +102,3 @@ public class search extends Activity {
         spinner_subtype.setAdapter(dataAdapter2);
     }
 }
-

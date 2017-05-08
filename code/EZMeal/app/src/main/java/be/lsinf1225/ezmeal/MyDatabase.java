@@ -16,8 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TO DO : Peupler listRecette
- *         Charger toutes les images
+ * TO DO : Charger toutes les images
  *         Charger touts les videos
  */
 
