@@ -31,8 +31,10 @@ public class suggest extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.suggest);
+
         suggestions = db.suggest();
         suggestion = suggestions.get(index);
+
         Recette_name =(TextView) findViewById(R.id.Recette_name);
         Recette_name.setText(suggestion);
 
@@ -47,6 +49,8 @@ public class suggest extends Activity {
 
 
         imageButton = (ImageButton) findViewById(R.id.imageButton);
+        Bitmap bitmap=db.getImageRecette(suggestion);
+        imageButton.setImageBitmap(bitmap);
         imageButton.setOnClickListener(new View.OnClickListener() {
 
                                            @Override
@@ -69,12 +73,10 @@ public class suggest extends Activity {
                 else {
                     suggestion = suggestions.get(index);
                     Recette_name.setText(suggestion);
+                    Bitmap bitmap=db.getImageRecette(suggestion);
+                    imageButton.setImageBitmap(bitmap);
                 }
             }
         });
-
-        Bitmap bitmap=db.getImageRecette(suggestion);
-        imageButton.setImageBitmap(bitmap);
     }
-
 }
