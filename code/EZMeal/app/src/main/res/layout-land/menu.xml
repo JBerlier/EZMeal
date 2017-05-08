@@ -26,7 +26,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="49dp"
-                android:text=" Menu"
+                android:text="@string/menu"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="45sp"
@@ -47,7 +47,7 @@
                 android:backgroundTint="@color/orange"
                 android:textColor="@color/white"
                 android:alpha="0.9"
-                android:text="Profil utilisateur"/>
+                android:text="@string/profil"/>
 
 
             <Button
@@ -61,7 +61,7 @@
                 android:backgroundTint="@color/orange"
                 android:textColor="@color/white"
                 android:alpha="0.9"
-                android:text="Suggestion du jour"/>
+                android:text="@string/suggestion"/>
             <Button
                 android:id="@+id/button_catalogue"
                 android:layout_width="fill_parent"
@@ -73,7 +73,7 @@
                 android:backgroundTint="@color/orange"
                 android:textColor="@color/white"
                 android:alpha="0.9"
-                android:text="catalogue"/>
+                android:text="@string/catalogue"/>
             <Button
                 android:id="@+id/button_search"
                 android:layout_width="fill_parent"
@@ -85,7 +85,7 @@
                 android:backgroundTint="@color/orange"
                 android:textColor="@color/white"
                 android:alpha="0.9"
-                android:text="recherche"/>
+                android:text="@string/recherche"/>
 
             <Button
                 android:id="@+id/button_signout"
@@ -98,7 +98,7 @@
                 android:backgroundTint="@color/orange"
                 android:textColor="@color/white"
                 android:alpha="0.9"
-                android:text="Déconnexion"/>
+                android:text="@string/déconnexion"/>
         </LinearLayout>
 
 

@@ -67,7 +67,7 @@ public class suggest extends Activity {
                 index++;
                 if (index>=suggestions.size())
                 {
-                    Toast.makeText(suggest.this, "Plus de suggestions", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(suggest.this,R.string.plus_de_sug, Toast.LENGTH_SHORT).show();
                 }
                 else {
                     suggestion = suggestions.get(index);
