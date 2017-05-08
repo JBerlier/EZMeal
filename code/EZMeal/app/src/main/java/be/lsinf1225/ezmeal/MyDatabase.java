@@ -516,19 +516,31 @@ public class MyDatabase extends SQLiteOpenHelper {
         cursor.close();
         throw new Error("User not found");
     }
-    public Bitmap getImage(String SQLrequest) {
+
+    private Bitmap getImage(String SQLrequest) {
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor c=db.rawQuery(SQLrequest,null);
         if(c.moveToFirst()) {
             byte[] img=c.getBlob(0);
             c.close();
-            return BitmapFactory.decodeByteArray(img,0,img.length);
+            if (img==null){//si il n'y as pas d'images
+                return null;
+            }
+            else {
+                return BitmapFactory.decodeByteArray(img, 0, img.length);
+            }
         }
         if(c!=null && !c.isClosed()) {
             c.close();
         }
         return null;
     }
+
+    /**
+     * recherche la photo d'une recette
+     * @param recette nom de la recette
+     * @return l'image si elle existe, sinon null
+     */
     public Bitmap getImageRecette(String recette) {
         String SQLrequest="SELECT "+RECETTE_PICTURE_COLUMN+" FROM "+RECETTE_TABLE+" WHERE "+RECETTE_NAME_COLUMN+"='"+recette+"';";
         return this.getImage(SQLrequest);
