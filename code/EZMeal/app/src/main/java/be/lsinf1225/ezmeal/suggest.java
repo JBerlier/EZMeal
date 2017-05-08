@@ -38,15 +38,6 @@ public class suggest extends Activity {
         Recette_name =(TextView) findViewById(R.id.Recette_name);
         Recette_name.setText(suggestion);
 
-        Button ButtonRetour = (Button) findViewById(R.id.button_retour);
-        ButtonRetour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(suggest.this, menu.class);
-                startActivityForResult(i, REQUEST_CODE);
-            }
-        });
-
         note=(RatingBar)this.findViewById(R.id.ratingBar);
         note.setRating(db.getAvgGrade(suggestion));
 
@@ -82,5 +73,10 @@ public class suggest extends Activity {
                 }
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(suggest.this, menu.class);
+        startActivityForResult(i, REQUEST_CODE);
     }
 }

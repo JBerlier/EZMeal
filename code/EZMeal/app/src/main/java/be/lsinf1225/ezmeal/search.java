@@ -19,7 +19,6 @@ import java.util.List;
 
 public class search extends Activity {
     private static final int REQUEST_CODE = 1 ;
-    private Button buttonRetour ;
     private Button buttonSearch ;
     private EditText keyword;
     private Spinner spinner_type;
@@ -32,7 +31,6 @@ public class search extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
         keyword =(EditText) findViewById(R.id.editText_keywords);
-        buttonRetour = (Button) findViewById(R.id.button_retour);
         buttonSearch = (Button) findViewById(R.id.button_search);
         spinner_type = (Spinner) findViewById(R.id.spinner_type);
         spinner_subtype = (Spinner) findViewById(R.id.spinner_subtype);
@@ -68,13 +66,11 @@ public class search extends Activity {
                 startActivityForResult(i, REQUEST_CODE);
             }
         });
-        buttonRetour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(search.this, menu.class);
-                startActivityForResult(i, REQUEST_CODE);
-            }
-        });
+    }
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(search.this, menu.class);
+        startActivityForResult(i, REQUEST_CODE);
     }
 
     /**

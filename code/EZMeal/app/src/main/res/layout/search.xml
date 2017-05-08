@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context="be.lsinf1225.ezmeal.search">
 
-    <Button
-        android:id="@+id/button_retour"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:alpha="0.9"
-        android:background="@drawable/rounded"
-        android:backgroundTint="@color/orange"
-
-        android:text="@string/retour"
-        android:textColor="@color/white" />
-
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
@@ -49,15 +38,13 @@
         android:id="@+id/textView_recherche_title"
         android:layout_width="171dp"
         android:layout_height="40dp"
-        android:layout_marginStart="121dp"
         android:layout_marginTop="16dp"
         android:text="@string/recherche"
+        android:gravity="center_horizontal"
         android:textColor="@color/orange"
         android:textSize="30sp"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <TextView
