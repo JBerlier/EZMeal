@@ -95,7 +95,6 @@ public class MyDatabase extends SQLiteOpenHelper {
                 "('Topichef', 'toptop', 53, 'Avenue des plats 10', 'Male');"
         );
 
-
         //creation table step
         db.execSQL("DROP TABLE IF EXISTS '"+STEP_TABLE+"';");
         db.execSQL("CREATE TABLE '"+STEP_TABLE+"' ('"+
@@ -141,7 +140,6 @@ public class MyDatabase extends SQLiteOpenHelper {
                 "PRIMARY KEY("+AVIS_AUTHOR_COLUMN+", "+AVIS_RECETTE_COLUMN+"),"+
                 "FOREIGN KEY("+AVIS_RECETTE_COLUMN+") REFERENCES "+RECETTE_TABLE+","+
                 "FOREIGN KEY("+AVIS_AUTHOR_COLUMN+") REFERENCES "+USER_TABLE+")");
-
         db.execSQL("INSERT INTO "+AVIS_TABLE+" ("+AVIS_AUTHOR_COLUMN+","+AVIS_RECETTE_COLUMN+","+AVIS_NOTE_COLUMN+","+AVIS_COMMENTAIRE_COLUMN+")"+
         " VALUES ('Laurent','Lasagnes',5,'trop bon :p'),"+
                 "('Laurent','Muffins au chocolat',2,'trop sucré'),"+
@@ -151,7 +149,6 @@ public class MyDatabase extends SQLiteOpenHelper {
                 "('Morgane','Toasts aux champignons','5','juste parfait')"
         );
 
-        // Completer listRecette + listDrawableID ==> !!!!!! doivent etre de la meme taille
         String[] listRecette={"Lasagnes","Muffins au chocolat","Toasts aux champignons"};
         Integer[] listDrawableID={R.drawable.lasagne,R.drawable.muffins,R.drawable.toast};
         for(int i=0; i<listRecette.length; i++) {

@@ -49,16 +49,15 @@
     <string name="déconnexion">Sign out</string>
 
     <string name="propose_sent">Today we suggest you: </string>
-    <string name="retour">back</string>
-    <string name="autre_suggestion">Auther suggestion</string>
-    <string name="plus_de_sug">No more suggestion</string>
-
+    <string name="retour">Back</string>
+    <string name="autre_suggestion">Other suggestions</string>
+    <string name="plus_de_sug">No more suggestions</string>
 
     <string name="par_type">By type:</string>
     <string name="par_soust">By subtype:</string>
     <string name="par_mot">By keyword:</string>
     <string name="lancer_recherche">Search</string>
     <string name="pas_de_result">No results</string>
-    <string name="autre_rech">Auther research</string>
+    <string name="autre_rech">Other researchs</string>
     <string name="retour_menu">Back to menu</string>
 </resources>
