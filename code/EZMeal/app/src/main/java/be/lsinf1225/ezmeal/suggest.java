@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ public class suggest extends Activity {
     private Button ButtonAutre;
     private ImageButton imageButton;
     private TextView Recette_name;
+    private RatingBar note;
     private List<String> suggestions=new ArrayList<>();
     private String suggestion;
     private int index =0 ;
@@ -47,6 +49,8 @@ public class suggest extends Activity {
             }
         });
 
+        note=(RatingBar)this.findViewById(R.id.ratingBar);
+        note.setRating(db.getAvgGrade(suggestion));
 
         imageButton = (ImageButton) findViewById(R.id.imageButton);
         Bitmap bitmap=db.getImageRecette(suggestion);
@@ -75,6 +79,7 @@ public class suggest extends Activity {
                     Recette_name.setText(suggestion);
                     Bitmap bitmap=db.getImageRecette(suggestion);
                     imageButton.setImageBitmap(bitmap);
+                    note.setRating(db.getAvgGrade(suggestion));
                 }
             }
         });

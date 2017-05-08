@@ -413,7 +413,7 @@ public class MyDatabase extends SQLiteOpenHelper {
     /**
      * Calcule la moyenne des notes d'une recette
      * @param recipe nom de la recette
-     * @return moyenne des notes ou 0 si pas de notes
+     * @return moyenne des notes ou null
      */
     public float getAvgGrade(String recipe){
         SQLiteDatabase db = this.getReadableDatabase();
@@ -425,15 +425,13 @@ public class MyDatabase extends SQLiteOpenHelper {
                 null,
                 null);
 
-        if(cursor.getCount()==0){//si pas de grade
-            cursor.close();
-            return 0;
-        }
-        else {
-            float avg=cursor.getFloat(1);
+        if(cursor.moveToFirst()) {
+            float avg = cursor.getFloat(cursor.getColumnIndex("AVG(" + AVIS_NOTE_COLUMN + ")"));
             cursor.close();
             return avg;
         }
+            cursor.close();
+            return 0;
     }
 
     /**
@@ -456,7 +454,7 @@ public class MyDatabase extends SQLiteOpenHelper {
             return "";
         }
         else {
-            String tmp=cursor.getString(1);
+            String tmp=cursor.getString(cursor.getColumnIndex(AVIS_COMMENTAIRE_COLUMN));
             cursor.close();
             return tmp;
         }
