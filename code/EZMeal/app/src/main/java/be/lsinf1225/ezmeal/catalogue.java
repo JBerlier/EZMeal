@@ -40,6 +40,12 @@ public class catalogue extends ListActivity {
                     Intent i = new Intent(catalogue.this, menu.class);
                     startActivityForResult(i, REQUEST_CODE);
                 }
+                else
+                {
+                    Intent i = new Intent(catalogue.this, menu.class);//menu->RecetteActivity
+                    i.putExtra("recette",chosenrecette);
+                    startActivityForResult(i, REQUEST_CODE);
+                }
             }
         });
     }

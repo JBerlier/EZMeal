@@ -60,6 +60,12 @@ public class SearchResult extends ListActivity {
                     Intent i = new Intent(SearchResult.this, search.class);
                     startActivityForResult(i, REQUEST_CODE);
                 }
+                else
+                {
+                    Intent i = new Intent(SearchResult.this, menu.class);//menu->RecetteActivity
+                    i.putExtra("recette",chosenRecette);
+                    startActivityForResult(i, REQUEST_CODE);
+                }
             }
         });
 

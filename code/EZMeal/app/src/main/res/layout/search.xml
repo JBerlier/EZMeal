@@ -107,20 +107,24 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <Button
         android:id="@+id/button_search"
-        android:layout_width="188dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="113dp"
+        android:layout_width="224dp"
+        android:layout_height="55dp"
         android:alpha="0.9"
+        android:gravity="center"
         android:background="@drawable/rounded"
         android:backgroundTint="@color/orange"
         android:text="Lancer recherche"
         android:drawableLeft="@drawable/ic_search_black_24dp"
         android:textColor="@color/white"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="390dp"
+        android:layout_marginTop="389dp"
         android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent" />
+
 
 </android.support.constraint.ConstraintLayout>
