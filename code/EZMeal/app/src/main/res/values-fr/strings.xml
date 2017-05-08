@@ -38,4 +38,7 @@
     <string name="unsuccessfull_login_label">Echec de la connexion, réessayez</string>
     <string name="unsuccessfull_register_label">Echec de l\'enregitrement, réessayez</string>
     <string name="unsuccessfull_change_label">Echec des modifications, réessayez</string>
+    <string name="avis">Donnez votre avis</string>
+    <string name="set_grade">Envoyez note</string>
+    <string name="set_comment">Envoye commentaire</string>
 </resources>

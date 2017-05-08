@@ -10,14 +10,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.StringTokenizer;
 
 /**
  * TO DO : Peupler listRecette
@@ -30,7 +26,7 @@ public class MyDatabase extends SQLiteOpenHelper {
     private static final String TAG = "MyDatabase";
     private static final String DATABASE_NAME = "database.sqlite";
     private static final int DATABASE_VERSION = 2;
-    private static Context context;
+    private Context context;
 
     private static final String AVIS_TABLE = "avis";
     private static final String AVIS_AUTHOR_COLUMN = "username";
@@ -192,7 +188,7 @@ public class MyDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db=this.getReadableDatabase();
         Cursor cursor=db.query(AVIS_TABLE,
                 new String[]{AVIS_AUTHOR_COLUMN}, //on prend une seule colonne car on n'est interessé que par le nombre de lignes
-                AVIS_AUTHOR_COLUMN+" ='"+username+"'AND"+AVIS_RECETTE_COLUMN+" ='"+recipe+"'",
+                AVIS_AUTHOR_COLUMN+" ='"+username+"'AND "+AVIS_RECETTE_COLUMN+" ='"+recipe+"'",
                 null,
                 null,
                 null,
@@ -206,6 +202,7 @@ public class MyDatabase extends SQLiteOpenHelper {
             db.execSQL(String.format("UPDATE %1$s SET %2$s = '%3$s' WHERE %4$s = '%5$s' AND %6$s = '%7$s'"
                     ,AVIS_TABLE,AVIS_COMMENTAIRE_COLUMN,comment,AVIS_AUTHOR_COLUMN,username,AVIS_RECETTE_COLUMN,recipe));
         }
+        cursor.close();
     }
     /**
      * Ajoute ou écrase une note d'un utilsateur sur un recette
@@ -233,6 +230,7 @@ public class MyDatabase extends SQLiteOpenHelper {
             db.execSQL(String.format("UPDATE %1$s SET %2$s = '%3$s' WHERE %4$s = '%5$s' AND %6$s = '%7$s'"
                     , AVIS_TABLE, AVIS_NOTE_COLUMN, grade, AVIS_AUTHOR_COLUMN, username, AVIS_RECETTE_COLUMN, recipe));
         }
+        cursor.close();
     }
     public String getStepNameColumn(String recette_name, int step_number){
         Log.d(this.TAG, "Rentree dans get step_name");
@@ -402,10 +400,39 @@ public class MyDatabase extends SQLiteOpenHelper {
                 null,
                 null);
         if(cursor.getCount()==0){
+            cursor.close();
             return 0;
         }
         else {
-            return cursor.getInt(1);
+            int tmp=cursor.getInt(1);
+            cursor.close();
+            return tmp;
+        }
+    }
+
+    /**
+     * Calcule la moyenne des notes d'une recette
+     * @param recipe nom de la recette
+     * @return moyenne des notes ou 0 si pas de notes
+     */
+    public float getAvgGrade(String recipe){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(AVIS_TABLE,
+                new String[]{"AVG("+AVIS_NOTE_COLUMN+")"},
+                AVIS_RECETTE_COLUMN + " ='" + recipe + "'",
+                null,
+                null,
+                null,
+                null);
+
+        if(cursor.getCount()==0){//si pas de grade
+            cursor.close();
+            return 0;
+        }
+        else {
+            float avg=cursor.getFloat(1);
+            cursor.close();
+            return avg;
         }
     }
 
@@ -425,10 +452,13 @@ public class MyDatabase extends SQLiteOpenHelper {
                 null,
                 null);
         if(cursor.getCount()==0){
+            cursor.close();
             return "";
         }
         else {
-            return cursor.getString(1);
+            String tmp=cursor.getString(1);
+            cursor.close();
+            return tmp;
         }
     }
 
