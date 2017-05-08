@@ -399,12 +399,12 @@ public class MyDatabase extends SQLiteOpenHelper {
                 null,
                 null,
                 null);
-        if(cursor.getCount()==0){
+        if(!cursor.moveToFirst()){
             cursor.close();
             return 0;
         }
         else {
-            int tmp=cursor.getInt(1);
+            int tmp=cursor.getInt(cursor.getColumnIndex(AVIS_NOTE_COLUMN));
             cursor.close();
             return tmp;
         }
@@ -449,7 +449,7 @@ public class MyDatabase extends SQLiteOpenHelper {
                 null,
                 null,
                 null);
-        if(cursor.getCount()==0){
+        if(!cursor.moveToFirst()){
             cursor.close();
             return "";
         }

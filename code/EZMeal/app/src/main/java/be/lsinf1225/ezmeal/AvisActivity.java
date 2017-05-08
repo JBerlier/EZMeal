@@ -54,33 +54,22 @@ public class AvisActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        int test=db.getGrade(username,recipe);
-        this.stars.setNumStars(db.getGrade(username,recipe));
+        this.stars.setRating((float)db.getGrade(username,recipe));
         this.comment.setText(db.getComment(username,recipe));
     }
 
     public void set_comment(){
         final String comm_final=this.comment.getText().toString();
-        if(db.open()) {
-            db.addComment(comm_final, "Laurent", "Muffins au chocolat");//user, recipe));
-        } else {
-            throw new Error("Impossible d'ouvir la base de donnees");
-        }
-
+            db.addComment(comm_final, username, recipe);
     }
 
     public void set_grade(){
         final int grade_final=(int)this.stars.getRating();//cast acceptable car la granularité du rating est de 1
-        if(db.open()) {
             try {
-                db.addGrade(grade_final, "Hadrien", "Muffins au chocolat");//user, recipe);
-                db.addGrade(grade_final+1, "Morgane", "Muffins au chocolat");//user, recipe);
+                db.addGrade(grade_final, username, recipe);
             } catch (Throwable t){
                 Toast toast = Toast.makeText(getApplicationContext(), "Nombre non valide d'étoiles envoyés", Toast.LENGTH_LONG);
                 toast.show();
             }
-        } else {
-            throw new Error("Impossible d'ouvir la base de donnees");
-        }
     }
 }
